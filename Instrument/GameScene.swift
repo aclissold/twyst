@@ -64,17 +64,17 @@ class GameScene: SKScene {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
             // when user touches a button, turn it light blue
 
-        for touch: AnyObject in touches {
+        for touch in touches {
             let location = touch.locationInNode(self)
 
-            let nodes = self.nodesAtPoint(location) as [SKNode]
+            let nodes = nodesAtPoint(location) as [SKNode]
 
             for node in nodes {
                 if let name = node.name {
                     if name.containsString("noteButton") {
                         // if it's a noteButton....
 
-                        handleNoteStart(node.name!)
+                        handleNoteStart(name)
                         let spriteNode = node as! SKSpriteNode
 
                         let changeColorAction = SKAction.colorizeWithColor(minimalLightBlue, colorBlendFactor: 1.0, duration: 0)
@@ -97,8 +97,21 @@ class GameScene: SKScene {
                             spriteNode.color = self.minimalLightPurple
                         }
                     }
+                    updateSynthNote()
                 }
             }
+        }
+    }
+
+    func updateSynthNote() {
+        if let noteCode = getCurrentNoteCode() {
+            guard let note = noteCodeMappings[noteCode] else {
+                fatalError("unexpected note code: \(noteCode)")
+            }
+            synth.note = note
+            synth.mute(false)
+        } else {
+            synth.mute(true)
         }
     }
 
@@ -131,8 +144,8 @@ class GameScene: SKScene {
                         spriteNode.runAction(changeColorAction) {
                             spriteNode.color = self.minimalPurple
                         }
-                        synth.mute(true)
                     }
+                    updateSynthNote()
                 }
             }
         }
