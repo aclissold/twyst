@@ -57,6 +57,7 @@ class InstrumentScene: SKScene {
         screenWidth = Int(view.frame.width)
         screenHeight = Int(view.frame.height)
         makeButtons()
+        addMiddleImage()
 
         AKOrchestra.addInstrument(synth)
         synth.play()
@@ -234,6 +235,15 @@ class InstrumentScene: SKScene {
         noteCode -= flatButtonActive
 
         return noteCode
+    }
+
+    func addMiddleImage() {
+        let imageSize = CGSize(width: 350, height: 150)
+        let imageNode = SKSpriteNode(texture: SKTexture(imageNamed: "blue_logo"), size: imageSize)
+        imageNode.anchorPoint = CGPoint(x: 0, y: 0)
+        imageNode.position = CGPoint(x: 0, y: 180)
+
+        self.addChild(imageNode)
     }
 
     func makeButtons() {
