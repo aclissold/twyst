@@ -37,21 +37,12 @@ class SineSynth: AKInstrument {
         setAudioOutput(oscillator)
     }
 
+    let noteCodeMappings = [
+        1: Note.C4, 2: .D4, 3: .F4, 4: .E4, 5: .G4, 6: .A4, 7: .B4
+    ]
     func play(noteCode: Int) {
-        if noteCode == 1 {
-            note = Note.C4
-        } else if noteCode == 2 {
-            note = Note.D4
-        } else if noteCode == 4 {
-            note = Note.E4
-        } else if noteCode == 3 {
-            note = Note.F4
-        } else if noteCode == 5 {
-            note = Note.G4
-        } else if noteCode == 6 {
-            note = Note.A4
-        } else if noteCode == 7 {
-            note = Note.B4
+        guard let note = noteCodeMappings[noteCode] else {
+            fatalError("unexpected noteCode: \(noteCode)")
         }
 
         frequency.value = note.rawValue
