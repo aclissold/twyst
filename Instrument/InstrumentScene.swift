@@ -14,7 +14,8 @@ class InstrumentScene: SKScene {
 
     let synth = SineSynth()
     let noteCodeMappings = [
-        1: Note.C4, 2: .D4, 3: .F4, 4: .E4, 5: .G4, 6: .A4, 7: .B4
+        1: Note.C4, 1.5: .Cs4, 2: .D4, 2.5: .Ds4, 3: .F4, 3.5: .Fs4, 4: .E4,
+        4.5: .F4, 5: .G4, 5.5: .Gs4, 6: .A4, 6.5: .As4, 7: .B4, 7.5: .C5
     ]
 
     // regular colors!
@@ -25,7 +26,9 @@ class InstrumentScene: SKScene {
 
     var buttonOneActive = 0,
         buttonTwoActive = 0,
-        buttonThreeActive = 0
+        buttonThreeActive = 0,
+        sharpButtonActive = 0,
+        flatButtonActive = 0
 
     // minimalist colors!
     let minimalLightBlue = SKColor(rgba: "#3498db"),
@@ -89,12 +92,18 @@ class InstrumentScene: SKScene {
                             synth.note = note
                             synth.mute(false)
                         }
-                    } else if (node.name?.containsString("topButton") != nil) {
+                    } else if (name.containsString("topButton")) {
                         let spriteNode = node as! SKSpriteNode
                         let changeColorAction = SKAction.colorizeWithColor(minimalLightPurple, colorBlendFactor: 1.0, duration: 0)
 
                         spriteNode.runAction(changeColorAction) {
                             spriteNode.color = self.minimalLightPurple
+                        }
+
+                        if name == "topButtonSharp" {
+                            sharpButtonActive = 1
+                        } else if name == "topButtonFlat" {
+                            flatButtonActive = 1
                         }
                     }
                     updateSynthNote()
@@ -144,6 +153,12 @@ class InstrumentScene: SKScene {
                         spriteNode.runAction(changeColorAction) {
                             spriteNode.color = self.minimalPurple
                         }
+
+                        if name == "topButtonSharp" {
+                            sharpButtonActive = 0
+                        } else if name == "topButtonFlat" {
+                            flatButtonActive = 0
+                        }
                     }
                     updateSynthNote()
                 }
@@ -180,10 +195,16 @@ class InstrumentScene: SKScene {
         }
     }
 
-    func getCurrentNoteCode() -> Int? {
-        let noteCode = buttonOneActive * 1 + buttonTwoActive * 2 + buttonThreeActive * 4
+    func getCurrentNoteCode() -> Double? {
+        var noteCode = Double(buttonOneActive * 1)
+        noteCode += Double(buttonTwoActive * 2)
+        noteCode += Double(buttonThreeActive * 4)
+
         if noteCode == 0 {
             return nil
+        }
+        if sharpButtonActive == 1 {
+            noteCode += 0.5
         }
         return noteCode
     }
@@ -248,15 +269,15 @@ class InstrumentScene: SKScene {
         colorNode.position = position
         x += screenWidth / 3
 
-        colorNode.name = "topButton"
-
         // ~~~~
         // image node
         let imageName: String
         if x == screenWidth / 3 {
             imageName = "flat"
+            colorNode.name = "topButtonFlat"
         } else {
             imageName = "sharp"
+            colorNode.name = "topButtonSharp"
         }
 
         let imageNode = SKSpriteNode(texture: SKTexture(imageNamed: imageName), size: buttonSize)
