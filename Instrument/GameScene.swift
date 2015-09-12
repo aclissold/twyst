@@ -33,9 +33,61 @@ class GameScene: SKScene {
         HeightOfScreen = Int(view.frame.height)
         makeButtons()
     }
+
+    func isEqualColor(color: SKColor, toColor: SKColor) -> Bool {
+        let color1Components = CGColorGetComponents(color.CGColor)
+        let color2Components = CGColorGetComponents(toColor.CGColor)
+
+        if ((color1Components[0] != color2Components[0]) || //red
+            (color1Components[1] != color2Components[1]) || //green
+            (color1Components[2] != color2Components[2]) || //blue
+            (color1Components[3] != color2Components[3])) { //alpha
+                return false
+        }
+        
+        return true
+    }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+            // when user touches a button, turn it light blue
 
+        for touch: AnyObject in touches {
+            let location = touch.locationInNode(self)
+
+            let nodes = self.nodesAtPoint(location) as [SKNode]
+
+            for node in nodes {
+                if node.name == "noteButton" {
+                    let spriteNode = node as SKSpriteNode
+
+                    let changeColorAction = SKAction.colorizeWithColor(minimalLightBlue, colorBlendFactor: 1.0, duration: 0)
+                    spriteNode.runAction(changeColorAction) {
+                        spriteNode.color = self.minimalLightBlue
+                    }
+                }
+            }
+        }
+    }
+
+    override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
+            // when user leaves hand from button, turn it back to dark blue
+
+        for touch: AnyObject in touches {
+            let location = touch.locationInNode(self)
+
+            let nodes = self.nodesAtPoint(location) as [SKNode]
+
+            for node in nodes {
+                if node.name == "noteButton" {
+                    let spriteNode = node as SKSpriteNode
+
+                    let changeColorAction = SKAction.colorizeWithColor(minimalBlue, colorBlendFactor: 1.0, duration: 0)
+                    spriteNode.runAction(changeColorAction) {
+                        spriteNode.color = self.minimalBlue
+                    }
+                }
+            }
+        }
     }
 
 
@@ -73,6 +125,8 @@ class GameScene: SKScene {
         node.position = CGPoint(x: x, y: 0)
         x += WidthOfScreen / 3
 
+        node.name = "noteButton"
+
         self.addChild(node)
     }
 
@@ -84,6 +138,8 @@ class GameScene: SKScene {
 
         node.position = CGPoint(x: x, y: HeightOfScreen - (WidthOfScreen/2) )
         x += WidthOfScreen / 3
+
+        node.name = "noteButton"
 
         self.addChild(node)
     }
