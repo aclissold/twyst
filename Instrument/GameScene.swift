@@ -12,6 +12,8 @@ import SpriteKit
 
 class GameScene: SKScene {
 
+    let synth = SineSynth()
+
     // regular colors!
     let blue = SKColor.blueColor(),
         red = SKColor.redColor(),
@@ -32,6 +34,8 @@ class GameScene: SKScene {
         WidthOfScreen = Int(view.frame.width)
         HeightOfScreen = Int(view.frame.height)
         makeButtons()
+
+        AKOrchestra.addInstrument(synth)
     }
 
     func isEqualColor(color: SKColor, toColor: SKColor) -> Bool {
@@ -64,6 +68,8 @@ class GameScene: SKScene {
                     spriteNode.runAction(changeColorAction) {
                         spriteNode.color = self.minimalLightBlue
                     }
+
+                    synth.play()
                 }
             }
         }
@@ -85,6 +91,8 @@ class GameScene: SKScene {
                     spriteNode.runAction(changeColorAction) {
                         spriteNode.color = self.minimalBlue
                     }
+
+                    synth.stop()
                 }
             }
         }
