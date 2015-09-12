@@ -15,37 +15,23 @@ class SineSynth: AKInstrument {
     }
 
     private var frequency = AKInstrumentProperty(value: 440, minimum: 220, maximum: 880)
+    private var amplitude = AKInstrumentProperty(value: 0, minimum: 0, maximum: 1)
 
     override init() {
         super.init()
 
         addProperty(frequency)
-
-        let adsr = AKADSREnvelope(
-            attackDuration: 0.1.ak,
-            decayDuration: 0.5.ak,
-            sustainLevel: 0.7.ak,
-            releaseDuration: 0.1.ak,
-            delay: 0.ak
-        )
+        addProperty(amplitude)
 
         let oscillator = AKFMOscillator()
         oscillator.waveform = AKTable.standardSineWave()
         oscillator.baseFrequency = frequency
-        oscillator.amplitude = adsr
+        oscillator.amplitude = amplitude
 
         setAudioOutput(oscillator)
     }
 
-    let noteCodeMappings = [
-        1: Note.C4, 2: .D4, 3: .F4, 4: .E4, 5: .G4, 6: .A4, 7: .B4
-    ]
-    func play(noteCode: Int) {
-        guard let note = noteCodeMappings[noteCode] else {
-            fatalError("unexpected noteCode: \(noteCode)")
-        }
-
-        frequency.value = note.rawValue
-        self.play()
+    func mute(shouldMute: Bool) {
+        amplitude.value = shouldMute ? 0 : 0.7
     }
 }

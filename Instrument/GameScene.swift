@@ -13,6 +13,9 @@ import SpriteKit
 class GameScene: SKScene {
 
     let synth = SineSynth()
+    let noteCodeMappings = [
+        1: Note.C4, 2: .D4, 3: .F4, 4: .E4, 5: .G4, 6: .A4, 7: .B4
+    ]
 
     // regular colors!
     let blue = SKColor.blueColor(),
@@ -41,6 +44,7 @@ class GameScene: SKScene {
         makeButtons()
 
         AKOrchestra.addInstrument(synth)
+        synth.play()
     }
 
     func isEqualColor(color: SKColor, toColor: SKColor) -> Bool {
@@ -53,7 +57,7 @@ class GameScene: SKScene {
             (color1Components[3] != color2Components[3])) { //alpha
                 return false
         }
-        
+
         return true
     }
 
@@ -66,26 +70,32 @@ class GameScene: SKScene {
             let nodes = self.nodesAtPoint(location) as [SKNode]
 
             for node in nodes {
-                if (node.name?.containsString("noteButton") != nil) {
-                    // if it's a noteButton....
+                if let name = node.name {
+                    if name.containsString("noteButton") {
+                        // if it's a noteButton....
 
-                    handleNoteStart(node.name!)
-                    let spriteNode = node as! SKSpriteNode
+                        handleNoteStart(node.name!)
+                        let spriteNode = node as! SKSpriteNode
 
-                    let changeColorAction = SKAction.colorizeWithColor(minimalLightBlue, colorBlendFactor: 1.0, duration: 0)
-                    spriteNode.runAction(changeColorAction) {
-                        spriteNode.color = self.minimalLightBlue
-                    }
+                        let changeColorAction = SKAction.colorizeWithColor(minimalLightBlue, colorBlendFactor: 1.0, duration: 0)
+                        spriteNode.runAction(changeColorAction) {
+                            spriteNode.color = self.minimalLightBlue
+                        }
 
-                    let noteCode = getCurrentNoteCode()
-                    synth.play(noteCode)
+                        if let noteCode = getCurrentNoteCode() {
+                            guard let note = noteCodeMappings[noteCode] else {
+                                fatalError("unexpected note code: \(noteCode)")
+                            }
+                            synth.note = note
+                            synth.mute(false)
+                        }
+                    } else if (node.name?.containsString("topButton") != nil) {
+                        let spriteNode = node as! SKSpriteNode
+                        let changeColorAction = SKAction.colorizeWithColor(minimalLightPurple, colorBlendFactor: 1.0, duration: 0)
 
-                } else if (node.name?.containsString("topButton") != nil) {
-                    let spriteNode = node as! SKSpriteNode
-                    let changeColorAction = SKAction.colorizeWithColor(minimalLightPurple, colorBlendFactor: 1.0, duration: 0)
-
-                    spriteNode.runAction(changeColorAction) {
-                        spriteNode.color = self.minimalLightPurple
+                        spriteNode.runAction(changeColorAction) {
+                            spriteNode.color = self.minimalLightPurple
+                        }
                     }
                 }
             }
@@ -95,31 +105,33 @@ class GameScene: SKScene {
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
             // when user leaves hand from button, turn it back to dark blue
 
-        for touch: AnyObject in touches {
+        for touch in touches {
             let location = touch.locationInNode(self)
 
-            let nodes = self.nodesAtPoint(location) as [SKNode]
+            let nodes = nodesAtPoint(location) as [SKNode]
 
             for node in nodes {
-                if (node.name?.containsString("noteButton") != nil) {
-                    // if it's a noteButton....
+                if let name = node.name {
+                    if name.containsString("noteButton") {
+                        // if it's a noteButton....
 
-                    handleNoteEnd(node.name!)
+                        handleNoteEnd(name)
 
-                    let spriteNode = node as! SKSpriteNode
+                        let spriteNode = node as! SKSpriteNode
 
-                    let changeColorAction = SKAction.colorizeWithColor(minimalBlue, colorBlendFactor: 1.0, duration: 0)
-                    spriteNode.runAction(changeColorAction) {
-                        spriteNode.color = self.minimalBlue
-                    }
+                        let changeColorAction = SKAction.colorizeWithColor(minimalBlue, colorBlendFactor: 1.0, duration: 0)
+                        spriteNode.runAction(changeColorAction) {
+                            spriteNode.color = self.minimalBlue
+                        }
 
-                    synth.stop()
-                } else if (node.name?.containsString("topButton") != nil) {
-                    let spriteNode = node as! SKSpriteNode
-                    let changeColorAction = SKAction.colorizeWithColor(minimalPurple, colorBlendFactor: 1.0, duration: 0)
+                    } else if name.containsString("topButton") {
+                        let spriteNode = node as! SKSpriteNode
+                        let changeColorAction = SKAction.colorizeWithColor(minimalPurple, colorBlendFactor: 1.0, duration: 0)
 
-                    spriteNode.runAction(changeColorAction) {
-                        spriteNode.color = self.minimalPurple
+                        spriteNode.runAction(changeColorAction) {
+                            spriteNode.color = self.minimalPurple
+                        }
+                        synth.mute(true)
                     }
                 }
             }
@@ -151,9 +163,12 @@ class GameScene: SKScene {
         }
     }
 
-    func getCurrentNoteCode() -> Int {
-        let NoteCode = ButtonOne * 1 + ButtonTwo * 2 + ButtonThree * 4
-        return NoteCode
+    func getCurrentNoteCode() -> Int? {
+        let noteCode = ButtonOne * 1 + ButtonTwo * 2 + ButtonThree * 4
+        if noteCode == 0 {
+            return nil
+        }
+        return noteCode
     }
 
 
@@ -202,7 +217,7 @@ class GameScene: SKScene {
             // set button to 3 value
             node.name = node.name! + " 3"
         }
-        
+
         self.addChild(node)
         return node
     }
