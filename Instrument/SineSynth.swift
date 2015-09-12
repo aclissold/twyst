@@ -8,7 +8,13 @@
 
 class SineSynth: AKInstrument {
 
-    var frequency = AKInstrumentProperty(value: 440, minimum: 220, maximum: 880)
+    var note = Note.A4 {
+        didSet {
+            frequency.value = note.rawValue
+        }
+    }
+
+    private var frequency = AKInstrumentProperty(value: 440, minimum: 220, maximum: 880)
 
     override init() {
         super.init()
