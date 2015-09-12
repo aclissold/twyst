@@ -23,9 +23,9 @@ class GameScene: SKScene {
         green = SKColor.greenColor(),
         purple = SKColor.purpleColor()
 
-    var ButtonOne = 0,
-        ButtonTwo = 0,
-        ButtonThree = 0
+    var buttonOneActive = 0,
+        buttonTwoActive = 0,
+        buttonThreeActive = 0
 
     // minimalist colors!
     let minimalLightBlue = SKColor(rgba: "#3498db"),
@@ -35,12 +35,12 @@ class GameScene: SKScene {
 
     var y = 0,
         x = 0,
-        WidthOfScreen = 0,
-        HeightOfScreen = 0
+        screenWidth = 0,
+        screenHeight = 0
 
     override func didMoveToView(view: SKView) {
-        WidthOfScreen = Int(view.frame.width)
-        HeightOfScreen = Int(view.frame.height)
+        screenWidth = Int(view.frame.width)
+        screenHeight = Int(view.frame.height)
         makeButtons()
 
         AKOrchestra.addInstrument(synth)
@@ -62,7 +62,7 @@ class GameScene: SKScene {
     }
 
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-            // when user touches a button, turn it light blue
+        // when user touches a button, turn it light blue
 
         for touch in touches {
             let location = touch.locationInNode(self)
@@ -116,7 +116,7 @@ class GameScene: SKScene {
     }
 
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-            // when user leaves hand from button, turn it back to dark blue
+        // when user leaves hand from button, turn it back to dark blue
 
         for touch in touches {
             let location = touch.locationInNode(self)
@@ -155,40 +155,42 @@ class GameScene: SKScene {
     // ~~~~~~~
     // specialized funcs
     func handleNoteStart(noteName: String) {
-        let lastChar = noteName.characters.last!
-        if lastChar == "1" {
-            ButtonOne = 1
-        } else if lastChar == "2" {
-            ButtonTwo = 1
-        } else if lastChar == "3" {
-            ButtonThree = 1
+        switch noteName.characters.last! {
+        case "1":
+            buttonOneActive = 1
+        case "2":
+            buttonTwoActive = 1
+        case "3":
+            buttonThreeActive = 1
+        default:
+            fatalError("unexpected noteName: \(noteName)")
         }
     }
 
     func handleNoteEnd(noteName: String) {
-        let lastChar = noteName.characters.last!
-        if lastChar == "1" {
-            ButtonOne = 0
-        } else if lastChar == "2" {
-            ButtonTwo = 0
-        } else if lastChar == "3" {
-            ButtonThree = 0
+        switch noteName.characters.last! {
+        case "1":
+            buttonOneActive = 0
+        case "2":
+            buttonTwoActive = 0
+        case "3":
+            buttonThreeActive = 0
+        default:
+            fatalError("unexpected noteName: \(noteName)")
         }
     }
 
     func getCurrentNoteCode() -> Int? {
-        let noteCode = ButtonOne * 1 + ButtonTwo * 2 + ButtonThree * 4
+        let noteCode = buttonOneActive * 1 + buttonTwoActive * 2 + buttonThreeActive * 4
         if noteCode == 0 {
             return nil
         }
         return noteCode
     }
 
-
     func makeButtons() {
-
-        let thinButtonSize = CGSize(width: WidthOfScreen / 3, height: WidthOfScreen / 2),
-            wideButtonSize = CGSize(width: WidthOfScreen / 3, height: WidthOfScreen / 2)
+        let thinButtonSize = CGSize(width: screenWidth / 3, height: screenWidth / 2),
+            wideButtonSize = CGSize(width: screenWidth / 3, height: screenWidth / 2)
 
         // ~~~~~
         // bottom buttons
@@ -200,7 +202,7 @@ class GameScene: SKScene {
         // top buttons
 
         x = 0
-            // start back at left of screen
+        // start back at left of screen
 
         makeTopButton(minimalBlue, buttonSize: wideButtonSize)
         makeTopButton(minimalBlue, buttonSize: wideButtonSize)
@@ -214,18 +216,16 @@ class GameScene: SKScene {
         // positions it with respect to bottom left
 
         node.position = CGPoint(x: x, y: 0)
-        x += WidthOfScreen / 3
+        x += screenWidth / 3
 
         node.name = "noteButton"
 
-        if x == WidthOfScreen / 3 {
+        if x == screenWidth / 3 {
             // set button to 1 value
             node.name = node.name! + " 1"
-
-        } else if (x > (WidthOfScreen / 2) && x < (3 * WidthOfScreen / 4)) {
+        } else if (x > (screenWidth / 2) && x < (3 * screenWidth / 4)) {
             // set button to 2 value
             node.name = node.name! + " 2"
-
         } else {
             // set button to 3 value
             node.name = node.name! + " 3"
@@ -237,7 +237,7 @@ class GameScene: SKScene {
 
     func makeTopButton(buttonColor: SKColor, buttonSize: CGSize) {
         let anchorPoint = CGPoint(x: 0, y: 0)
-        let position = CGPoint(x: x, y: HeightOfScreen - (WidthOfScreen/2))
+        let position = CGPoint(x: x, y: screenHeight - (screenWidth/2))
 
         // ~~~~
         // color node
@@ -246,20 +246,20 @@ class GameScene: SKScene {
         // positions it with respect to top left
 
         colorNode.position = position
-        x += WidthOfScreen / 3
+        x += screenWidth / 3
 
         colorNode.name = "topButton"
 
         // ~~~~
         // image node
-        var imageUrl = ""
-        if x == WidthOfScreen / 3 {
-            imageUrl = "flat"
+        let imageName: String
+        if x == screenWidth / 3 {
+            imageName = "flat"
         } else {
-            imageUrl = "sharp"
+            imageName = "sharp"
         }
 
-        let imageNode = SKSpriteNode(texture: SKTexture(imageNamed: imageUrl), size: buttonSize)
+        let imageNode = SKSpriteNode(texture: SKTexture(imageNamed: imageName), size: buttonSize)
         imageNode.anchorPoint = anchorPoint
         imageNode.position = position
 
@@ -268,10 +268,6 @@ class GameScene: SKScene {
     }
 
 }
-
-
-
-
 
 // functions to grab minimalist colors!!
 extension SKColor {
