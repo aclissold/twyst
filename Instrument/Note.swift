@@ -53,8 +53,8 @@ enum Note: Float {
     case G3 = 196.00
     case Gs3 = 207.65
     case A3 = 220.00
-    case As3 = 233.08
-    case B3 = 246.94*/
+    case As3 = 233.08*/
+    case B3 = 246.94
     case C4 = 261.63
     case Cs4 = 277.18
     case D4 = 293.66

@@ -14,8 +14,20 @@ class InstrumentScene: SKScene {
 
     let synth = SineSynth()
     let noteCodeMappings = [
-        1: Note.C4, 1.5: .Cs4, 2: .D4, 2.5: .Ds4, 3: .F4, 3.5: .Fs4, 4: .E4,
-        4.5: .F4, 5: .G4, 5.5: .Gs4, 6: .A4, 6.5: .As4, 7: .B4, 7.5: .C5
+        -1: Note.B3,
+        0: .C4,
+        1: .Cs4,
+        2: .D4,
+        3: .Ds4,
+        4: .E4,
+        5: .F4,
+        6: .Fs4,
+        7: .G4,
+        8: .Gs4,
+        9: .A4,
+        10: .As4,
+        11: .B4,
+        12: .C5,
     ]
 
     // regular colors!
@@ -195,17 +207,32 @@ class InstrumentScene: SKScene {
         }
     }
 
-    func getCurrentNoteCode() -> Double? {
-        var noteCode = Double(buttonOneActive * 1)
-        noteCode += Double(buttonTwoActive * 2)
-        noteCode += Double(buttonThreeActive * 4)
-
-        if noteCode == 0 {
+    func getCurrentNoteCode() -> Int? {
+        var noteCode: Int
+        switch (buttonOneActive, buttonTwoActive, buttonThreeActive) {
+        case (0, 0, 0):
             return nil
+        case (1, 0, 0):
+            noteCode = 0
+        case (0, 1, 0):
+            noteCode = 2
+        case (0, 0, 1):
+            noteCode = 4
+        case (1, 1, 0):
+            noteCode = 5
+        case (1, 0, 1):
+            noteCode = 7
+        case (0, 1, 1):
+            noteCode = 9
+        case (1, 1, 1):
+            noteCode = 11
+        default:
+            fatalError("unexpected button combination: (\(buttonOneActive), \(buttonTwoActive), \(buttonThreeActive))")
         }
-        if sharpButtonActive == 1 {
-            noteCode += 0.5
-        }
+
+        noteCode += sharpButtonActive
+        noteCode -= flatButtonActive
+
         return noteCode
     }
 
