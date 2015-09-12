@@ -15,10 +15,18 @@ class SineSynth: AKInstrument {
 
         addProperty(frequency)
 
+        let adsr = AKADSREnvelope(
+            attackDuration: 0.1.ak,
+            decayDuration: 0.5.ak,
+            sustainLevel: 0.2.ak,
+            releaseDuration: 0.1.ak,
+            delay: 0.ak
+        )
+
         let oscillator = AKFMOscillator()
         oscillator.waveform = AKTable.standardSineWave()
         oscillator.baseFrequency = frequency
-        oscillator.amplitude = 0.2.ak
+        oscillator.amplitude = adsr
 
         setAudioOutput(oscillator)
     }
