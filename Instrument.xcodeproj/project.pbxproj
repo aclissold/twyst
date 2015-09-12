@@ -16,6 +16,7 @@
 		B566F3D71BA3E98900777821 /* InstrumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566F3D61BA3E98900777821 /* InstrumentTests.swift */; };
 		B5ADB0D91BA439C300B2A876 /* AKSoundFiles.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B5ADB0D81BA439C300B2A876 /* AKSoundFiles.bundle */; settings = {ASSET_TAGS = (); }; };
 		B5ADB0DB1BA439D000B2A876 /* AudioKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ADB0DA1BA439D000B2A876 /* AudioKit.swift */; settings = {ASSET_TAGS = (); }; };
+		B5ADB0E11BA43B8500B2A876 /* SineSynth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ADB0E01BA43B8500B2A876 /* SineSynth.swift */; settings = {ASSET_TAGS = (); }; };
 		B5EA28EB1BA42C6B00BF8233 /* libAudioKit iOS Static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5EA28E41BA42B5E00BF8233 /* libAudioKit iOS Static.a */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +73,7 @@
 		B5ADB0D81BA439C300B2A876 /* AKSoundFiles.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AKSoundFiles.bundle; sourceTree = "<group>"; };
 		B5ADB0DA1BA439D000B2A876 /* AudioKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioKit.swift; sourceTree = "<group>"; };
 		B5ADB0DC1BA43A0B00B2A876 /* Instrument-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Instrument-Bridging-Header.h"; sourceTree = "<group>"; };
+		B5ADB0E01BA43B8500B2A876 /* SineSynth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SineSynth.swift; sourceTree = "<group>"; };
 		B5EA28DD1BA42B5E00BF8233 /* AudioKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AudioKit.xcodeproj; path = AudioKit/AudioKit.xcodeproj; sourceTree = "<group>"; };
 		B5EA28EC1BA42DB300BF8233 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -119,6 +121,7 @@
 			children = (
 				B566F3BC1BA3E98900777821 /* AppDelegate.swift */,
 				B566F3C01BA3E98900777821 /* GameScene.swift */,
+				B5ADB0E01BA43B8500B2A876 /* SineSynth.swift */,
 				B566F3C21BA3E98900777821 /* GameViewController.swift */,
 				B5EA28EC1BA42DB300BF8233 /* Header.h */,
 				B566F3C41BA3E98900777821 /* Main.storyboard */,
@@ -303,6 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B566F3C11BA3E98900777821 /* GameScene.swift in Sources */,
+				B5ADB0E11BA43B8500B2A876 /* SineSynth.swift in Sources */,
 				B566F3C31BA3E98900777821 /* GameViewController.swift in Sources */,
 				B566F3BD1BA3E98900777821 /* AppDelegate.swift in Sources */,
 				B5ADB0DB1BA439D000B2A876 /* AudioKit.swift in Sources */,
