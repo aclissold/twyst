@@ -135,13 +135,8 @@ class GameScene: SKScene {
     }
 
     func getCurrentNoteCode() -> Int {
-        if ButtonOne == 1 {
-            return 1
-        } else if ButtonTwo == 1 {
-            return 2
-        } else {
-            return 3
-        }
+        let NoteCode = ButtonOne * 1 + ButtonTwo * 2 + ButtonThree * 4
+        return NoteCode
     }
 
 
@@ -182,9 +177,9 @@ class GameScene: SKScene {
             // set button to 1 value
             node.name = node.name! + " 1"
 
-        } else if x == (2 * WidthOfScreen / 3) {
-            node.name = node.name! + " 2"
+        } else if (x > (WidthOfScreen / 2) && x < (3 * WidthOfScreen / 4)) {
             // set button to 2 value
+            node.name = node.name! + " 2"
 
         } else {
             // set button to 3 value

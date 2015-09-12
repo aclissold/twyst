@@ -24,7 +24,7 @@ class SineSynth: AKInstrument {
         let adsr = AKADSREnvelope(
             attackDuration: 0.1.ak,
             decayDuration: 0.5.ak,
-            sustainLevel: 0.2.ak,
+            sustainLevel: 0.7.ak,
             releaseDuration: 0.1.ak,
             delay: 0.ak
         )
@@ -42,8 +42,16 @@ class SineSynth: AKInstrument {
             note = Note.C4
         } else if noteCode == 2 {
             note = Note.D4
-        } else {
+        } else if noteCode == 4 {
             note = Note.E4
+        } else if noteCode == 3 {
+            note = Note.F4
+        } else if noteCode == 5 {
+            note = Note.G4
+        } else if noteCode == 6 {
+            note = Note.A4
+        } else if noteCode == 7 {
+            note = Note.B4
         }
 
         frequency.value = note.rawValue
