@@ -20,10 +20,15 @@ class GameScene: SKScene {
         green = SKColor.greenColor(),
         purple = SKColor.purpleColor()
 
+    var ButtonOne = 0,
+        ButtonTwo = 0,
+        ButtonThree = 0
 
     // minimalist colors!
     let minimalLightBlue = SKColor(rgba: "#3498db"),
-        minimalBlue = SKColor(rgba: "#2980b9")
+        minimalBlue = SKColor(rgba: "#2980b9"),
+        minimalPurple = SKColor(rgba: "#8e44ad"),
+        minimalLightPurple = SKColor(rgba: "#9b59b6")
 
     var y = 0,
         x = 0,
@@ -61,7 +66,10 @@ class GameScene: SKScene {
             let nodes = self.nodesAtPoint(location) as [SKNode]
 
             for node in nodes {
-                if node.name == "noteButton" {
+                if (node.name?.containsString("noteButton") != nil) {
+                    // if it's a noteButton....
+
+                    handleNoteStart(node.name!)
                     let spriteNode = node as! SKSpriteNode
 
                     let changeColorAction = SKAction.colorizeWithColor(minimalLightBlue, colorBlendFactor: 1.0, duration: 0)
@@ -69,7 +77,16 @@ class GameScene: SKScene {
                         spriteNode.color = self.minimalLightBlue
                     }
 
-                    synth.play()
+                    let noteCode = getCurrentNoteCode()
+                    synth.play(noteCode)
+
+                } else if (node.name?.containsString("topButton") != nil) {
+                    let spriteNode = node as! SKSpriteNode
+                    let changeColorAction = SKAction.colorizeWithColor(minimalLightPurple, colorBlendFactor: 1.0, duration: 0)
+
+                    spriteNode.runAction(changeColorAction) {
+                        spriteNode.color = self.minimalLightPurple
+                    }
                 }
             }
         }
@@ -84,7 +101,11 @@ class GameScene: SKScene {
             let nodes = self.nodesAtPoint(location) as [SKNode]
 
             for node in nodes {
-                if node.name == "noteButton" {
+                if (node.name?.containsString("noteButton") != nil) {
+                    // if it's a noteButton....
+
+                    handleNoteEnd(node.name!)
+
                     let spriteNode = node as! SKSpriteNode
 
                     let changeColorAction = SKAction.colorizeWithColor(minimalBlue, colorBlendFactor: 1.0, duration: 0)
@@ -93,6 +114,13 @@ class GameScene: SKScene {
                     }
 
                     synth.stop()
+                } else if (node.name?.containsString("topButton") != nil) {
+                    let spriteNode = node as! SKSpriteNode
+                    let changeColorAction = SKAction.colorizeWithColor(minimalPurple, colorBlendFactor: 1.0, duration: 0)
+
+                    spriteNode.runAction(changeColorAction) {
+                        spriteNode.color = self.minimalPurple
+                    }
                 }
             }
         }
@@ -101,6 +129,33 @@ class GameScene: SKScene {
 
     // ~~~~~~~
     // specialized funcs
+    func handleNoteStart(noteName: String) {
+        let lastChar = noteName.characters.last!
+        if lastChar == "1" {
+            ButtonOne = 1
+        } else if lastChar == "2" {
+            ButtonTwo = 1
+        } else if lastChar == "3" {
+            ButtonThree = 1
+        }
+    }
+
+    func handleNoteEnd(noteName: String) {
+        let lastChar = noteName.characters.last!
+        if lastChar == "1" {
+            ButtonOne = 0
+        } else if lastChar == "2" {
+            ButtonTwo = 0
+        } else if lastChar == "3" {
+            ButtonThree = 0
+        }
+    }
+
+    func getCurrentNoteCode() -> Int {
+        let NoteCode = ButtonOne * 1 + ButtonTwo * 2 + ButtonThree * 4
+        return NoteCode
+    }
+
 
     func makeButtons() {
 
@@ -124,32 +179,64 @@ class GameScene: SKScene {
     }
 
 
-    func makeBottomButton(buttonColor: SKColor, buttonSize: CGSize) {
+    func makeBottomButton(buttonColor: SKColor, buttonSize: CGSize) -> SKSpriteNode {
         let node = SKSpriteNode(color: buttonColor, size: buttonSize)
 
         node.anchorPoint = CGPoint(x: 0, y: 0)
-            // positions it with respect to bottom left
+        // positions it with respect to bottom left
 
         node.position = CGPoint(x: x, y: 0)
         x += WidthOfScreen / 3
 
         node.name = "noteButton"
 
+        if x == WidthOfScreen / 3 {
+            // set button to 1 value
+            node.name = node.name! + " 1"
+
+        } else if (x > (WidthOfScreen / 2) && x < (3 * WidthOfScreen / 4)) {
+            // set button to 2 value
+            node.name = node.name! + " 2"
+
+        } else {
+            // set button to 3 value
+            node.name = node.name! + " 3"
+        }
+        
         self.addChild(node)
+        return node
     }
 
     func makeTopButton(buttonColor: SKColor, buttonSize: CGSize) {
-        let node = SKSpriteNode(color: buttonColor, size: buttonSize)
+        let anchorPoint = CGPoint(x: 0, y: 0)
+        let position = CGPoint(x: x, y: HeightOfScreen - (WidthOfScreen/2))
 
-        node.anchorPoint = CGPoint(x: 0, y: 0)
+        // ~~~~
+        // color node
+        let colorNode = SKSpriteNode(color: minimalPurple, size: buttonSize)
+        colorNode.anchorPoint = anchorPoint
         // positions it with respect to top left
 
-        node.position = CGPoint(x: x, y: HeightOfScreen - (WidthOfScreen/2) )
+        colorNode.position = position
         x += WidthOfScreen / 3
 
-        node.name = "noteButton"
+        colorNode.name = "topButton"
 
-        self.addChild(node)
+        // ~~~~
+        // image node
+        var imageUrl = ""
+        if x == WidthOfScreen / 3 {
+            imageUrl = "flat"
+        } else {
+            imageUrl = "sharp"
+        }
+
+        let imageNode = SKSpriteNode(texture: SKTexture(imageNamed: imageUrl), size: buttonSize)
+        imageNode.anchorPoint = anchorPoint
+        imageNode.position = position
+
+        self.addChild(colorNode)
+        self.addChild(imageNode)
     }
 
 }
