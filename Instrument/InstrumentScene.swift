@@ -56,7 +56,11 @@ class InstrumentScene: SKScene {
     override func didMoveToView(view: SKView) {
         screenWidth = Int(view.frame.width)
         screenHeight = Int(view.frame.height)
+
+        // ~~~~
+        // add elements
         makeButtons()
+        addMiddleLogo()
         addMiddleImage()
 
         AKOrchestra.addInstrument(synth)
@@ -237,65 +241,84 @@ class InstrumentScene: SKScene {
         return noteCode
     }
 
+    func addMiddleLogo() {
+        let logoSize = CGSize(width: 260, height: 55)
+        let logoNode = SKSpriteNode(texture: SKTexture(imageNamed: "blue_logo"), size: logoSize)
+        logoNode.anchorPoint = CGPoint(x: 0, y: 0)
+        logoNode.position = CGPoint(x: 160, y: (2 * screenHeight / 3) + 15)
+
+        self.addChild(logoNode)
+    }
+
     func addMiddleImage() {
-        let imageSize = CGSize(width: 350, height: 150)
-        let imageNode = SKSpriteNode(texture: SKTexture(imageNamed: "blue_logo"), size: imageSize)
+        let imageSize = CGSize(width: 180, height: 180)
+        let imageNode = SKSpriteNode(texture: SKTexture(imageNamed: "vinyl_icon"), size: imageSize)
         imageNode.anchorPoint = CGPoint(x: 0, y: 0)
-        imageNode.position = CGPoint(x: 0, y: 180)
+        imageNode.position = CGPoint(x: 190, y: 10)
 
         self.addChild(imageNode)
     }
 
     func makeButtons() {
-        let thinButtonSize = CGSize(width: screenWidth / 3, height: screenWidth / 2),
-            wideButtonSize = CGSize(width: screenWidth / 3, height: screenWidth / 2)
+        let accidentalButtonSize = CGSize(width: screenWidth / 4, height: screenHeight / 3),
+            noteButtonSize = CGSize(width: screenWidth / 4, height: screenHeight / 3)
 
         // ~~~~~
         // bottom buttons
-        makeBottomButton(minimalBlue, buttonSize: thinButtonSize)
-        makeBottomButton(minimalBlue, buttonSize: thinButtonSize)
-        makeBottomButton(minimalBlue, buttonSize: thinButtonSize)
+        makeNoteButton(minimalBlue, buttonSize: noteButtonSize)
+        makeNoteButton(minimalBlue, buttonSize: noteButtonSize)
+        makeNoteButton(minimalBlue, buttonSize: noteButtonSize)
 
         // ~~~~~
         // top buttons
 
-        x = 0
+        y = 0
         // start back at left of screen
 
-        makeTopButton(minimalBlue, buttonSize: wideButtonSize)
-        makeTopButton(minimalBlue, buttonSize: wideButtonSize)
+        makeAccidentalButton(minimalBlue, buttonSize: accidentalButtonSize)
+        makeAccidentalButton(minimalBlue, buttonSize: accidentalButtonSize)
     }
 
 
-    func makeBottomButton(buttonColor: SKColor, buttonSize: CGSize) -> SKSpriteNode {
+    func makeNoteButton(buttonColor: SKColor, buttonSize: CGSize) -> SKSpriteNode {
         let node = SKSpriteNode(color: buttonColor, size: buttonSize)
 
         node.anchorPoint = CGPoint(x: 0, y: 0)
         // positions it with respect to bottom left
 
-        node.position = CGPoint(x: x, y: 0)
-        x += screenWidth / 3
+        node.position = CGPoint(x: screenWidth - Int(buttonSize.width), y: y)
 
         node.name = "noteButton"
+        var imageUrl = ""
 
-        if x == screenWidth / 3 {
+        if y == 0 {
             // set button to 1 value
             node.name = node.name! + " 1"
-        } else if (x > (screenWidth / 2) && x < (3 * screenWidth / 4)) {
+            imageUrl = "one_no_background"
+        } else if y == screenHeight / 3 {
             // set button to 2 value
             node.name = node.name! + " 2"
+            imageUrl = "two_no_background"
         } else {
             // set button to 3 value
             node.name = node.name! + " 3"
+            imageUrl = "three_no_background"
         }
 
+        y += screenHeight / 3
+
+        let imageNode = SKSpriteNode(texture: SKTexture(imageNamed: imageUrl), size: CGSize(width: 15, height: 30))
+        imageNode.anchorPoint = CGPoint(x: 0, y: 1)
+        imageNode.position = CGPoint(x: screenWidth - Int(buttonSize.width) + 6, y: y - 6)
+
+        self.addChild(imageNode)
         self.addChild(node)
         return node
     }
 
-    func makeTopButton(buttonColor: SKColor, buttonSize: CGSize) {
+    func makeAccidentalButton(buttonColor: SKColor, buttonSize: CGSize) {
         let anchorPoint = CGPoint(x: 0, y: 0)
-        let position = CGPoint(x: x, y: screenHeight - (screenWidth/2))
+        let position = CGPoint(x: 0, y: y)
 
         // ~~~~
         // color node
@@ -304,12 +327,12 @@ class InstrumentScene: SKScene {
         // positions it with respect to top left
 
         colorNode.position = position
-        x += screenWidth / 3
+        y += screenHeight / 3
 
         // ~~~~
         // image node
         let imageName: String
-        if x == screenWidth / 3 {
+        if y == screenHeight / 3 {
             imageName = "flat"
             colorNode.name = "topButtonFlat"
         } else {

@@ -33,7 +33,7 @@ class GameViewController: UIViewController {
     }
 
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.Portrait
+        return UIInterfaceOrientationMask.Landscape
     }
 
     override func prefersStatusBarHidden() -> Bool {
