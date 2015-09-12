@@ -1,5 +1,5 @@
 //
-//  GameScene.swift
+//  InstrumentScene.swift
 //  Instrument
 //
 //  Created by Andrew Clissold on 9/12/15.
@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SpriteKit
 
-class GameScene: SKScene {
+class InstrumentScene: SKScene {
 
     let synth = SineSynth()
     let noteCodeMappings = [
