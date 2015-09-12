@@ -47,8 +47,8 @@ class GameScene: SKScene {
         
         return true
     }
-    
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
             // when user touches a button, turn it light blue
 
         for touch: AnyObject in touches {
@@ -58,7 +58,7 @@ class GameScene: SKScene {
 
             for node in nodes {
                 if node.name == "noteButton" {
-                    let spriteNode = node as SKSpriteNode
+                    let spriteNode = node as! SKSpriteNode
 
                     let changeColorAction = SKAction.colorizeWithColor(minimalLightBlue, colorBlendFactor: 1.0, duration: 0)
                     spriteNode.runAction(changeColorAction) {
@@ -69,7 +69,7 @@ class GameScene: SKScene {
         }
     }
 
-    override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
             // when user leaves hand from button, turn it back to dark blue
 
         for touch: AnyObject in touches {
@@ -79,7 +79,7 @@ class GameScene: SKScene {
 
             for node in nodes {
                 if node.name == "noteButton" {
-                    let spriteNode = node as SKSpriteNode
+                    let spriteNode = node as! SKSpriteNode
 
                     let changeColorAction = SKAction.colorizeWithColor(minimalBlue, colorBlendFactor: 1.0, duration: 0)
                     spriteNode.runAction(changeColorAction) {
@@ -117,7 +117,7 @@ class GameScene: SKScene {
 
 
     func makeBottomButton(buttonColor: SKColor, buttonSize: CGSize) {
-        var node = SKSpriteNode(color: buttonColor, size: buttonSize)
+        let node = SKSpriteNode(color: buttonColor, size: buttonSize)
 
         node.anchorPoint = CGPoint(x: 0, y: 0)
             // positions it with respect to bottom left
@@ -131,7 +131,7 @@ class GameScene: SKScene {
     }
 
     func makeTopButton(buttonColor: SKColor, buttonSize: CGSize) {
-        var node = SKSpriteNode(color: buttonColor, size: buttonSize)
+        let node = SKSpriteNode(color: buttonColor, size: buttonSize)
 
         node.anchorPoint = CGPoint(x: 0, y: 0)
         // positions it with respect to top left
@@ -159,28 +159,28 @@ extension SKColor {
         var alpha: CGFloat = 1.0
 
         if rgba.hasPrefix("#") {
-            let index   = advance(rgba.startIndex, 1)
+            let index   = rgba.startIndex.advancedBy(1)
             let hex     = rgba.substringFromIndex(index)
             let scanner = NSScanner(string: hex)
             var hexValue: CUnsignedLongLong = 0
             if scanner.scanHexLongLong(&hexValue) {
-                if countElements(hex) == 6 {
+                if hex.characters.count == 6 {
                     red   = CGFloat((hexValue & 0xFF0000) >> 16) / 255.0
                     green = CGFloat((hexValue & 0x00FF00) >> 8)  / 255.0
                     blue  = CGFloat(hexValue & 0x0000FF) / 255.0
-                } else if countElements(hex) == 8 {
+                } else if hex.characters.count == 8 {
                     red   = CGFloat((hexValue & 0xFF000000) >> 24) / 255.0
                     green = CGFloat((hexValue & 0x00FF0000) >> 16) / 255.0
                     blue  = CGFloat((hexValue & 0x0000FF00) >> 8)  / 255.0
                     alpha = CGFloat(hexValue & 0x000000FF)         / 255.0
                 } else {
-                    print("invalid rgb string, length should be 7 or 9")
+                    print("invalid rgb string, length should be 7 or 9", terminator: "")
                 }
             } else {
-                println("scan hex error")
+                print("scan hex error")
             }
         } else {
-            print("invalid rgb string, missing '#' as prefix")
+            print("invalid rgb string, missing '#' as prefix", terminator: "")
         }
         self.init(red:red, green:green, blue:blue, alpha:alpha)
     }
