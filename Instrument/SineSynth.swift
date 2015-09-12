@@ -8,7 +8,7 @@
 
 class SineSynth: AKInstrument {
 
-    var note = Note.A4 {
+    var note = Note.C4 {
         didSet {
             frequency.value = note.rawValue
         }
@@ -35,5 +35,18 @@ class SineSynth: AKInstrument {
         oscillator.amplitude = adsr
 
         setAudioOutput(oscillator)
+    }
+
+    func play(noteCode: Int) {
+        if noteCode == 1 {
+            note = Note.C4
+        } else if noteCode == 2 {
+            note = Note.D4
+        } else {
+            note = Note.E4
+        }
+
+        frequency.value = note.rawValue
+        self.play()
     }
 }
