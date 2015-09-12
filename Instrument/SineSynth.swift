@@ -8,16 +8,17 @@
 
 class SineSynth: AKInstrument {
 
+    var frequency = AKInstrumentProperty(value: 440, minimum: 220, maximum: 880)
+
     override init() {
         super.init()
 
-        let oscillator = AKFMOscillator(
-            waveform: AKTable.standardSineWave(),
-            baseFrequency: akp(440),
-            carrierMultiplier: akp(1),
-            modulatingMultiplier: akp(1),
-            modulationIndex: akp(1),
-            amplitude: akp(0.2))
+        addProperty(frequency)
+
+        let oscillator = AKFMOscillator()
+        oscillator.waveform = AKTable.standardSineWave()
+        oscillator.baseFrequency = frequency
+        oscillator.amplitude = 0.2.ak
 
         setAudioOutput(oscillator)
     }
