@@ -19,7 +19,8 @@ class GameViewController: UIViewController {
         skView.showsFPS = true
         skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
-            
+        skView.multipleTouchEnabled = true
+
         scene.scaleMode = .AspectFill
         scene.size = skView.frame.size
         scene.backgroundColor = SKColor(rgba: "#2c3e50")
