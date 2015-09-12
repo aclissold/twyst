@@ -22,6 +22,7 @@ class GameViewController: UIViewController {
             
         scene.scaleMode = .AspectFill
         scene.size = skView.frame.size
+        scene.backgroundColor = SKColor(rgba: "#2c3e50")
 
         skView.presentScene(scene)
     }
