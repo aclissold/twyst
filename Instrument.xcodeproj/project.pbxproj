@@ -14,6 +14,8 @@
 		B566F3C81BA3E98900777821 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B566F3C71BA3E98900777821 /* Images.xcassets */; };
 		B566F3CB1BA3E98900777821 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B566F3C91BA3E98900777821 /* LaunchScreen.xib */; };
 		B566F3D71BA3E98900777821 /* InstrumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566F3D61BA3E98900777821 /* InstrumentTests.swift */; };
+		B5ADB0D91BA439C300B2A876 /* AKSoundFiles.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B5ADB0D81BA439C300B2A876 /* AKSoundFiles.bundle */; settings = {ASSET_TAGS = (); }; };
+		B5ADB0DB1BA439D000B2A876 /* AudioKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ADB0DA1BA439D000B2A876 /* AudioKit.swift */; settings = {ASSET_TAGS = (); }; };
 		B5EA28EB1BA42C6B00BF8233 /* libAudioKit iOS Static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5EA28E41BA42B5E00BF8233 /* libAudioKit iOS Static.a */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +69,9 @@
 		B566F3D01BA3E98900777821 /* InstrumentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstrumentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B566F3D51BA3E98900777821 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B566F3D61BA3E98900777821 /* InstrumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentTests.swift; sourceTree = "<group>"; };
+		B5ADB0D81BA439C300B2A876 /* AKSoundFiles.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AKSoundFiles.bundle; sourceTree = "<group>"; };
+		B5ADB0DA1BA439D000B2A876 /* AudioKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioKit.swift; sourceTree = "<group>"; };
+		B5ADB0DC1BA43A0B00B2A876 /* Instrument-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Instrument-Bridging-Header.h"; sourceTree = "<group>"; };
 		B5EA28DD1BA42B5E00BF8233 /* AudioKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AudioKit.xcodeproj; path = AudioKit/AudioKit.xcodeproj; sourceTree = "<group>"; };
 		B5EA28EC1BA42DB300BF8233 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -120,6 +125,7 @@
 				B566F3C71BA3E98900777821 /* Images.xcassets */,
 				B566F3C91BA3E98900777821 /* LaunchScreen.xib */,
 				B566F3BA1BA3E98900777821 /* Supporting Files */,
+				B5ADB0DC1BA43A0B00B2A876 /* Instrument-Bridging-Header.h */,
 			);
 			path = Instrument;
 			sourceTree = "<group>";
@@ -127,6 +133,8 @@
 		B566F3BA1BA3E98900777821 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B5ADB0DA1BA439D000B2A876 /* AudioKit.swift */,
+				B5ADB0D81BA439C300B2A876 /* AKSoundFiles.bundle */,
 				B566F3BB1BA3E98900777821 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -276,6 +284,7 @@
 				B566F3CB1BA3E98900777821 /* LaunchScreen.xib in Resources */,
 				B566F3C81BA3E98900777821 /* Images.xcassets in Resources */,
 				B566F3C61BA3E98900777821 /* Main.storyboard in Resources */,
+				B5ADB0D91BA439C300B2A876 /* AKSoundFiles.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +305,7 @@
 				B566F3C11BA3E98900777821 /* GameScene.swift in Sources */,
 				B566F3C31BA3E98900777821 /* GameViewController.swift in Sources */,
 				B566F3BD1BA3E98900777821 /* AppDelegate.swift in Sources */,
+				B5ADB0DB1BA439D000B2A876 /* AudioKit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,6 +436,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
@@ -436,6 +447,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewclissold.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Instrument/Instrument-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				USER_HEADER_SEARCH_PATHS = "AudioKit/AudioKit/**";
 			};
 			name = Debug;
@@ -444,6 +457,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
@@ -454,6 +468,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewclissold.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Instrument/Instrument-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "AudioKit/AudioKit/**";
 			};
 			name = Release;
