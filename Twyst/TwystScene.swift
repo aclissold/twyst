@@ -75,9 +75,9 @@ class TwystScene: SKScene {
         // add elements
         makeButtons()
         addMiddleLogo()
-        addMiddleImage()
+        // addMiddleImage()
 
-        addHelp()
+        // addHelp()
             // disabled for now
 
         AKOrchestra.addInstrument(synth)
@@ -124,7 +124,19 @@ class TwystScene: SKScene {
 
             for node in nodes {
                 if let name = node.name {
-                    if name.containsString("noteButton") {
+                    if  name.containsString("buttonOneImage") ||
+                        name.containsString("buttonTwoImage") ||
+                        name.containsString("buttonThreeImage") {
+
+                            handleNoteStart(name)
+
+                            let spriteNode = node as! SKSpriteNode
+                            spriteNode.texture = SKTexture(imageNamed: "buttonThreeImage_active")
+
+                    }
+
+
+                    /*if name.containsString("noteButton") {
                         // if it's a noteButton....
 
                         // vibrate
@@ -134,13 +146,9 @@ class TwystScene: SKScene {
 
                         handleNoteStart(name)
                         let spriteNode = node as! SKSpriteNode
-
-                        let changeColorAction = SKAction.colorizeWithColor(minimalLightBlue, colorBlendFactor: 1.0, duration: 0)
-                        spriteNode.runAction(changeColorAction) {
-                            spriteNode.color = self.minimalLightBlue
-                        }
-
-                    } else if (name.containsString("topButton")) {
+                        let newImageName = name + "_active"
+                        spriteNode.texture = SKTexture(imageNamed: newImageName)
+                    }*/ if (name.containsString("topButton")) {
                         let spriteNode = node as! SKSpriteNode
                         let changeColorAction = SKAction.colorizeWithColor(minimalLightPurple, colorBlendFactor: 1.0, duration: 0)
 
@@ -184,12 +192,8 @@ class TwystScene: SKScene {
 
                         handleNoteEnd(name)
                         let spriteNode = node as! SKSpriteNode
-
-                        let changeColorAction = SKAction.colorizeWithColor(minimalBlue, colorBlendFactor: 1.0, duration: 0)
-                        spriteNode.runAction(changeColorAction) {
-                            spriteNode.color = self.minimalBlue
-                        }
-
+                        let newImageName = name.stringByReplacingOccurrencesOfString("_active", withString: "")
+                        spriteNode.texture = SKTexture(imageNamed: newImageName)
                     } else if name.containsString("topButton") {
                         let spriteNode = node as! SKSpriteNode
                         let changeColorAction = SKAction.colorizeWithColor(minimalPurple, colorBlendFactor: 1.0, duration: 0)
@@ -338,7 +342,7 @@ class TwystScene: SKScene {
 
     func makeButtons() {
         let accidentalButtonSize = CGSize(width: 212, height: 106),
-            noteButtonSize = CGSize(width: screenWidth / 4, height: screenHeight / 3)
+            noteButtonSize = CGSize(width: 2 * screenWidth / 5, height: screenHeight / 3)
 
         // ~~~~~
         // bottom buttons
@@ -359,32 +363,34 @@ class TwystScene: SKScene {
 
     func makeNoteButton(buttonColor: SKColor, buttonSize: CGSize) -> SKSpriteNode {
         let node = SKSpriteNode(color: buttonColor, size: buttonSize)
+        node.alpha = 0.0
+            // make the color transparent
 
         node.anchorPoint = CGPoint(x: 0, y: 0)
         // positions it with respect to bottom left
 
         node.position = CGPoint(x: screenWidth - Int(buttonSize.width), y: y)
 
-        node.name = "noteButton"
+        node.name = ""
         var imageUrl = ""
 
         if y == 0 {
             // set button to 1 value
-            node.name = node.name! + " 1"
-            imageUrl = "one_no_background"
+            node.name = "buttonOneImage"
+            imageUrl = "buttonOneImage"
         } else if y == screenHeight / 3 {
             // set button to 2 value
-            node.name = node.name! + " 2"
-            imageUrl = "two_no_background"
+            node.name = "buttonTwoImage"
+            imageUrl = "buttonTwoImage"
         } else {
             // set button to 3 value
-            node.name = node.name! + " 3"
-            imageUrl = "three_no_background"
+            node.name = "buttonThreeImage"
+            imageUrl = "buttonThreeImage"
         }
 
         y += screenHeight / 3
 
-        let imageNode = SKSpriteNode(texture: SKTexture(imageNamed: imageUrl), size: CGSize(width: 15, height: 30))
+        let imageNode = SKSpriteNode(texture: SKTexture(imageNamed: imageUrl), size: buttonSize)
         imageNode.anchorPoint = CGPoint(x: 0, y: 1)
         imageNode.position = CGPoint(x: screenWidth - Int(buttonSize.width) + 6, y: y - 6)
 
