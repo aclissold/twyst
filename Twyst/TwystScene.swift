@@ -14,7 +14,6 @@ import AudioToolbox
 
 class TwystScene: SKScene {
 
-    var recognizer: UILongPressGestureRecognizer!
     let updateDelay = 0.03
 
     let synth = SineSynth()
@@ -55,10 +54,6 @@ class TwystScene: SKScene {
         sharpButtonActive = 0,
         flatButtonActive = 0
 
-    var buttonOne = SKSpriteNode()
-    var buttonTwo = SKSpriteNode()
-    var buttonThree = SKSpriteNode()
-
     var showNote = UILabel(frame: CGRect(x: 230, y: 200, width: 140.00, height: 140.00))
 
     // minimalist colors!
@@ -77,9 +72,6 @@ class TwystScene: SKScene {
     // ~~~~~~~~~~
     // MAIN VIEW FUNCTION
     override func didMoveToView(view: SKView) {
-        initialize()
-        view.addGestureRecognizer(recognizer)
-
         screenWidth = Int(view.frame.width)
         screenHeight = Int(view.frame.height)
 
@@ -111,17 +103,6 @@ class TwystScene: SKScene {
                     self.synth.vibrato = Float(a.x + a.y + a.z)
                 }
         }
-    }
-
-    func initialize() {
-        recognizer = UILongPressGestureRecognizer(target: self,
-            action: "handleLongPressGestures")
-
-        recognizer.numberOfTouchesRequired = 1
-        recognizer.allowableMovement = 10
-        recognizer.minimumPressDuration = 0.01
-
-
     }
 
     func isEqualColor(color: SKColor, toColor: SKColor) -> Bool {
@@ -191,59 +172,11 @@ class TwystScene: SKScene {
         }
     }
 
-    func handleLongPressGestures() {}
-
     var pendingUpdate = false
     var eventDate = NSDate()
     override func update(currentTime: NSTimeInterval) {
         if pendingUpdate && abs(eventDate.timeIntervalSinceNow) > updateDelay {
             completePendingUpdate()
-        }
-
-        updateTouches()
-    }
-
-    func updateTouches() {
-        // check touches to see what's touched
-
-        var ButtonOneIsTouched = false,
-            ButtonTwoIsTouched = false,
-            ButtonThreeIsTouched = false
-
-        let touches = recognizer.numberOfTouches()
-
-        for touch in 0..<touches {
-            let location = recognizer.locationOfTouch(touch, inView: view)
-            for node in nodesAtPoint(location) as [SKNode] {
-                if let name = node.name {
-                    if  name == "buttonOneImage" {
-                        ButtonOneIsTouched = true;
-                    } else if name == "buttonTwoImage" {
-                        ButtonTwoIsTouched = true;
-                    } else if name == "buttonThreeImage" {
-                        ButtonThreeIsTouched = true;
-                    }
-                }
-            }
-
-            if (!ButtonOneIsTouched && buttonOneActive == 1) {
-                buttonOneActive = 0
-                toggle(buttonOne, on: false)
-                ButtonOneIsTouched = false
-            }
-
-            if (!ButtonTwoIsTouched && buttonTwoActive == 1) {
-                buttonTwoActive = 0
-                toggle(buttonTwo, on: false)
-                ButtonTwoIsTouched = false
-            }
-
-            if (!ButtonThreeIsTouched && buttonThreeActive == 1) {
-                buttonThreeActive = 0
-                toggle(buttonThree, on: false)
-                ButtonThreeIsTouched = false
-            }
-
         }
     }
 
@@ -416,9 +349,9 @@ class TwystScene: SKScene {
 
         // ~~~~~
         // bottom buttons
-        buttonOne = makeNoteButton(minimalBlue, buttonSize: noteButtonSize)
-        buttonTwo = makeNoteButton(minimalBlue, buttonSize: noteButtonSize)
-        buttonThree = makeNoteButton(minimalBlue, buttonSize: noteButtonSize)
+        makeNoteButton(minimalBlue, buttonSize: noteButtonSize)
+        makeNoteButton(minimalBlue, buttonSize: noteButtonSize)
+        makeNoteButton(minimalBlue, buttonSize: noteButtonSize)
 
         // ~~~~~
         // top buttons
