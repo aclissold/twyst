@@ -178,7 +178,7 @@ class TwystScene: SKScene {
         if pendingUpdate && abs(eventDate.timeIntervalSinceNow) > updateDelay {
             completePendingUpdate()
         }
-    }gi
+    }
 
     var pendingNoteCode: Int? = 0
     func completePendingUpdate() {
