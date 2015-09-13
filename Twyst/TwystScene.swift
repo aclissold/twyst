@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import CoreMotion
 import SpriteKit
+import AudioToolbox
 
 class TwystScene: SKScene {
 
@@ -61,7 +62,9 @@ class TwystScene: SKScene {
         makeButtons()
         addMiddleLogo()
         addMiddleImage()
-        addKey()
+
+        // addKey()
+            // disabled for now
 
         AKOrchestra.addInstrument(synth)
         synth.play()
@@ -101,6 +104,11 @@ class TwystScene: SKScene {
                 if let name = node.name {
                     if name.containsString("noteButton") {
                         // if it's a noteButton....
+
+                        // vibrate
+                        //   ipod touch doesn't support, so leaving this out for now
+                        //
+                        // AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
 
                         handleNoteStart(name)
                         pendingUpdate = true
