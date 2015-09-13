@@ -68,7 +68,7 @@ enum Note: Float {
     case As4 = 466.16
     case B4 = 493.88
     case C5 = 523.25
-    /*case Cs5 = 554.37
+    case Cs5 = 554.37
     case D5 = 587.33
     case Ds5 = 622.25
     case E5 = 659.25
@@ -80,7 +80,7 @@ enum Note: Float {
     case As5 = 932.33
     case B5 = 987.77
     case C6 = 1046.50
-    case Cs6 = 1108.73
+    /*case Cs6 = 1108.73
     case D6 = 1174.66
     case Ds6 = 1244.51
     case E6 = 1318.51

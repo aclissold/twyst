@@ -32,6 +32,18 @@ class TwystScene: SKScene {
         10: .As4,
         11: .B4,
         12: .C5,
+        13: .Cs5,
+        14: .D5,
+        15: .Ds5,
+        16: .E5,
+        17: .F5,
+        18: .Fs5,
+        19: .G5,
+        20: .Gs5,
+        21: .A5,
+        22: .As5,
+        23: .B5,
+        24: .C6,
     ]
 
     let motionManager = CMMotionManager()
@@ -53,6 +65,8 @@ class TwystScene: SKScene {
         screenWidth = 0,
         screenHeight = 0
 
+    var upAnOctave = false
+
     override func didMoveToView(view: SKView) {
         screenWidth = Int(view.frame.width)
         screenHeight = Int(view.frame.height)
@@ -71,10 +85,18 @@ class TwystScene: SKScene {
 
         motionManager.startDeviceMotionUpdatesToQueue(
             NSOperationQueue.mainQueue()) { (deviceMotion, error) in
-                guard let a = deviceMotion?.userAcceleration else {
+                if let error = error {
+                    print("error retrieving device motion: \(error.localizedDescription)")
                     return
                 }
-                self.synth.vibrato = Float(a.x + a.y + a.z)
+
+                if let g = deviceMotion?.gravity {
+                    self.upAnOctave = g.x > 0.666
+                }
+
+                if let a = deviceMotion?.userAcceleration {
+                    self.synth.vibrato = Float(a.x + a.y + a.z)
+                }
         }
     }
 
@@ -279,6 +301,10 @@ class TwystScene: SKScene {
 
         noteCode += sharpButtonActive
         noteCode -= flatButtonActive
+
+        if upAnOctave {
+            noteCode += 12
+        }
 
         return noteCode
     }
