@@ -337,7 +337,7 @@ class TwystScene: SKScene {
     }
 
     func makeButtons() {
-        let accidentalButtonSize = CGSize(width: 106, height: 106),
+        let accidentalButtonSize = CGSize(width: 212, height: 106),
             noteButtonSize = CGSize(width: screenWidth / 4, height: screenHeight / 3)
 
         // ~~~~~
