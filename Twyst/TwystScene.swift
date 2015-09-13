@@ -30,12 +30,6 @@ class TwystScene: SKScene {
         12: .C5,
     ]
 
-    // regular colors!
-    let blue = SKColor.blueColor(),
-        red = SKColor.redColor(),
-        green = SKColor.greenColor(),
-        purple = SKColor.purpleColor()
-
     var buttonOneActive = 0,
         buttonTwoActive = 0,
         buttonThreeActive = 0,
