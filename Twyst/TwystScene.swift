@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreMotion
 import SpriteKit
 
 class TwystScene: SKScene {
@@ -29,6 +30,8 @@ class TwystScene: SKScene {
         11: .B4,
         12: .C5,
     ]
+
+    let motionManager = CMMotionManager()
 
     var buttonOneActive = 0,
         buttonTwoActive = 0,
@@ -60,6 +63,14 @@ class TwystScene: SKScene {
 
         AKOrchestra.addInstrument(synth)
         synth.play()
+
+        motionManager.startDeviceMotionUpdatesToQueue(
+            NSOperationQueue.mainQueue()) { (deviceMotion, error) in
+                guard let a = deviceMotion?.userAcceleration else {
+                    return
+                }
+                self.synth.vibrato = Float(a.x + a.y + a.z)
+        }
     }
 
     func isEqualColor(color: SKColor, toColor: SKColor) -> Bool {
@@ -177,7 +188,6 @@ class TwystScene: SKScene {
             }
         }
     }
-
 
     // ~~~~~~~
     // specialized funcs
