@@ -1,6 +1,6 @@
 //
 //  GameViewController.swift
-//  Instrument
+//  Twyst
 //
 //  Created by Andrew Clissold on 9/12/15.
 //  Copyright (c) 2015 Andrew Clissold. All rights reserved.
@@ -14,7 +14,7 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let scene = InstrumentScene()
+        let scene = TwystScene()
         let skView = self.view as! SKView
         skView.showsFPS = true
         skView.showsNodeCount = true

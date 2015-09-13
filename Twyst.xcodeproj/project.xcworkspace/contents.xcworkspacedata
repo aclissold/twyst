@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Instrument.xcodeproj">
+      location = "self:/Users/aclissold/Code/iOS/instrument/Twyst.xcodeproj">
    </FileRef>
 </Workspace>

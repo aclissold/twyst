@@ -1,6 +1,6 @@
 //
-//  InstrumentTests.swift
-//  InstrumentTests
+//  TwystTests.swift
+//  TwystTests
 //
 //  Created by Andrew Clissold on 9/12/15.
 //  Copyright (c) 2015 Andrew Clissold. All rights reserved.
@@ -9,7 +9,7 @@
 import UIKit
 import XCTest
 
-class InstrumentTests: XCTestCase {
+class TwystTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

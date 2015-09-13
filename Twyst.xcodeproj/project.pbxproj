@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		B5018D171BA449D2002915D1 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5018D161BA449D2002915D1 /* Note.swift */; settings = {ASSET_TAGS = (); }; };
 		B566F3BD1BA3E98900777821 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566F3BC1BA3E98900777821 /* AppDelegate.swift */; };
-		B566F3C11BA3E98900777821 /* InstrumentScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566F3C01BA3E98900777821 /* InstrumentScene.swift */; };
+		B566F3C11BA3E98900777821 /* TwystScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566F3C01BA3E98900777821 /* TwystScene.swift */; };
 		B566F3C31BA3E98900777821 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566F3C21BA3E98900777821 /* GameViewController.swift */; };
 		B566F3C61BA3E98900777821 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B566F3C41BA3E98900777821 /* Main.storyboard */; };
 		B566F3C81BA3E98900777821 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B566F3C71BA3E98900777821 /* Images.xcassets */; };
 		B566F3CB1BA3E98900777821 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B566F3C91BA3E98900777821 /* LaunchScreen.xib */; };
-		B566F3D71BA3E98900777821 /* InstrumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566F3D61BA3E98900777821 /* InstrumentTests.swift */; };
+		B566F3D71BA3E98900777821 /* TwystTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566F3D61BA3E98900777821 /* TwystTests.swift */; };
 		B5ADB0D91BA439C300B2A876 /* AKSoundFiles.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B5ADB0D81BA439C300B2A876 /* AKSoundFiles.bundle */; settings = {ASSET_TAGS = (); }; };
 		B5ADB0DB1BA439D000B2A876 /* AudioKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ADB0DA1BA439D000B2A876 /* AudioKit.swift */; settings = {ASSET_TAGS = (); }; };
 		B5ADB0E11BA43B8500B2A876 /* SineSynth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ADB0E01BA43B8500B2A876 /* SineSynth.swift */; settings = {ASSET_TAGS = (); }; };
@@ -61,20 +61,20 @@
 
 /* Begin PBXFileReference section */
 		B5018D161BA449D2002915D1 /* Note.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
-		B566F3B71BA3E98900777821 /* Instrument.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instrument.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B566F3B71BA3E98900777821 /* Twyst.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Twyst.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B566F3BB1BA3E98900777821 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B566F3BC1BA3E98900777821 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B566F3C01BA3E98900777821 /* InstrumentScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentScene.swift; sourceTree = "<group>"; };
+		B566F3C01BA3E98900777821 /* TwystScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwystScene.swift; sourceTree = "<group>"; };
 		B566F3C21BA3E98900777821 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		B566F3C51BA3E98900777821 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B566F3C71BA3E98900777821 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B566F3CA1BA3E98900777821 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		B566F3D01BA3E98900777821 /* InstrumentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstrumentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B566F3D01BA3E98900777821 /* Twyst.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Twyst.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B566F3D51BA3E98900777821 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B566F3D61BA3E98900777821 /* InstrumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentTests.swift; sourceTree = "<group>"; };
+		B566F3D61BA3E98900777821 /* TwystTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwystTests.swift; sourceTree = "<group>"; };
 		B5ADB0D81BA439C300B2A876 /* AKSoundFiles.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AKSoundFiles.bundle; sourceTree = "<group>"; };
 		B5ADB0DA1BA439D000B2A876 /* AudioKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioKit.swift; sourceTree = "<group>"; };
-		B5ADB0DC1BA43A0B00B2A876 /* Instrument-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Instrument-Bridging-Header.h"; sourceTree = "<group>"; };
+		B5ADB0DC1BA43A0B00B2A876 /* Twyst-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Twyst-Bridging-Header.h"; sourceTree = "<group>"; };
 		B5ADB0E01BA43B8500B2A876 /* SineSynth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SineSynth.swift; sourceTree = "<group>"; };
 		B5EA28DD1BA42B5E00BF8233 /* AudioKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AudioKit.xcodeproj; path = AudioKit/AudioKit.xcodeproj; sourceTree = "<group>"; };
 		B5EA28EC1BA42DB300BF8233 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
@@ -103,8 +103,8 @@
 			isa = PBXGroup;
 			children = (
 				B5EA28DD1BA42B5E00BF8233 /* AudioKit.xcodeproj */,
-				B566F3B91BA3E98900777821 /* Instrument */,
-				B566F3D31BA3E98900777821 /* InstrumentTests */,
+				B566F3B91BA3E98900777821 /* Twyst */,
+				B566F3D31BA3E98900777821 /* TwystTests */,
 				B566F3B81BA3E98900777821 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -112,17 +112,17 @@
 		B566F3B81BA3E98900777821 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B566F3B71BA3E98900777821 /* Instrument.app */,
-				B566F3D01BA3E98900777821 /* InstrumentTests.xctest */,
+				B566F3B71BA3E98900777821 /* Twyst.app */,
+				B566F3D01BA3E98900777821 /* Twyst.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B566F3B91BA3E98900777821 /* Instrument */ = {
+		B566F3B91BA3E98900777821 /* Twyst */ = {
 			isa = PBXGroup;
 			children = (
 				B566F3BC1BA3E98900777821 /* AppDelegate.swift */,
-				B566F3C01BA3E98900777821 /* InstrumentScene.swift */,
+				B566F3C01BA3E98900777821 /* TwystScene.swift */,
 				B5ADB0E01BA43B8500B2A876 /* SineSynth.swift */,
 				B5018D161BA449D2002915D1 /* Note.swift */,
 				B566F3C21BA3E98900777821 /* GameViewController.swift */,
@@ -131,9 +131,9 @@
 				B566F3C71BA3E98900777821 /* Images.xcassets */,
 				B566F3C91BA3E98900777821 /* LaunchScreen.xib */,
 				B566F3BA1BA3E98900777821 /* Supporting Files */,
-				B5ADB0DC1BA43A0B00B2A876 /* Instrument-Bridging-Header.h */,
+				B5ADB0DC1BA43A0B00B2A876 /* Twyst-Bridging-Header.h */,
 			);
-			path = Instrument;
+			path = Twyst;
 			sourceTree = "<group>";
 		};
 		B566F3BA1BA3E98900777821 /* Supporting Files */ = {
@@ -146,13 +146,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		B566F3D31BA3E98900777821 /* InstrumentTests */ = {
+		B566F3D31BA3E98900777821 /* TwystTests */ = {
 			isa = PBXGroup;
 			children = (
-				B566F3D61BA3E98900777821 /* InstrumentTests.swift */,
+				B566F3D61BA3E98900777821 /* TwystTests.swift */,
 				B566F3D41BA3E98900777821 /* Supporting Files */,
 			);
-			path = InstrumentTests;
+			path = TwystTests;
 			sourceTree = "<group>";
 		};
 		B566F3D41BA3E98900777821 /* Supporting Files */ = {
@@ -176,9 +176,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B566F3B61BA3E98900777821 /* Instrument */ = {
+		B566F3B61BA3E98900777821 /* Twyst */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B566F3DA1BA3E98900777821 /* Build configuration list for PBXNativeTarget "Instrument" */;
+			buildConfigurationList = B566F3DA1BA3E98900777821 /* Build configuration list for PBXNativeTarget "Twyst" */;
 			buildPhases = (
 				B566F3B31BA3E98900777821 /* Sources */,
 				B566F3B41BA3E98900777821 /* Frameworks */,
@@ -189,14 +189,14 @@
 			dependencies = (
 				B5EA28EA1BA42C5E00BF8233 /* PBXTargetDependency */,
 			);
-			name = Instrument;
+			name = Twyst;
 			productName = Instrument;
-			productReference = B566F3B71BA3E98900777821 /* Instrument.app */;
+			productReference = B566F3B71BA3E98900777821 /* Twyst.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B566F3CF1BA3E98900777821 /* InstrumentTests */ = {
+		B566F3CF1BA3E98900777821 /* TwystTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B566F3DD1BA3E98900777821 /* Build configuration list for PBXNativeTarget "InstrumentTests" */;
+			buildConfigurationList = B566F3DD1BA3E98900777821 /* Build configuration list for PBXNativeTarget "TwystTests" */;
 			buildPhases = (
 				B566F3CC1BA3E98900777821 /* Sources */,
 				B566F3CD1BA3E98900777821 /* Frameworks */,
@@ -207,9 +207,9 @@
 			dependencies = (
 				B566F3D21BA3E98900777821 /* PBXTargetDependency */,
 			);
-			name = InstrumentTests;
+			name = TwystTests;
 			productName = InstrumentTests;
-			productReference = B566F3D01BA3E98900777821 /* InstrumentTests.xctest */;
+			productReference = B566F3D01BA3E98900777821 /* Twyst.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -233,7 +233,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B566F3B21BA3E98900777821 /* Build configuration list for PBXProject "Instrument" */;
+			buildConfigurationList = B566F3B21BA3E98900777821 /* Build configuration list for PBXProject "Twyst" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -252,8 +252,8 @@
 			);
 			projectRoot = "";
 			targets = (
-				B566F3B61BA3E98900777821 /* Instrument */,
-				B566F3CF1BA3E98900777821 /* InstrumentTests */,
+				B566F3B61BA3E98900777821 /* Twyst */,
+				B566F3CF1BA3E98900777821 /* TwystTests */,
 			);
 		};
 /* End PBXProject section */
@@ -308,7 +308,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B566F3C11BA3E98900777821 /* InstrumentScene.swift in Sources */,
+				B566F3C11BA3E98900777821 /* TwystScene.swift in Sources */,
 				B5ADB0E11BA43B8500B2A876 /* SineSynth.swift in Sources */,
 				B566F3C31BA3E98900777821 /* GameViewController.swift in Sources */,
 				B566F3BD1BA3E98900777821 /* AppDelegate.swift in Sources */,
@@ -321,7 +321,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B566F3D71BA3E98900777821 /* InstrumentTests.swift in Sources */,
+				B566F3D71BA3E98900777821 /* TwystTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,7 +330,7 @@
 /* Begin PBXTargetDependency section */
 		B566F3D21BA3E98900777821 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B566F3B61BA3E98900777821 /* Instrument */;
+			target = B566F3B61BA3E98900777821 /* Twyst */;
 			targetProxy = B566F3D11BA3E98900777821 /* PBXContainerItemProxy */;
 		};
 		B5EA28EA1BA42C5E00BF8233 /* PBXTargetDependency */ = {
@@ -448,14 +448,14 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = Instrument/Info.plist;
+				INFOPLIST_FILE = Twyst/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewclissold.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Twyst;
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Instrument/Instrument-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Twyst/Twyst-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				USER_HEADER_SEARCH_PATHS = "AudioKit/AudioKit/**";
 			};
@@ -469,14 +469,14 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = Instrument/Info.plist;
+				INFOPLIST_FILE = Twyst/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewclissold.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Twyst;
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Instrument/Instrument-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Twyst/Twyst-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "AudioKit/AudioKit/**";
 			};
 			name = Release;
@@ -489,11 +489,11 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = InstrumentTests/Info.plist;
+				INFOPLIST_FILE = TwystTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewclissold.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Instrument.app/Instrument";
+				PRODUCT_NAME = Twyst;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Twyst.app/Twyst";
 			};
 			name = Debug;
 		};
@@ -501,18 +501,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = InstrumentTests/Info.plist;
+				INFOPLIST_FILE = TwystTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewclissold.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Instrument.app/Instrument";
+				PRODUCT_NAME = Twyst;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Twyst.app/Twyst";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B566F3B21BA3E98900777821 /* Build configuration list for PBXProject "Instrument" */ = {
+		B566F3B21BA3E98900777821 /* Build configuration list for PBXProject "Twyst" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B566F3D81BA3E98900777821 /* Debug */,
@@ -521,7 +521,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B566F3DA1BA3E98900777821 /* Build configuration list for PBXNativeTarget "Instrument" */ = {
+		B566F3DA1BA3E98900777821 /* Build configuration list for PBXNativeTarget "Twyst" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B566F3DB1BA3E98900777821 /* Debug */,
@@ -530,7 +530,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B566F3DD1BA3E98900777821 /* Build configuration list for PBXNativeTarget "InstrumentTests" */ = {
+		B566F3DD1BA3E98900777821 /* Build configuration list for PBXNativeTarget "TwystTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B566F3DE1BA3E98900777821 /* Debug */,
