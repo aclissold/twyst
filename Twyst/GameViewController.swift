@@ -16,8 +16,8 @@ class GameViewController: UIViewController {
 
         let scene = TwystScene()
         let skView = self.view as! SKView
-        skView.showsFPS = true
-        skView.showsNodeCount = true
+//        skView.showsFPS = true
+//        skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
         skView.multipleTouchEnabled = true
 
