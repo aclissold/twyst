@@ -13,6 +13,8 @@ import SpriteKit
 
 class TwystScene: SKScene {
 
+    let updateDelay = 0.05
+
     let synth = SineSynth()
     let noteCodeMappings = [
         -1: Note.B3,
@@ -101,6 +103,7 @@ class TwystScene: SKScene {
                         // if it's a noteButton....
 
                         handleNoteStart(name)
+                        pendingUpdate = true
                         let spriteNode = node as! SKSpriteNode
 
                         let changeColorAction = SKAction.colorizeWithColor(minimalLightBlue, colorBlendFactor: 1.0, duration: 0)
@@ -108,13 +111,6 @@ class TwystScene: SKScene {
                             spriteNode.color = self.minimalLightBlue
                         }
 
-                        if let noteCode = getCurrentNoteCode() {
-                            guard let note = noteCodeMappings[noteCode] else {
-                                fatalError("unexpected note code: \(noteCode)")
-                            }
-                            synth.note = note
-                            synth.mute(false)
-                        }
                     } else if (name.containsString("topButton")) {
                         let spriteNode = node as! SKSpriteNode
                         let changeColorAction = SKAction.colorizeWithColor(minimalLightPurple, colorBlendFactor: 1.0, duration: 0)
@@ -129,7 +125,6 @@ class TwystScene: SKScene {
                             flatButtonActive = 1
                         }
                     }
-                    updateSynthNote()
                 }
             }
         }
@@ -161,7 +156,7 @@ class TwystScene: SKScene {
                         // if it's a noteButton....
 
                         handleNoteEnd(name)
-
+                        pendingUpdate = true
                         let spriteNode = node as! SKSpriteNode
 
                         let changeColorAction = SKAction.colorizeWithColor(minimalBlue, colorBlendFactor: 1.0, duration: 0)
@@ -183,10 +178,32 @@ class TwystScene: SKScene {
                             flatButtonActive = 0
                         }
                     }
-                    updateSynthNote()
                 }
             }
         }
+    }
+
+    var pendingUpdate = false
+    var lastUpdate = NSDate()
+    var pendingNoteCode: Int? = nil
+    override func update(currentTime: NSTimeInterval) {
+        if pendingUpdate && abs(lastUpdate.timeIntervalSinceNow) > updateDelay {
+            completePendingUpdate()
+        }
+
+        let noteCode = getCurrentNoteCode()
+        if noteCode == pendingNoteCode {
+            return
+        }
+
+        pendingNoteCode = noteCode
+        lastUpdate = NSDate()
+        pendingUpdate = true
+    }
+
+    func completePendingUpdate() {
+        updateSynthNote()
+        pendingUpdate = false
     }
 
     // ~~~~~~~
