@@ -84,7 +84,7 @@ class TwystScene: SKScene {
         synth.play()
 
         motionManager.startDeviceMotionUpdatesToQueue(
-            NSOperationQueue.mainQueue()) { (deviceMotion, error) in
+            NSOperationQueue()) { (deviceMotion, error) in
                 if let error = error {
                     print("error retrieving device motion: \(error.localizedDescription)")
                     return
