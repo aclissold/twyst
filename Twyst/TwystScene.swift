@@ -131,7 +131,14 @@ class TwystScene: SKScene {
                         } else if name == "topButtonFlat" {
                             flatButtonActive = 1
                         }
+                    } else if name.containsString("flatImage") {
+                        let spriteNode = node as! SKSpriteNode
+                        spriteNode.texture = SKTexture(imageNamed: "flatImage_active")
+                    } else if name.containsString("sharpImage") {
+                        let spriteNode = node as! SKSpriteNode
+                        spriteNode.texture = SKTexture(imageNamed: "sharpImage_active")
                     }
+
                     pendingNoteCode = getCurrentNoteCode()
                     pendingUpdate = true
                     eventDate = NSDate()
@@ -174,7 +181,21 @@ class TwystScene: SKScene {
                         } else if name == "topButtonFlat" {
                             flatButtonActive = 0
                         }
+                    } else if name.containsString("flatImage") {
+                        let spriteNode = node as! SKSpriteNode
+                        spriteNode.texture = SKTexture(imageNamed: "flatImage")
+                    } else if name.containsString("sharpImage") {
+                        let spriteNode = node as! SKSpriteNode
+                        spriteNode.texture = SKTexture(imageNamed: "sharpImage")
                     }
+
+                    /*if name.containsString("_active") {
+                        let spriteNode = node as! SKSpriteNode
+                        let newName = name.stringByReplacingOccurrencesOfString("_active", withString: "")
+                        spriteNode.texture = SKTexture(imageNamed: newName)
+                        node.name = newName
+                    }*/
+
                     pendingNoteCode = getCurrentNoteCode()
                     pendingUpdate = true
                     eventDate = NSDate()
@@ -354,6 +375,7 @@ class TwystScene: SKScene {
         // color node
         let colorNode = SKSpriteNode(color: minimalPurple, size: buttonSize)
         colorNode.anchorPoint = anchorPoint
+        colorNode.alpha = 0.0
         // positions it with respect to top left
 
         colorNode.position = position
@@ -363,15 +385,16 @@ class TwystScene: SKScene {
         // image node
         let imageName: String
         if y == screenHeight / 3 {
-            imageName = "flat"
+            imageName = "flatImage"
             colorNode.name = "topButtonFlat"
         } else {
-            imageName = "sharp"
+            imageName = "sharpImage"
             colorNode.name = "topButtonSharp"
         }
 
         let imageNode = SKSpriteNode(texture: SKTexture(imageNamed: imageName), size: buttonSize)
         imageNode.anchorPoint = anchorPoint
+        imageNode.name = imageName
         imageNode.position = position
 
         self.addChild(colorNode)
