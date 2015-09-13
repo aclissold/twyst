@@ -16,6 +16,7 @@
 		B566F3CB1BA3E98900777821 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B566F3C91BA3E98900777821 /* LaunchScreen.xib */; };
 		B566F3D71BA3E98900777821 /* TwystTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566F3D61BA3E98900777821 /* TwystTests.swift */; };
 		B57EACF41BA501E8001B05D6 /* SKColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57EACF31BA501E8001B05D6 /* SKColorExtensions.swift */; settings = {ASSET_TAGS = (); }; };
+		B57EAD091BA5B4DF001B05D6 /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57EAD081BA5B4DF001B05D6 /* ButtonNode.swift */; settings = {ASSET_TAGS = (); }; };
 		B5ADB0D91BA439C300B2A876 /* AKSoundFiles.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B5ADB0D81BA439C300B2A876 /* AKSoundFiles.bundle */; settings = {ASSET_TAGS = (); }; };
 		B5ADB0DB1BA439D000B2A876 /* AudioKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ADB0DA1BA439D000B2A876 /* AudioKit.swift */; settings = {ASSET_TAGS = (); }; };
 		B5ADB0E11BA43B8500B2A876 /* SineSynth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ADB0E01BA43B8500B2A876 /* SineSynth.swift */; settings = {ASSET_TAGS = (); }; };
@@ -74,6 +75,7 @@
 		B566F3D51BA3E98900777821 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B566F3D61BA3E98900777821 /* TwystTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwystTests.swift; sourceTree = "<group>"; };
 		B57EACF31BA501E8001B05D6 /* SKColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKColorExtensions.swift; sourceTree = "<group>"; };
+		B57EAD081BA5B4DF001B05D6 /* ButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
 		B5ADB0D81BA439C300B2A876 /* AKSoundFiles.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AKSoundFiles.bundle; sourceTree = "<group>"; };
 		B5ADB0DA1BA439D000B2A876 /* AudioKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioKit.swift; sourceTree = "<group>"; };
 		B5ADB0DC1BA43A0B00B2A876 /* Twyst-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Twyst-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 			children = (
 				B566F3BC1BA3E98900777821 /* AppDelegate.swift */,
 				B566F3C01BA3E98900777821 /* TwystScene.swift */,
+				B57EAD081BA5B4DF001B05D6 /* ButtonNode.swift */,
 				B57EACF31BA501E8001B05D6 /* SKColorExtensions.swift */,
 				B5ADB0E01BA43B8500B2A876 /* SineSynth.swift */,
 				B5018D161BA449D2002915D1 /* Note.swift */,
@@ -316,6 +319,7 @@
 				B57EACF41BA501E8001B05D6 /* SKColorExtensions.swift in Sources */,
 				B566F3C31BA3E98900777821 /* GameViewController.swift in Sources */,
 				B566F3BD1BA3E98900777821 /* AppDelegate.swift in Sources */,
+				B57EAD091BA5B4DF001B05D6 /* ButtonNode.swift in Sources */,
 				B5ADB0DB1BA439D000B2A876 /* AudioKit.swift in Sources */,
 				B5018D171BA449D2002915D1 /* Note.swift in Sources */,
 			);

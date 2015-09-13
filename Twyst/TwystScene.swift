@@ -48,12 +48,6 @@ class TwystScene: SKScene {
 
     let motionManager = CMMotionManager()
 
-    var buttonOneActive = 0,
-        buttonTwoActive = 0,
-        buttonThreeActive = 0,
-        sharpButtonActive = 0,
-        flatButtonActive = 0
-
     var showNote = UILabel(frame: CGRect(x: 230, y: 200, width: 140.00, height: 140.00))
 
     // minimalist colors!
@@ -68,6 +62,8 @@ class TwystScene: SKScene {
         screenHeight = 0
 
     var upAnOctave = false
+
+    var buttonOne, buttonTwo, buttonThree, flatButton, sharpButton: ButtonNode!
 
     // ~~~~~~~~~~
     // MAIN VIEW FUNCTION
@@ -119,57 +115,16 @@ class TwystScene: SKScene {
         return true
     }
 
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        for touch in touches {
-            let location = touch.locationInNode(self)
-            for node in nodesAtPoint(location) as [SKNode] {
-                toggle(node, on: true)
-            }
+    func buttonTapped(node: ButtonNode) {
+        if node.active {
+            updateShownNote()
+        } else {
+            showNote.text = ""
         }
-    }
 
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        for touch in touches {
-            let location = touch.locationInNode(self)
-            for node in nodesAtPoint(location) as [SKNode] {
-                toggle(node, on: false)
-            }
-        }
-    }
-
-    func toggle(node: SKNode, on: Bool) {
-        if let name = node.name {
-            if  name == "buttonOneImage" ||
-                name == "buttonTwoImage" ||
-                name == "buttonThreeImage" {
-                    if on {
-                        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
-                        handleNoteStart(name)
-                    } else {
-                        handleNoteEnd(name)
-                    }
-                    let spriteNode = node as! SKSpriteNode
-                    let newImageName: String
-                    if on {
-                        newImageName = name + "_active"
-                    } else {
-                        newImageName = name.stringByReplacingOccurrencesOfString("_active", withString: "")
-                    }
-                    spriteNode.texture = SKTexture(imageNamed: newImageName)
-            } else if name.containsString("flatImage") {
-                flatButtonActive = on ? 1 : 0
-                let spriteNode = node as! SKSpriteNode
-                spriteNode.texture = SKTexture(imageNamed: on ? "flatImage_active" : "flatImage")
-            } else if name.containsString("sharpImage") {
-                sharpButtonActive = on ? 1 : 0
-                let spriteNode = node as! SKSpriteNode
-                spriteNode.texture = SKTexture(imageNamed: on ? "sharpImage_active" : "sharpImage")
-            }
-
-            pendingNoteCode = getCurrentNoteCode()
-            pendingUpdate = true
-            eventDate = NSDate()
-        }
+        pendingNoteCode = getCurrentNoteCode()
+        pendingUpdate = true
+        eventDate = NSDate()
     }
 
     var pendingUpdate = false
@@ -195,50 +150,13 @@ class TwystScene: SKScene {
         pendingUpdate = false
     }
 
-    // ~~~~~~~
-    // specialized funcs
-    func handleNoteStart(noteName: String) {
-        switch noteName {
-        case "buttonOneImage":
-            buttonOneActive = 1
-        case "buttonTwoImage":
-            buttonTwoActive = 1
-        case "buttonThreeImage":
-            buttonThreeActive = 1
-        default:
-            fatalError("unexpected note name: \(noteName)")
-        }
-
-        updateShownNote()
-    }
-
-    func handleNoteEnd(noteName: String) {
-        switch noteName {
-        case "buttonOneImage":
-            buttonOneActive = 0
-        case "buttonTwoImage":
-            buttonTwoActive = 0
-        case "buttonThreeImage":
-            buttonThreeActive = 0
-        default:
-            fatalError("unexpected note name: \(noteName)")
-        }
-
-        hideShownNote()
-    }
-
     func updateShownNote() {
         if let noteCode = getCurrentNoteCode() {
             let noteString = getNoteString(noteCode)
             showNote.text = noteString
+        } else {
+            showNote.text = ""
         }
-        else {
-            hideShownNote()
-        }
-    }
-
-    func hideShownNote() {
-        showNote.text = ""
     }
 
     func addNoteTextBox(view: SKView) {
@@ -247,35 +165,35 @@ class TwystScene: SKScene {
         showNote.font = UIFont(name: "Avenir-Light", size: 95)
 
         view.addSubview(showNote)
-
     }
 
     func getCurrentNoteCode() -> Int? {
         var noteCode: Int
-        switch (buttonOneActive, buttonTwoActive, buttonThreeActive) {
-        case (0, 0, 0):
+        switch (buttonOne.active, buttonTwo.active, buttonThree.active) {
+        case (false, false, false):
             return nil
-        case (1, 0, 0):
+        case (true, false, false):
             noteCode = 0
-        case (0, 1, 0):
+        case (false, true, false):
             noteCode = 2
-        case (0, 0, 1):
+        case (false, false, true):
             noteCode = 4
-        case (1, 1, 0):
+        case (true, true, false):
             noteCode = 5
-        case (1, 0, 1):
+        case (true, false, true):
             noteCode = 7
-        case (0, 1, 1):
+        case (false, true, true):
             noteCode = 9
-        case (1, 1, 1):
+        case (true, true, true):
             noteCode = 11
-        default:
-            fatalError("unexpected button combination: (\(buttonOneActive), \(buttonTwoActive), \(buttonThreeActive))")
         }
 
-        noteCode += sharpButtonActive
-        noteCode -= flatButtonActive
-
+        if sharpButton.active {
+            ++noteCode
+        }
+        if flatButton.active {
+            --noteCode
+        }
         if upAnOctave {
             noteCode += 12
         }
@@ -347,76 +265,56 @@ class TwystScene: SKScene {
         let accidentalButtonSize = CGSize(width: 212, height: 106),
             noteButtonSize = CGSize(width: 2 * screenWidth / 5, height: screenHeight / 3)
 
-        // ~~~~~
-        // bottom buttons
-        makeNoteButton(minimalBlue, buttonSize: noteButtonSize)
-        makeNoteButton(minimalBlue, buttonSize: noteButtonSize)
-        makeNoteButton(minimalBlue, buttonSize: noteButtonSize)
-
-        // ~~~~~
-        // top buttons
+        makeNoteButton(noteButtonSize)
+        makeNoteButton(noteButtonSize)
+        makeNoteButton(noteButtonSize)
 
         y = 0
-        // start back at left of screen
 
         makeAccidentalButton(minimalBlue, buttonSize: accidentalButtonSize)
         makeAccidentalButton(minimalBlue, buttonSize: accidentalButtonSize)
     }
 
-    func makeNoteButton(buttonColor: SKColor, buttonSize: CGSize) -> SKSpriteNode {
-        var imageName = ""
+    func makeNoteButton(buttonSize: CGSize) {
+        let noteButton: ButtonNode
         if y == 0 {
-            // set button to 1 value
-            imageName = "buttonOneImage"
+            noteButton = ButtonNode(type: .One, size: buttonSize)
+            buttonOne = noteButton
         } else if y == screenHeight / 3 {
-            imageName = "buttonTwoImage"
+            noteButton = ButtonNode(type: .Two, size: buttonSize)
+            buttonTwo = noteButton
         } else {
-            imageName = "buttonThreeImage"
+            noteButton = ButtonNode(type: .Three, size: buttonSize)
+            buttonThree = noteButton
         }
 
         y += screenHeight / 3
 
-        let imageNode = SKSpriteNode(texture: SKTexture(imageNamed: imageName), size: buttonSize)
-        imageNode.name = imageName
-        imageNode.anchorPoint = CGPoint(x: 0, y: 1)
-        imageNode.position = CGPoint(x: screenWidth - Int(buttonSize.width) + 6, y: y - 6)
+        noteButton.anchorPoint = CGPoint(x: 0, y: 1)
+        noteButton.position = CGPoint(x: screenWidth - Int(buttonSize.width) + 6, y: y - 6)
 
-        self.addChild(imageNode)
-        return imageNode
+        self.addChild(noteButton)
     }
 
     func makeAccidentalButton(buttonColor: SKColor, buttonSize: CGSize) {
         let anchorPoint = CGPoint(x: 0, y: 0)
         let position = CGPoint(x: 0, y: y)
 
-        // ~~~~
-        // color node
-        let colorNode = SKSpriteNode(color: minimalPurple, size: buttonSize)
-        colorNode.anchorPoint = anchorPoint
-        colorNode.alpha = 0.0
-        // positions it with respect to top left
-
-        colorNode.position = position
         y += screenHeight / 3
 
-        // ~~~~
-        // image node
-        let imageName: String
+        let accidentalButton: ButtonNode
         if y == screenHeight / 3 {
-            imageName = "flatImage"
-            colorNode.name = "topButtonFlat"
+            accidentalButton = ButtonNode(type: .Flat, size: buttonSize)
+            flatButton = accidentalButton
         } else {
-            imageName = "sharpImage"
-            colorNode.name = "topButtonSharp"
+            accidentalButton = ButtonNode(type: .Sharp, size: buttonSize)
+            sharpButton = accidentalButton
         }
 
-        let imageNode = SKSpriteNode(texture: SKTexture(imageNamed: imageName), size: buttonSize)
-        imageNode.anchorPoint = anchorPoint
-        imageNode.name = imageName
-        imageNode.position = position
+        accidentalButton.anchorPoint = anchorPoint
+        accidentalButton.position = position
 
-        self.addChild(colorNode)
-        self.addChild(imageNode)
+        self.addChild(accidentalButton)
     }
 
 }
