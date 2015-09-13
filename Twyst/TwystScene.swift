@@ -77,7 +77,7 @@ class TwystScene: SKScene {
         addMiddleLogo()
         addMiddleImage()
 
-        // addKey()
+        addHelp()
             // disabled for now
 
         AKOrchestra.addInstrument(synth)
@@ -309,11 +309,11 @@ class TwystScene: SKScene {
         return noteCode
     }
 
-    func addKey() {
-        let keySize = CGSize(width: 50, height: 50)
-        let keyPic = SKSpriteNode(texture: SKTexture(imageNamed: "key"), size: keySize)
+    func addHelp() {
+        let keySize = CGSize(width: 20, height: 30)
+        let keyPic = SKSpriteNode(texture: SKTexture(imageNamed: "help"), size: keySize)
         keyPic.anchorPoint = CGPoint(x: 0, y: 1)
-        keyPic.position = CGPoint(x: 35, y: screenHeight - 25)
+        keyPic.position = CGPoint(x: 40, y: screenHeight - 25)
 
         self.addChild(keyPic)
     }
