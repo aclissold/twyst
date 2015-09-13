@@ -54,6 +54,8 @@ class TwystScene: SKScene {
         sharpButtonActive = 0,
         flatButtonActive = 0
 
+    var showNote = UILabel(frame: CGRect(x: 230, y: 200, width: 140.00, height: 140.00))
+
     // minimalist colors!
     let minimalLightBlue = SKColor(rgba: "#3498db"),
         minimalBlue = SKColor(rgba: "#2980b9"),
@@ -67,6 +69,8 @@ class TwystScene: SKScene {
 
     var upAnOctave = false
 
+    // ~~~~~~~~~~
+    // MAIN VIEW FUNCTION
     override func didMoveToView(view: SKView) {
         screenWidth = Int(view.frame.width)
         screenHeight = Int(view.frame.height)
@@ -76,6 +80,7 @@ class TwystScene: SKScene {
         makeButtons()
         addMiddleLogo()
         // addMiddleImage()
+        addNoteTextBox(view)
 
         // addHelp()
             // disabled for now
@@ -173,7 +178,7 @@ class TwystScene: SKScene {
         if pendingUpdate && abs(eventDate.timeIntervalSinceNow) > updateDelay {
             completePendingUpdate()
         }
-    }
+    }gi
 
     var pendingNoteCode: Int? = 0
     func completePendingUpdate() {
@@ -182,6 +187,7 @@ class TwystScene: SKScene {
                 fatalError("unexpected note code: \(noteCode)")
             }
             synth.note = note
+            updateShownNote()
             synth.mute(false)
         } else {
             synth.mute(true)
@@ -202,6 +208,8 @@ class TwystScene: SKScene {
         default:
             fatalError("unexpected note name: \(noteName)")
         }
+
+        updateShownNote()
     }
 
     func handleNoteEnd(noteName: String) {
@@ -215,6 +223,31 @@ class TwystScene: SKScene {
         default:
             fatalError("unexpected note name: \(noteName)")
         }
+
+        hideShownNote()
+    }
+
+    func updateShownNote() {
+        if let noteCode = getCurrentNoteCode() {
+            let noteString = getNoteString(noteCode)
+            showNote.text = noteString
+        }
+        else {
+            hideShownNote()
+        }
+    }
+
+    func hideShownNote() {
+        showNote.text = ""
+    }
+
+    func addNoteTextBox(view: SKView) {
+        showNote.text = ""
+        showNote.textColor = UIColor.whiteColor()
+        showNote.font = UIFont(name: "Avenir-Light", size: 95)
+
+        view.addSubview(showNote)
+
     }
 
     func getCurrentNoteCode() -> Int? {
@@ -248,6 +281,39 @@ class TwystScene: SKScene {
         }
 
         return noteCode
+    }
+
+    func getNoteString(var noteCode: Int) -> String {
+        //noteCode += sharpButtonActive
+        //noteCode -= flatButtonActive
+
+        if noteCode < 0 {
+            noteCode += 12
+        }
+
+        if noteCode > 11 {
+            noteCode -= 12
+        }
+
+        var noteString = ""
+
+        switch (noteCode) {
+        case 0: noteString = "C"
+        case 1: noteString = "C#"
+        case 2: noteString = "D"
+        case 3: noteString = "D#"
+        case 4: noteString = "E"
+        case 5: noteString = "F"
+        case 6: noteString = "F#"
+        case 7: noteString = "G"
+        case 8: noteString = "G#"
+        case 9: noteString = "A"
+        case 10: noteString = "A#"
+        case 11: noteString = "B"
+        default: noteString = ""
+        }
+
+        return noteString
     }
 
     func addHelp() {
