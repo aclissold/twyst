@@ -117,35 +117,8 @@ class TwystScene: SKScene {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch in touches {
             let location = touch.locationInNode(self)
-
-            let nodes = nodesAtPoint(location) as [SKNode]
-
-            for node in nodes {
-                if let name = node.name {
-                    if  name == "buttonOneImage" ||
-                        name == "buttonTwoImage" ||
-                        name == "buttonThreeImage" {
-
-                        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
-                        
-                        handleNoteStart(name)
-                        let spriteNode = node as! SKSpriteNode
-                        let newImageName = name + "_active"
-                        spriteNode.texture = SKTexture(imageNamed: newImageName)
-                    } else if name.containsString("flatImage") {
-                        flatButtonActive = 1
-                        let spriteNode = node as! SKSpriteNode
-                        spriteNode.texture = SKTexture(imageNamed: "flatImage_active")
-                    } else if name.containsString("sharpImage") {
-                        sharpButtonActive = 1
-                        let spriteNode = node as! SKSpriteNode
-                        spriteNode.texture = SKTexture(imageNamed: "sharpImage_active")
-                    }
-
-                    pendingNoteCode = getCurrentNoteCode()
-                    pendingUpdate = true
-                    eventDate = NSDate()
-                }
+            for node in nodesAtPoint(location) as [SKNode] {
+                toggle(node, on: true)
             }
         }
     }
@@ -153,34 +126,44 @@ class TwystScene: SKScene {
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch in touches {
             let location = touch.locationInNode(self)
-
-            let nodes = nodesAtPoint(location) as [SKNode]
-
-            for node in nodes {
-                if let name = node.name {
-                    if  name == "buttonOneImage" ||
-                        name == "buttonTwoImage" ||
-                        name == "buttonThreeImage" {
-
-                        handleNoteEnd(name)
-                        let spriteNode = node as! SKSpriteNode
-                        let newImageName = name.stringByReplacingOccurrencesOfString("_active", withString: "")
-                        spriteNode.texture = SKTexture(imageNamed: newImageName)
-                    } else if name.containsString("flatImage") {
-                        flatButtonActive = 0
-                        let spriteNode = node as! SKSpriteNode
-                        spriteNode.texture = SKTexture(imageNamed: "flatImage")
-                    } else if name.containsString("sharpImage") {
-                        sharpButtonActive = 0
-                        let spriteNode = node as! SKSpriteNode
-                        spriteNode.texture = SKTexture(imageNamed: "sharpImage")
-                    }
-
-                    pendingNoteCode = getCurrentNoteCode()
-                    pendingUpdate = true
-                    eventDate = NSDate()
-                }
+            for node in nodesAtPoint(location) as [SKNode] {
+                toggle(node, on: false)
             }
+        }
+    }
+
+    func toggle(node: SKNode, on: Bool) {
+        if let name = node.name {
+            if  name == "buttonOneImage" ||
+                name == "buttonTwoImage" ||
+                name == "buttonThreeImage" {
+                    if on {
+                        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+                        handleNoteStart(name)
+                    } else {
+                        handleNoteEnd(name)
+                    }
+                    let spriteNode = node as! SKSpriteNode
+                    let newImageName: String
+                    if on {
+                        newImageName = name + "_active"
+                    } else {
+                        newImageName = name.stringByReplacingOccurrencesOfString("_active", withString: "")
+                    }
+                    spriteNode.texture = SKTexture(imageNamed: newImageName)
+            } else if name.containsString("flatImage") {
+                flatButtonActive = on ? 1 : 0
+                let spriteNode = node as! SKSpriteNode
+                spriteNode.texture = SKTexture(imageNamed: on ? "flatImage_active" : "flatImage")
+            } else if name.containsString("sharpImage") {
+                sharpButtonActive = on ? 1 : 0
+                let spriteNode = node as! SKSpriteNode
+                spriteNode.texture = SKTexture(imageNamed: on ? "sharpImage_active" : "sharpImage")
+            }
+
+            pendingNoteCode = getCurrentNoteCode()
+            pendingUpdate = true
+            eventDate = NSDate()
         }
     }
 
