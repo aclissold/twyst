@@ -8,7 +8,7 @@
 
 class SineSynth: AKInstrument {
 
-    private let vibratoMultiplier: Float = 3
+    private let vibratoMultiplier: Float = 6
 
     var note = Note.C4 {
         didSet {

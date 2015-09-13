@@ -111,7 +111,6 @@ class TwystScene: SKScene {
                         // AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
 
                         handleNoteStart(name)
-                        pendingUpdate = true
                         let spriteNode = node as! SKSpriteNode
 
                         let changeColorAction = SKAction.colorizeWithColor(minimalLightBlue, colorBlendFactor: 1.0, duration: 0)
@@ -133,20 +132,11 @@ class TwystScene: SKScene {
                             flatButtonActive = 1
                         }
                     }
+                    pendingNoteCode = getCurrentNoteCode()
+                    pendingUpdate = true
+                    eventDate = NSDate()
                 }
             }
-        }
-    }
-
-    func updateSynthNote() {
-        if let noteCode = getCurrentNoteCode() {
-            guard let note = noteCodeMappings[noteCode] else {
-                fatalError("unexpected note code: \(noteCode)")
-            }
-            synth.note = note
-            synth.mute(false)
-        } else {
-            synth.mute(true)
         }
     }
 
@@ -164,7 +154,6 @@ class TwystScene: SKScene {
                         // if it's a noteButton....
 
                         handleNoteEnd(name)
-                        pendingUpdate = true
                         let spriteNode = node as! SKSpriteNode
 
                         let changeColorAction = SKAction.colorizeWithColor(minimalBlue, colorBlendFactor: 1.0, duration: 0)
@@ -186,31 +175,33 @@ class TwystScene: SKScene {
                             flatButtonActive = 0
                         }
                     }
+                    pendingNoteCode = getCurrentNoteCode()
+                    pendingUpdate = true
+                    eventDate = NSDate()
                 }
             }
         }
     }
 
     var pendingUpdate = false
-    var lastUpdate = NSDate()
-    var pendingNoteCode: Int? = nil
+    var eventDate = NSDate()
     override func update(currentTime: NSTimeInterval) {
-        if pendingUpdate && abs(lastUpdate.timeIntervalSinceNow) > updateDelay {
+        if pendingUpdate && abs(eventDate.timeIntervalSinceNow) > updateDelay {
             completePendingUpdate()
         }
-
-        let noteCode = getCurrentNoteCode()
-        if noteCode == pendingNoteCode {
-            return
-        }
-
-        pendingNoteCode = noteCode
-        lastUpdate = NSDate()
-        pendingUpdate = true
     }
 
+    var pendingNoteCode: Int? = 0
     func completePendingUpdate() {
-        updateSynthNote()
+        if let noteCode = pendingNoteCode {
+            guard let note = noteCodeMappings[noteCode] else {
+                fatalError("unexpected note code: \(noteCode)")
+            }
+            synth.note = note
+            synth.mute(false)
+        } else {
+            synth.mute(true)
+        }
         pendingUpdate = false
     }
 
@@ -299,7 +290,7 @@ class TwystScene: SKScene {
     }
 
     func makeButtons() {
-        let accidentalButtonSize = CGSize(width: screenWidth / 4, height: screenHeight / 3),
+        let accidentalButtonSize = CGSize(width: 106, height: 106),
             noteButtonSize = CGSize(width: screenWidth / 4, height: screenHeight / 3)
 
         // ~~~~~
