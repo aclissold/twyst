@@ -315,6 +315,7 @@ class TwystScene: SKScene {
         if y == screenHeight / 3 {
             accidentalButton = ButtonNode(type: .Flat, size: buttonSize)
             flatButton = accidentalButton
+            y += screenHeight / 3
         } else {
             accidentalButton = ButtonNode(type: .Sharp, size: buttonSize)
             sharpButton = accidentalButton
