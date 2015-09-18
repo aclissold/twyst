@@ -107,21 +107,15 @@ class TwystScene: SKScene {
         }
     }
 
-
-    // ~~~~~~~~~~
-    // MAIN VIEW FUNCTION
     override func didMoveToView(view: SKView) {
         screenWidth = view.frame.width
         screenHeight = view.frame.height
-        // ~~~~
-        // add elements
         addButtons()
         addMiddleLogo()
         // addMiddleImage()
         addNoteTextBox(view)
 
         // addHelp()
-            // disabled for now
 
         AKOrchestra.addInstrument(synth)
         synth.play()
