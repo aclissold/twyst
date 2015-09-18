@@ -8,10 +8,6 @@
 
 import SpriteKit
 
-enum ButtonNodeType {
-    case Flat, Sharp, One, Two, Three
-}
-
 private func restingTexture(type: ButtonNodeType) -> SKTexture {
     let imageName: String
     switch type {
