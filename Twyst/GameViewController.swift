@@ -18,14 +18,13 @@ class GameViewController: UIViewController {
             return
         }
 
-        let scene = TwystScene()
+        let scene = TwystScene(size: view.frame.size)
 //        view.showsFPS = true
 //        view.showsNodeCount = true
         view.ignoresSiblingOrder = true
         view.multipleTouchEnabled = true
 
         scene.scaleMode = .AspectFill
-        scene.size = view.frame.size
         scene.backgroundColor = SKColor(rgba: "#2c3e50")
 
         view.presentScene(scene)
