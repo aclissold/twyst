@@ -48,13 +48,12 @@ class TwystScene: SKScene {
 
     let motionManager = CMMotionManager()
 
-    var noteLabel = UILabel(frame: CGRect(x: 230, y: 200, width: 140.00, height: 140.00))
-
     var screenWidth: CGFloat = 0,
         screenHeight: CGFloat = 0
 
     var upAnOctave = false
 
+    var noteLabelNode: SKLabelNode!
     var oneButton, twoButton, threeButton, flatButton, sharpButton: ButtonNode!
 
     override func didMoveToView(view: SKView) {
@@ -63,7 +62,7 @@ class TwystScene: SKScene {
 
         addButtons()
         addLogo()
-        addNoteLabel(view)
+        addNoteLabelNode()
 
         AKOrchestra.addInstrument(synth)
         synth.play()
@@ -148,7 +147,7 @@ class TwystScene: SKScene {
         if node.active {
             updateShownNote()
         } else {
-            noteLabel.text = ""
+            noteLabelNode.text = ""
         }
 
         triggerUpdate()
@@ -186,18 +185,22 @@ class TwystScene: SKScene {
     func updateShownNote() {
         if let noteCode = getCurrentNoteCode() {
             let noteString = getNoteString(noteCode)
-            noteLabel.text = noteString
+            noteLabelNode.text = noteString
         } else {
-            noteLabel.text = ""
+            noteLabelNode.text = ""
         }
     }
 
-    func addNoteLabel(view: SKView) {
-        noteLabel.text = ""
-        noteLabel.textColor = UIColor.whiteColor()
-        noteLabel.font = UIFont(name: "Avenir-Light", size: 95)
+    func addNoteLabelNode() {
+        noteLabelNode = SKLabelNode(fontNamed: "Avenir-Light")
+        noteLabelNode.fontSize = 95
+        noteLabelNode.horizontalAlignmentMode = .Center
+        noteLabelNode.verticalAlignmentMode = .Top
+        noteLabelNode.position = CGPoint(x: (1/2)*screenWidth, y: (1/3)*screenHeight)
+        noteLabelNode.text = ""
+        noteLabelNode.color = SKColor.whiteColor()
 
-        view.addSubview(noteLabel)
+        addChild(noteLabelNode)
     }
 
     func getCurrentNoteCode() -> Int? {
