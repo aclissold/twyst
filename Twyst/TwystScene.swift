@@ -134,11 +134,10 @@ class TwystScene: SKScene {
     }
 
     func addLogo() {
-        let logoSize = CGSize(width: 260, height: 55)
-        let logoNode = SKSpriteNode(texture: SKTexture(imageNamed: "blue_logo"), size: logoSize)
+        let logoSize = CGSize(width: 161, height: 58)
+        let logoNode = SKSpriteNode(texture: SKTexture(imageNamed: "Wordmark"), size: logoSize)
         logoNode.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        let y = flatButton.frame.origin.y + (1/2)*flatButton.frame.size.height
-        logoNode.position = CGPoint(x: (1/2)*screenWidth, y: y)
+        logoNode.position = CGPoint(x: screenWidth/2, y: screenHeight/2)
 
         self.addChild(logoNode)
     }
