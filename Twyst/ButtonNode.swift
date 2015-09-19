@@ -8,10 +8,6 @@
 
 import SpriteKit
 
-enum ButtonNodeType {
-    case Flat, Sharp, One, Two, Three
-}
-
 private func restingTexture(type: ButtonNodeType) -> SKTexture {
     let imageName: String
     switch type {
@@ -58,9 +54,8 @@ class ButtonNode: SKSpriteNode {
             imageName = "buttonThreeImage_active"
         }
         texture = SKTexture(imageNamed: imageName)
-        name = imageName
 
-        (parent as! TwystScene).buttonTapped(self)
+        (parent as? TwystScene)?.buttonTapped(self)
     }
 
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -76,25 +71,28 @@ class ButtonNode: SKSpriteNode {
             imageName = "buttonOneImage"
         }
         texture = SKTexture(imageNamed: imageName)
-        name = imageName
 
-        (parent as! TwystScene).buttonTapped(self)
+        (parent as? TwystScene)?.buttonTapped(self)
     }
 
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        guard let parent = parent as? TwystScene else {
+            return
+        }
+
         for touch in touches {
-            let touchIsInside = containsPoint(touch.locationInNode(parent!))
-            let touchWasInside = containsPoint(touch.previousLocationInNode(parent!))
+            let touchIsInside = containsPoint(touch.locationInNode(parent))
+            let touchWasInside = containsPoint(touch.previousLocationInNode(parent))
 
             let touchMovedInside = touchIsInside && !touchWasInside
             let touchMovedOutside = !touchIsInside && touchWasInside
 
             if touchMovedInside {
                 active = true
-                (parent as! TwystScene).buttonTapped(self)
+                parent.buttonTapped(self)
             } else if touchMovedOutside {
                 active = false
-                (parent as! TwystScene).buttonTapped(self)
+                parent.buttonTapped(self)
             }
         }
     }

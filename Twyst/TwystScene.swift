@@ -50,36 +50,20 @@ class TwystScene: SKScene {
 
     var showNote = UILabel(frame: CGRect(x: 230, y: 200, width: 140.00, height: 140.00))
 
-    // minimalist colors!
-    let minimalLightBlue = SKColor(rgba: "#3498db"),
-        minimalBlue = SKColor(rgba: "#2980b9"),
-        minimalPurple = SKColor(rgba: "#8e44ad"),
-        minimalLightPurple = SKColor(rgba: "#9b59b6")
-
-    var y = 0,
-        x = 0,
-        screenWidth = 0,
-        screenHeight = 0
+    var screenWidth: CGFloat = 0,
+        screenHeight: CGFloat = 0
 
     var upAnOctave = false
 
-    var buttonOne, buttonTwo, buttonThree, flatButton, sharpButton: ButtonNode!
+    var oneButton, twoButton, threeButton, flatButton, sharpButton: ButtonNode!
 
-    // ~~~~~~~~~~
-    // MAIN VIEW FUNCTION
     override func didMoveToView(view: SKView) {
-        screenWidth = Int(view.frame.width)
-        screenHeight = Int(view.frame.height)
+        screenWidth = view.frame.width
+        screenHeight = view.frame.height
 
-        // ~~~~
-        // add elements
-        makeButtons()
-        addMiddleLogo()
-        // addMiddleImage()
+        addButtons()
+        addLogo()
         addNoteTextBox(view)
-
-        // addHelp()
-            // disabled for now
 
         AKOrchestra.addInstrument(synth)
         synth.play()
@@ -106,18 +90,57 @@ class TwystScene: SKScene {
         }
     }
 
-    func isEqualColor(color: SKColor, toColor: SKColor) -> Bool {
-        let color1Components = CGColorGetComponents(color.CGColor)
-        let color2Components = CGColorGetComponents(toColor.CGColor)
+    func addButtons() {
+        let buttonSize = CGSize(width: (2/5)*screenWidth, height: (1/3)*screenHeight)
 
-        if ((color1Components[0] != color2Components[0]) || //red
-            (color1Components[1] != color2Components[1]) || //green
-            (color1Components[2] != color2Components[2]) || //blue
-            (color1Components[3] != color2Components[3])) { //alpha
-                return false
+        for type in [ButtonNodeType.One, .Two, .Three, .Sharp, .Flat] {
+            let buttonNode = ButtonNode(type: type, size: buttonSize)
+            buttonNode.anchorPoint = CGPoint(x: 0, y: 1)
+
+            switch type {
+            case .One:
+                buttonNode.position = CGPoint(
+                    x: screenWidth - buttonSize.width,
+                    y: (1/3)*screenHeight
+                )
+                oneButton = buttonNode
+            case .Two:
+                buttonNode.position = CGPoint(
+                    x: screenWidth - buttonSize.width,
+                    y: (2/3)*screenHeight
+                )
+                twoButton = buttonNode
+            case .Three:
+                buttonNode.position = CGPoint(
+                    x: screenWidth - buttonSize.width,
+                    y: (3/3)*screenHeight
+                )
+                threeButton = buttonNode
+            case .Sharp:
+                buttonNode.position = CGPoint(
+                    x: 0,
+                    y: (1/3)*screenHeight
+                )
+                sharpButton = buttonNode
+            case .Flat:
+                buttonNode.position = CGPoint(
+                    x: 0,
+                    y: (3/3)*screenHeight
+                )
+                flatButton = buttonNode
+            }
+
+            addChild(buttonNode)
         }
+    }
 
-        return true
+    func addLogo() {
+        let logoSize = CGSize(width: 260, height: 55)
+        let logoNode = SKSpriteNode(texture: SKTexture(imageNamed: "blue_logo"), size: logoSize)
+        logoNode.anchorPoint = CGPoint(x: 0, y: 0)
+        logoNode.position = CGPoint(x: 160, y: (2 * screenHeight / 3) + 15)
+
+        self.addChild(logoNode)
     }
 
     func buttonTapped(node: ButtonNode) {
@@ -178,7 +201,8 @@ class TwystScene: SKScene {
 
     func getCurrentNoteCode() -> Int? {
         var noteCode: Int
-        switch (buttonOne.active, buttonTwo.active, buttonThree.active) {
+
+        switch (oneButton.active, twoButton.active, threeButton.active) {
         case (false, false, false):
             return nil
         case (true, false, false):
@@ -197,23 +221,14 @@ class TwystScene: SKScene {
             noteCode = 11
         }
 
-        if sharpButton.active {
-            ++noteCode
-        }
-        if flatButton.active {
-            --noteCode
-        }
-        if upAnOctave {
-            noteCode += 12
-        }
+        if sharpButton.active { ++noteCode }
+        if flatButton.active { --noteCode }
+        if upAnOctave { noteCode += 12 }
 
         return noteCode
     }
 
     func getNoteString(var noteCode: Int) -> String {
-        //noteCode += sharpButtonActive
-        //noteCode -= flatButtonActive
-
         if noteCode < 0 {
             noteCode += 12
         }
@@ -241,90 +256,6 @@ class TwystScene: SKScene {
         }
 
         return noteString
-    }
-
-    func addHelp() {
-        let keySize = CGSize(width: 20, height: 30)
-        let keyPic = SKSpriteNode(texture: SKTexture(imageNamed: "help"), size: keySize)
-        keyPic.anchorPoint = CGPoint(x: 0, y: 1)
-        keyPic.position = CGPoint(x: 40, y: screenHeight - 25)
-
-        self.addChild(keyPic)
-    }
-
-    func addMiddleLogo() {
-        let logoSize = CGSize(width: 260, height: 55)
-        let logoNode = SKSpriteNode(texture: SKTexture(imageNamed: "blue_logo"), size: logoSize)
-        logoNode.anchorPoint = CGPoint(x: 0, y: 0)
-        logoNode.position = CGPoint(x: 160, y: (2 * screenHeight / 3) + 15)
-
-        self.addChild(logoNode)
-    }
-
-    func addMiddleImage() {
-        let imageSize = CGSize(width: 180, height: 180)
-        let imageNode = SKSpriteNode(texture: SKTexture(imageNamed: "vinyl_icon"), size: imageSize)
-        imageNode.anchorPoint = CGPoint(x: 0, y: 0)
-        imageNode.position = CGPoint(x: 190, y: 10)
-
-        self.addChild(imageNode)
-    }
-
-    func makeButtons() {
-        let accidentalButtonSize = CGSize(width: 212, height: 106),
-            noteButtonSize = CGSize(width: 2 * screenWidth / 5, height: screenHeight / 3)
-
-        makeNoteButton(noteButtonSize)
-        makeNoteButton(noteButtonSize)
-        makeNoteButton(noteButtonSize)
-
-        y = 0
-
-        makeAccidentalButton(minimalBlue, buttonSize: accidentalButtonSize)
-        makeAccidentalButton(minimalBlue, buttonSize: accidentalButtonSize)
-    }
-
-    func makeNoteButton(buttonSize: CGSize) {
-        let noteButton: ButtonNode
-        if y == 0 {
-            noteButton = ButtonNode(type: .One, size: buttonSize)
-            buttonOne = noteButton
-        } else if y == screenHeight / 3 {
-            noteButton = ButtonNode(type: .Two, size: buttonSize)
-            buttonTwo = noteButton
-        } else {
-            noteButton = ButtonNode(type: .Three, size: buttonSize)
-            buttonThree = noteButton
-        }
-
-        y += screenHeight / 3
-
-        noteButton.anchorPoint = CGPoint(x: 0, y: 1)
-        noteButton.position = CGPoint(x: screenWidth - Int(buttonSize.width) + 6, y: y - 6)
-
-        self.addChild(noteButton)
-    }
-
-    func makeAccidentalButton(buttonColor: SKColor, buttonSize: CGSize) {
-        let anchorPoint = CGPoint(x: 0, y: 0)
-        let position = CGPoint(x: 0, y: y)
-
-        y += screenHeight / 3
-
-        let accidentalButton: ButtonNode
-        if y == screenHeight / 3 {
-            accidentalButton = ButtonNode(type: .Flat, size: buttonSize)
-            flatButton = accidentalButton
-            y += screenHeight / 3
-        } else {
-            accidentalButton = ButtonNode(type: .Sharp, size: buttonSize)
-            sharpButton = accidentalButton
-        }
-
-        accidentalButton.anchorPoint = anchorPoint
-        accidentalButton.position = position
-
-        self.addChild(accidentalButton)
     }
 
 }

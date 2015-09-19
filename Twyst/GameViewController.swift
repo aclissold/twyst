@@ -14,18 +14,23 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let scene = TwystScene()
-        let skView = self.view as! SKView
-//        skView.showsFPS = true
-//        skView.showsNodeCount = true
-        skView.ignoresSiblingOrder = true
-        skView.multipleTouchEnabled = true
+        guard let view = view as? SKView else {
+            return
+        }
+
+        let scene = TwystScene(size: view.frame.size)
+
+        view.ignoresSiblingOrder = true
+        view.multipleTouchEnabled = true
+
+        let showDebugOverlay = false
+        view.showsFPS = showDebugOverlay
+        view.showsNodeCount = showDebugOverlay
 
         scene.scaleMode = .AspectFill
-        scene.size = skView.frame.size
         scene.backgroundColor = SKColor(rgba: "#2c3e50")
 
-        skView.presentScene(scene)
+        view.presentScene(scene)
     }
 
     override func shouldAutorotate() -> Bool {

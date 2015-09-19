@@ -8,8 +8,8 @@
 
 import SpriteKit
 
-// functions to grab minimalist colors!!
 extension SKColor {
+
     convenience init(rgba: String) {
         var red:   CGFloat = 0.0
         var green: CGFloat = 0.0
@@ -42,4 +42,5 @@ extension SKColor {
         }
         self.init(red:red, green:green, blue:blue, alpha:alpha)
     }
+
 }
