@@ -48,7 +48,7 @@ class TwystScene: SKScene {
 
     let motionManager = CMMotionManager()
 
-    var showNote = UILabel(frame: CGRect(x: 230, y: 200, width: 140.00, height: 140.00))
+    var noteLabel = UILabel(frame: CGRect(x: 230, y: 200, width: 140.00, height: 140.00))
 
     var screenWidth: CGFloat = 0,
         screenHeight: CGFloat = 0
@@ -63,7 +63,7 @@ class TwystScene: SKScene {
 
         addButtons()
         addLogo()
-        addNoteTextBox(view)
+        addNoteLabel(view)
 
         AKOrchestra.addInstrument(synth)
         synth.play()
@@ -148,7 +148,7 @@ class TwystScene: SKScene {
         if node.active {
             updateShownNote()
         } else {
-            showNote.text = ""
+            noteLabel.text = ""
         }
 
         triggerUpdate()
@@ -186,18 +186,18 @@ class TwystScene: SKScene {
     func updateShownNote() {
         if let noteCode = getCurrentNoteCode() {
             let noteString = getNoteString(noteCode)
-            showNote.text = noteString
+            noteLabel.text = noteString
         } else {
-            showNote.text = ""
+            noteLabel.text = ""
         }
     }
 
-    func addNoteTextBox(view: SKView) {
-        showNote.text = ""
-        showNote.textColor = UIColor.whiteColor()
-        showNote.font = UIFont(name: "Avenir-Light", size: 95)
+    func addNoteLabel(view: SKView) {
+        noteLabel.text = ""
+        noteLabel.textColor = UIColor.whiteColor()
+        noteLabel.font = UIFont(name: "Avenir-Light", size: 95)
 
-        view.addSubview(showNote)
+        view.addSubview(noteLabel)
     }
 
     func getCurrentNoteCode() -> Int? {
