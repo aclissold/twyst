@@ -50,18 +50,45 @@ class TwystScene: SKScene {
 
     var showNote = UILabel(frame: CGRect(x: 230, y: 200, width: 140.00, height: 140.00))
 
-    // minimalist colors!
-    let minimalLightBlue = SKColor(rgba: "#3498db"),
-        minimalBlue = SKColor(rgba: "#2980b9"),
-        minimalPurple = SKColor(rgba: "#8e44ad"),
-        minimalLightPurple = SKColor(rgba: "#9b59b6")
-
     var screenWidth: CGFloat = 0,
         screenHeight: CGFloat = 0
 
     var upAnOctave = false
 
     var oneButton, twoButton, threeButton, flatButton, sharpButton: ButtonNode!
+
+    override func didMoveToView(view: SKView) {
+        screenWidth = view.frame.width
+        screenHeight = view.frame.height
+
+        addButtons()
+        addLogo()
+        addNoteTextBox(view)
+
+        AKOrchestra.addInstrument(synth)
+        synth.play()
+
+        motionManager.startDeviceMotionUpdatesToQueue(
+            NSOperationQueue()) { (deviceMotion, error) in
+                if let error = error {
+                    print("error retrieving device motion: \(error.localizedDescription)")
+                    return
+                }
+
+                if let g = deviceMotion?.gravity {
+                    let wasUpAnOctave = self.upAnOctave
+                    self.upAnOctave = g.x > 0.666
+                    if (wasUpAnOctave && !self.upAnOctave)
+                        || (!wasUpAnOctave && self.upAnOctave) {
+                            self.triggerUpdate()
+                    }
+                }
+
+                if let a = deviceMotion?.userAcceleration {
+                    self.synth.vibrato = Float(a.x + a.y + a.z)
+                }
+        }
+    }
 
     func addButtons() {
         let buttonSize = CGSize(width: (2/5)*screenWidth, height: (1/3)*screenHeight)
@@ -107,53 +134,13 @@ class TwystScene: SKScene {
         }
     }
 
-    override func didMoveToView(view: SKView) {
-        screenWidth = view.frame.width
-        screenHeight = view.frame.height
-        addButtons()
-        addMiddleLogo()
-        // addMiddleImage()
-        addNoteTextBox(view)
+    func addLogo() {
+        let logoSize = CGSize(width: 260, height: 55)
+        let logoNode = SKSpriteNode(texture: SKTexture(imageNamed: "blue_logo"), size: logoSize)
+        logoNode.anchorPoint = CGPoint(x: 0, y: 0)
+        logoNode.position = CGPoint(x: 160, y: (2 * screenHeight / 3) + 15)
 
-        // addHelp()
-
-        AKOrchestra.addInstrument(synth)
-        synth.play()
-
-        motionManager.startDeviceMotionUpdatesToQueue(
-            NSOperationQueue()) { (deviceMotion, error) in
-                if let error = error {
-                    print("error retrieving device motion: \(error.localizedDescription)")
-                    return
-                }
-
-                if let g = deviceMotion?.gravity {
-                    let wasUpAnOctave = self.upAnOctave
-                    self.upAnOctave = g.x > 0.666
-                    if (wasUpAnOctave && !self.upAnOctave)
-                        || (!wasUpAnOctave && self.upAnOctave) {
-                            self.triggerUpdate()
-                    }
-                }
-
-                if let a = deviceMotion?.userAcceleration {
-                    self.synth.vibrato = Float(a.x + a.y + a.z)
-                }
-        }
-    }
-
-    func isEqualColor(color: SKColor, toColor: SKColor) -> Bool {
-        let color1Components = CGColorGetComponents(color.CGColor)
-        let color2Components = CGColorGetComponents(toColor.CGColor)
-
-        if ((color1Components[0] != color2Components[0]) || //red
-            (color1Components[1] != color2Components[1]) || //green
-            (color1Components[2] != color2Components[2]) || //blue
-            (color1Components[3] != color2Components[3])) { //alpha
-                return false
-        }
-
-        return true
+        self.addChild(logoNode)
     }
 
     func buttonTapped(node: ButtonNode) {
@@ -214,6 +201,7 @@ class TwystScene: SKScene {
 
     func getCurrentNoteCode() -> Int? {
         var noteCode: Int
+
         switch (oneButton.active, twoButton.active, threeButton.active) {
         case (false, false, false):
             return nil
@@ -233,23 +221,14 @@ class TwystScene: SKScene {
             noteCode = 11
         }
 
-        if sharpButton.active {
-            ++noteCode
-        }
-        if flatButton.active {
-            --noteCode
-        }
-        if upAnOctave {
-            noteCode += 12
-        }
+        if sharpButton.active { ++noteCode }
+        if flatButton.active { --noteCode }
+        if upAnOctave { noteCode += 12 }
 
         return noteCode
     }
 
     func getNoteString(var noteCode: Int) -> String {
-        //noteCode += sharpButtonActive
-        //noteCode -= flatButtonActive
-
         if noteCode < 0 {
             noteCode += 12
         }
@@ -277,33 +256,6 @@ class TwystScene: SKScene {
         }
 
         return noteString
-    }
-
-    func addHelp() {
-        let keySize = CGSize(width: 20, height: 30)
-        let keyPic = SKSpriteNode(texture: SKTexture(imageNamed: "help"), size: keySize)
-        keyPic.anchorPoint = CGPoint(x: 0, y: 1)
-        keyPic.position = CGPoint(x: 40, y: screenHeight - 25)
-
-        self.addChild(keyPic)
-    }
-
-    func addMiddleLogo() {
-        let logoSize = CGSize(width: 260, height: 55)
-        let logoNode = SKSpriteNode(texture: SKTexture(imageNamed: "blue_logo"), size: logoSize)
-        logoNode.anchorPoint = CGPoint(x: 0, y: 0)
-        logoNode.position = CGPoint(x: 160, y: (2 * screenHeight / 3) + 15)
-
-        self.addChild(logoNode)
-    }
-
-    func addMiddleImage() {
-        let imageSize = CGSize(width: 180, height: 180)
-        let imageNode = SKSpriteNode(texture: SKTexture(imageNamed: "vinyl_icon"), size: imageSize)
-        imageNode.anchorPoint = CGPoint(x: 0, y: 0)
-        imageNode.position = CGPoint(x: 190, y: 10)
-
-        self.addChild(imageNode)
     }
 
 }
