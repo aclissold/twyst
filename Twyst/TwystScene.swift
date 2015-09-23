@@ -76,7 +76,6 @@ class TwystScene: SKScene {
 
                 if let g = deviceMotion?.gravity {
                     let wasUpAnOctave = self.upAnOctave
-                    print("x, y, z: \(g.x), \(g.y), \(g.z)")
                     self.upAnOctave = g.x < 0
                     if (wasUpAnOctave && !self.upAnOctave)
                         || (!wasUpAnOctave && self.upAnOctave) {
