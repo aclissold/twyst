@@ -192,12 +192,11 @@ class TwystScene: SKScene {
 
     func addNoteLabelNode() {
         noteLabelNode = SKLabelNode(fontNamed: "Avenir-Light")
-        noteLabelNode.fontSize = 95
+        noteLabelNode.fontSize = 52
         noteLabelNode.horizontalAlignmentMode = .Center
-        noteLabelNode.verticalAlignmentMode = .Top
-        noteLabelNode.position = CGPoint(x: (1/2)*screenWidth, y: (1/3)*screenHeight)
-        noteLabelNode.text = ""
-        noteLabelNode.color = SKColor.whiteColor()
+        noteLabelNode.verticalAlignmentMode = .Center
+        noteLabelNode.position = CGPoint(x: (1/2)*screenWidth, y: oneButton.frame.midY)
+        noteLabelNode.fontColor = SKColor(rgba: "#6e8499")
 
         addChild(noteLabelNode)
     }
