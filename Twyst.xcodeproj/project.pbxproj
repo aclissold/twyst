@@ -12,7 +12,7 @@
 		B566F3C11BA3E98900777821 /* TwystScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566F3C01BA3E98900777821 /* TwystScene.swift */; };
 		B566F3C31BA3E98900777821 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566F3C21BA3E98900777821 /* GameViewController.swift */; };
 		B566F3C61BA3E98900777821 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B566F3C41BA3E98900777821 /* Main.storyboard */; };
-		B566F3C81BA3E98900777821 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B566F3C71BA3E98900777821 /* Images.xcassets */; };
+		B566F3C81BA3E98900777821 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B566F3C71BA3E98900777821 /* Assets.xcassets */; };
 		B566F3CB1BA3E98900777821 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B566F3C91BA3E98900777821 /* LaunchScreen.xib */; };
 		B566F3D71BA3E98900777821 /* TwystTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566F3D61BA3E98900777821 /* TwystTests.swift */; };
 		B56F2B311BB37A5D00B141B4 /* libsndfile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B56F2B281BB379FD00B141B4 /* libsndfile.framework */; };
@@ -88,7 +88,7 @@
 		B566F3C01BA3E98900777821 /* TwystScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwystScene.swift; sourceTree = "<group>"; };
 		B566F3C21BA3E98900777821 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		B566F3C51BA3E98900777821 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		B566F3C71BA3E98900777821 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		B566F3C71BA3E98900777821 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B566F3CA1BA3E98900777821 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		B566F3D01BA3E98900777821 /* Twyst.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Twyst.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B566F3D51BA3E98900777821 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -102,7 +102,6 @@
 		B5ADB0E01BA43B8500B2A876 /* SineSynth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SineSynth.swift; sourceTree = "<group>"; };
 		B5AEB73B1BACD58300A8E070 /* ButtonNodeType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonNodeType.swift; sourceTree = "<group>"; };
 		B5EA28DD1BA42B5E00BF8233 /* AudioKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AudioKit.xcodeproj; path = AudioKit/AudioKit.xcodeproj; sourceTree = "<group>"; };
-		B5EA28EC1BA42DB300BF8233 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,9 +155,8 @@
 				B5ADB0E01BA43B8500B2A876 /* SineSynth.swift */,
 				B5018D161BA449D2002915D1 /* Note.swift */,
 				B566F3C21BA3E98900777821 /* GameViewController.swift */,
-				B5EA28EC1BA42DB300BF8233 /* Header.h */,
 				B566F3C41BA3E98900777821 /* Main.storyboard */,
-				B566F3C71BA3E98900777821 /* Images.xcassets */,
+				B566F3C71BA3E98900777821 /* Assets.xcassets */,
 				B566F3C91BA3E98900777821 /* LaunchScreen.xib */,
 				B566F3BA1BA3E98900777821 /* Supporting Files */,
 				B5ADB0DA1BA439D000B2A876 /* AudioKit.swift */,
@@ -321,7 +319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B566F3CB1BA3E98900777821 /* LaunchScreen.xib in Resources */,
-				B566F3C81BA3E98900777821 /* Images.xcassets in Resources */,
+				B566F3C81BA3E98900777821 /* Assets.xcassets in Resources */,
 				B566F3C61BA3E98900777821 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
