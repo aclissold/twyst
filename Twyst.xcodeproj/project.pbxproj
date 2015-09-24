@@ -102,7 +102,6 @@
 		B5ADB0E01BA43B8500B2A876 /* SineSynth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SineSynth.swift; sourceTree = "<group>"; };
 		B5AEB73B1BACD58300A8E070 /* ButtonNodeType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonNodeType.swift; sourceTree = "<group>"; };
 		B5EA28DD1BA42B5E00BF8233 /* AudioKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AudioKit.xcodeproj; path = AudioKit/AudioKit.xcodeproj; sourceTree = "<group>"; };
-		B5EA28EC1BA42DB300BF8233 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,7 +155,6 @@
 				B5ADB0E01BA43B8500B2A876 /* SineSynth.swift */,
 				B5018D161BA449D2002915D1 /* Note.swift */,
 				B566F3C21BA3E98900777821 /* GameViewController.swift */,
-				B5EA28EC1BA42DB300BF8233 /* Header.h */,
 				B566F3C41BA3E98900777821 /* Main.storyboard */,
 				B566F3C71BA3E98900777821 /* Assets.xcassets */,
 				B566F3C91BA3E98900777821 /* LaunchScreen.xib */,
