@@ -21,7 +21,6 @@
 		B56F2B341BB37A5D00B141B4 /* CsoundLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B56F2B291BB379FD00B141B4 /* CsoundLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B57EACF41BA501E8001B05D6 /* SKColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57EACF31BA501E8001B05D6 /* SKColorExtensions.swift */; settings = {ASSET_TAGS = (); }; };
 		B57EAD091BA5B4DF001B05D6 /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57EAD081BA5B4DF001B05D6 /* ButtonNode.swift */; settings = {ASSET_TAGS = (); }; };
-		B5ADB0D91BA439C300B2A876 /* AKSoundFiles.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B5ADB0D81BA439C300B2A876 /* AKSoundFiles.bundle */; settings = {ASSET_TAGS = (); }; };
 		B5ADB0DB1BA439D000B2A876 /* AudioKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ADB0DA1BA439D000B2A876 /* AudioKit.swift */; settings = {ASSET_TAGS = (); }; };
 		B5ADB0E11BA43B8500B2A876 /* SineSynth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ADB0E01BA43B8500B2A876 /* SineSynth.swift */; settings = {ASSET_TAGS = (); }; };
 		B5AEB73C1BACD58300A8E070 /* ButtonNodeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AEB73B1BACD58300A8E070 /* ButtonNodeType.swift */; settings = {ASSET_TAGS = (); }; };
@@ -98,7 +97,6 @@
 		B56F2B291BB379FD00B141B4 /* CsoundLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CsoundLib.framework; path = ../AudioKit/AudioKit/Platforms/iOS/CsoundLib.framework; sourceTree = "<group>"; };
 		B57EACF31BA501E8001B05D6 /* SKColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKColorExtensions.swift; sourceTree = "<group>"; };
 		B57EAD081BA5B4DF001B05D6 /* ButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
-		B5ADB0D81BA439C300B2A876 /* AKSoundFiles.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AKSoundFiles.bundle; sourceTree = "<group>"; };
 		B5ADB0DA1BA439D000B2A876 /* AudioKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioKit.swift; sourceTree = "<group>"; };
 		B5ADB0DC1BA43A0B00B2A876 /* Twyst-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Twyst-Bridging-Header.h"; sourceTree = "<group>"; };
 		B5ADB0E01BA43B8500B2A876 /* SineSynth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SineSynth.swift; sourceTree = "<group>"; };
@@ -163,6 +161,8 @@
 				B566F3C71BA3E98900777821 /* Images.xcassets */,
 				B566F3C91BA3E98900777821 /* LaunchScreen.xib */,
 				B566F3BA1BA3E98900777821 /* Supporting Files */,
+				B5ADB0DA1BA439D000B2A876 /* AudioKit.swift */,
+				B566F3BB1BA3E98900777821 /* Info.plist */,
 				B5ADB0DC1BA43A0B00B2A876 /* Twyst-Bridging-Header.h */,
 			);
 			path = Twyst;
@@ -173,9 +173,6 @@
 			children = (
 				B56F2B281BB379FD00B141B4 /* libsndfile.framework */,
 				B56F2B291BB379FD00B141B4 /* CsoundLib.framework */,
-				B5ADB0DA1BA439D000B2A876 /* AudioKit.swift */,
-				B5ADB0D81BA439C300B2A876 /* AKSoundFiles.bundle */,
-				B566F3BB1BA3E98900777821 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -326,7 +323,6 @@
 				B566F3CB1BA3E98900777821 /* LaunchScreen.xib in Resources */,
 				B566F3C81BA3E98900777821 /* Images.xcassets in Resources */,
 				B566F3C61BA3E98900777821 /* Main.storyboard in Resources */,
-				B5ADB0D91BA439C300B2A876 /* AKSoundFiles.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
