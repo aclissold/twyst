@@ -9,6 +9,7 @@
 class SineSynth: AKInstrument {
 
     private let vibratoMultiplier: Float = 6
+    private var muted = true
 
     var note = Note.C4 {
         didSet {
@@ -18,6 +19,11 @@ class SineSynth: AKInstrument {
     var vibrato: Float = 0 {
         didSet {
             frequency.value = note.rawValue + vibratoMultiplier*vibrato
+        }
+    }
+    var force: Float = 1 {
+        didSet {
+            amplitude.value = muted ? 0 : force * 0.7
         }
     }
 
@@ -39,6 +45,7 @@ class SineSynth: AKInstrument {
     }
 
     func mute(shouldMute: Bool) {
-        amplitude.value = shouldMute ? 0 : 0.7
+        muted = shouldMute
+        amplitude.value = shouldMute ? 0 : force * 0.7
     }
 }

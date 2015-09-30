@@ -48,6 +48,16 @@ class TwystScene: SKScene {
 
     let motionManager = CMMotionManager()
 
+    var currentForce: Float {
+        let amount = (oneButton.currentForce
+                    + twoButton.currentForce
+                    + threeButton.currentForce) / 3
+
+        let clippedAmount = 4*min(amount, (1/4))
+
+        return Float(0.3 + 0.7*clippedAmount)
+    }
+
     var screenWidth: CGFloat = 0,
         screenHeight: CGFloat = 0
 
@@ -85,6 +95,7 @@ class TwystScene: SKScene {
 
                 if let a = deviceMotion?.userAcceleration {
                     self.synth.vibrato = Float(a.x + a.y + a.z)
+                    self.synth.force = self.currentForce
                 }
         }
     }

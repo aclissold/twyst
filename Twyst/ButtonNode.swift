@@ -26,6 +26,26 @@ class ButtonNode: SKSpriteNode {
     var active = false
     let type: ButtonNodeType
 
+    private var currentTouches = Set<UITouch>()
+
+    var currentForce: Float {
+        guard #available(iOS 9.0, *) else { return 1 }
+        if currentTouches.isEmpty { return 0 }
+
+        var totalForce: CGFloat = 0
+        var totalMaximumPossibleForce: CGFloat = 0
+        for touch in currentTouches {
+            totalForce += touch.force
+            totalMaximumPossibleForce += touch.maximumPossibleForce
+        }
+
+        if totalForce == 0 && totalMaximumPossibleForce == 0 {
+            return 1
+        } else {
+            return Float(totalForce / totalMaximumPossibleForce)
+        }
+    }
+
     init(type: ButtonNodeType, size: CGSize) {
         self.type = type
         let texture = restingTexture(type)
@@ -34,11 +54,16 @@ class ButtonNode: SKSpriteNode {
     }
 
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        self.type = ButtonNodeType.One
+        let texture = restingTexture(type)
+        super.init(texture: texture, color: SKColor.clearColor(), size: CGSize(width: 10, height: 10))
+        userInteractionEnabled = true
     }
 
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         active = true
+
+        currentTouches.unionInPlace(touches)
 
         let imageName: String
         switch type {
@@ -60,6 +85,8 @@ class ButtonNode: SKSpriteNode {
 
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         active = false
+
+        currentTouches.subtractInPlace(touches)
 
         let imageName: String
         switch type {
