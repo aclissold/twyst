@@ -6,39 +6,35 @@
 //  Copyright © 2015 Andrew Clissold. All rights reserved.
 //
 
-class SineSynth: AKInstrument {
+class SineSynth {
 
     private let vibratoMultiplier: Float = 6
 
     var note = Note.C4 {
         didSet {
-            frequency.value = note.rawValue
+            frequency = note.rawValue
         }
     }
     var vibrato: Float = 0 {
         didSet {
-            frequency.value = note.rawValue + vibratoMultiplier*vibrato
+            frequency = note.rawValue + vibratoMultiplier*vibrato
         }
     }
 
-    private var frequency = AKInstrumentProperty(value: 440, minimum: 220, maximum: 880)
-    private var amplitude = AKInstrumentProperty(value: 0, minimum: 0, maximum: 1)
+    private var frequency: Float = 440.0
+    private var amplitude: Float = 0.0
 
-    override init() {
-        super.init()
-
-        addProperty(frequency)
-        addProperty(amplitude)
-
-        let oscillator = AKFMOscillator()
-        oscillator.waveform = AKTable.standardSineWave()
-        oscillator.baseFrequency = frequency
-        oscillator.amplitude = amplitude
-
-        setAudioOutput(oscillator)
+    init() {
+//        TODO
+//        let oscillator = AKFMOscillator()
+//        oscillator.waveform = AKTable.standardSineWave()
+//        oscillator.baseFrequency = frequency
+//        oscillator.amplitude = amplitude
+//
+//        setAudioOutput(oscillator)
     }
 
     func mute(shouldMute: Bool) {
-        amplitude.value = shouldMute ? 0 : 0.7
+        amplitude = shouldMute ? 0 : 0.7
     }
 }

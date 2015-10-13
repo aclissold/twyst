@@ -64,8 +64,9 @@ class TwystScene: SKScene {
         addLogo()
         addNoteLabelNode()
 
-        AKOrchestra.addInstrument(synth)
-        synth.play()
+//        TODO
+//        AKOrchestra.addInstrument(synth)
+//        synth.play()
 
         motionManager.startDeviceMotionUpdatesToQueue(
             NSOperationQueue()) { (deviceMotion, error) in
