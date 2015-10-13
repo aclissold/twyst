@@ -1,47 +1,23 @@
-## Inspiration
+![Wordmark](https://cloud.githubusercontent.com/assets/4397642/10442627/53020134-7122-11e5-9331-722c43958da5.png)
 
-Twyst is here to change the face of the music industry.
+![Screenshot](https://cloud.githubusercontent.com/assets/4397642/10442516/f873b998-7120-11e5-9361-865ffec78c38.png)
 
-No clutter. No mess. Just music.
+<br/>
 
-## What it does
+Twyst is a professional instrument for iPhone.
 
-Our app, simple in nature but sleek in design, is made for performance. W
-removed the clutter that most music apps have. Instead of opting for a full set
-of piano keys, or a guitar neck, our app instead has just five buttons. But
-don't be deceived—with just those buttons, one can play twenty-four different
-notes, or two full octaves!
+With just five buttons, Twyst is a real instrument that’s not only easy to learn, but easy to master. Start an impromptu jam session with your friends anywhere, anytime. Or plug in a pair of headphones and play along with your favorite tunes.
 
-On the right side of the app, there are three buttons that can be used to play a
-scale. On the left side of the screen, there are two more buttons — one for
-sharps, and the other for flats. By tilting the phone forward, one plays higher
-musical notes. And by shaking the phone, a user produces vibrato.
+Simple in nature and sleek in design, Twyst is made for performance. Unlike other instrument apps that attempt to shrink down a full set of piano keys or a guitar neck, we designed Twyst from the ground-up to work beautifully with iPhone and do things analog instruments can’t.
 
-We think our app is not only functional, but fun to use as well. But don’t just
-take our word for it, give it a twist!
+* Play the entire scale using three note buttons
+* Raise or lower the pitch with sharp and flat buttons
+* “Twyst” iPhone away from you to jump up an octave
+* Shake iPhone for vibrato that feels and sounds natural
 
-## How we built it
+And if you make some money playing Twyst on street corners, we’d love a cut
+:wink:
 
-Starting from a clean Xcode slate, our instrument manifested itself in the form
-of an iOS app. Making use of an open-source framework called AudioKit, we were
-able to get the audio synthesis up and running quickly and focus on the
-instrument itself. SpriteKit allowed our visual palette to be as free as our
-sound palette, and CoreMotion gave us access to the device's motion for features
-that would be otherwise impossible on physical instruments.
+(Have any questions? Just send me an [email](mailto:andrewclissold@gmail.com)!)
 
-## What's next for Twyst
-
-We believe in the potential for mobile instrument applications. Not only ones
-that are cute in the short term, but really ones that can reach the professional
-level. Twyst was a preliminary experiment in how we can get mobile music apps to
-the level that they might perform in front of audiences, and even shape the
-future of the music industry.
-
-When showing Twyst to other hackers, we found that users of all skill levels
-loved tilting and shaking the phone. This led to the following conclusion:
-producing music through applications is not simply about touch interfaces. It’s
-really about the gamut of tools that phones offer! Hopefully we can continue
-this in future iterations.
-
-Thank you for trying Twyst, and we can’t wait to see how you’ll push it to the
-next level.
+[![Download on the App Store](https://cdn.rawgit.com/aclissold/break./16fd79ed681025ac7b756f9d1725bcccbe5b731b/Art/App%20Store.svg)](https://itunes.apple.com/us/app/twyst-professional-instrument/id1040172976?mt=8)
