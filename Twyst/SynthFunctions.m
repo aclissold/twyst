@@ -14,7 +14,7 @@
 
 static const int channel = 0;
 
-static const Float32 kMaxAmplitude = 0.25;
+static const Float32 kMaxAmplitude = 0.7;
 static const Float32 kMinAmplitude = 0.0;
 
 static const Float32 kSineTinkAttackDelta  = 0.004;
