@@ -16,7 +16,6 @@ class TwystScene: SKScene {
 
     let updateDelay = 0.03
 
-    let synth = SineSynth()
     let noteCodeMappings = [
         -1: Note.B3,
         0: .C4,
@@ -55,6 +54,7 @@ class TwystScene: SKScene {
 
     var noteLabelNode: SKLabelNode!
     var oneButton, twoButton, threeButton, flatButton, sharpButton: ButtonNode!
+    let synthNode = SynthNode(synthType: .Trumpet)
 
     override func didMoveToView(view: SKView) {
         screenWidth = view.frame.width
@@ -63,10 +63,7 @@ class TwystScene: SKScene {
         addButtons()
         addLogo()
         addNoteLabelNode()
-
-//        TODO
-//        AKOrchestra.addInstrument(synth)
-//        synth.play()
+        addChild(synthNode)
 
         motionManager.startDeviceMotionUpdatesToQueue(
             NSOperationQueue()) { (deviceMotion, error) in
@@ -85,7 +82,7 @@ class TwystScene: SKScene {
                 }
 
                 if let a = deviceMotion?.userAcceleration {
-                    self.synth.vibrato = Float(a.x + a.y + a.z)
+//                    self.synthNode.vibrato = Float(a.x + a.y + a.z) TODO
                 }
         }
     }
@@ -173,11 +170,11 @@ class TwystScene: SKScene {
             guard let note = noteCodeMappings[noteCode] else {
                 fatalError("unexpected note code: \(noteCode)")
             }
-            synth.note = note
+            synthNode.frequency = note.rawValue
             updateShownNote()
-            synth.mute(false)
-        } else {
-            synth.mute(true)
+            synthNode.startPlaying()
+        } else if synthNode.playing {
+            synthNode.stopPlaying()
         }
         pendingUpdate = false
     }

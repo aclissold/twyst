@@ -17,7 +17,6 @@
 		B566F3D71BA3E98900777821 /* TwystTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566F3D61BA3E98900777821 /* TwystTests.swift */; };
 		B57EACF41BA501E8001B05D6 /* SKColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57EACF31BA501E8001B05D6 /* SKColorExtensions.swift */; settings = {ASSET_TAGS = (); }; };
 		B57EAD091BA5B4DF001B05D6 /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57EAD081BA5B4DF001B05D6 /* ButtonNode.swift */; settings = {ASSET_TAGS = (); }; };
-		B5ADB0E11BA43B8500B2A876 /* SineSynth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ADB0E01BA43B8500B2A876 /* SineSynth.swift */; settings = {ASSET_TAGS = (); }; };
 		B5AEB73C1BACD58300A8E070 /* ButtonNodeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AEB73B1BACD58300A8E070 /* ButtonNodeType.swift */; settings = {ASSET_TAGS = (); }; };
 		B5CECA1C1BCF1F3D004BF49C /* SynthFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CECA191BCF1F3D004BF49C /* SynthFunctions.m */; settings = {ASSET_TAGS = (); }; };
 		B5CECA1D1BCF1F3D004BF49C /* SynthNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CECA1B1BCF1F3D004BF49C /* SynthNode.m */; settings = {ASSET_TAGS = (); }; };
@@ -62,7 +61,6 @@
 		B57EACF31BA501E8001B05D6 /* SKColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKColorExtensions.swift; sourceTree = "<group>"; };
 		B57EAD081BA5B4DF001B05D6 /* ButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
 		B5ADB0DC1BA43A0B00B2A876 /* Twyst-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Twyst-Bridging-Header.h"; sourceTree = "<group>"; };
-		B5ADB0E01BA43B8500B2A876 /* SineSynth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SineSynth.swift; sourceTree = "<group>"; };
 		B5AEB73B1BACD58300A8E070 /* ButtonNodeType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonNodeType.swift; sourceTree = "<group>"; };
 		B5CECA181BCF1F3D004BF49C /* SynthFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthFunctions.h; sourceTree = "<group>"; };
 		B5CECA191BCF1F3D004BF49C /* SynthFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SynthFunctions.m; sourceTree = "<group>"; };
@@ -114,7 +112,6 @@
 				B57EAD081BA5B4DF001B05D6 /* ButtonNode.swift */,
 				B5AEB73B1BACD58300A8E070 /* ButtonNodeType.swift */,
 				B57EACF31BA501E8001B05D6 /* SKColorExtensions.swift */,
-				B5ADB0E01BA43B8500B2A876 /* SineSynth.swift */,
 				B5018D161BA449D2002915D1 /* Note.swift */,
 				B566F3C21BA3E98900777821 /* GameViewController.swift */,
 				B5CECA181BCF1F3D004BF49C /* SynthFunctions.h */,
@@ -261,7 +258,6 @@
 			files = (
 				B5CECA1D1BCF1F3D004BF49C /* SynthNode.m in Sources */,
 				B566F3C11BA3E98900777821 /* TwystScene.swift in Sources */,
-				B5ADB0E11BA43B8500B2A876 /* SineSynth.swift in Sources */,
 				B57EACF41BA501E8001B05D6 /* SKColorExtensions.swift in Sources */,
 				B5CECA1C1BCF1F3D004BF49C /* SynthFunctions.m in Sources */,
 				B566F3C31BA3E98900777821 /* GameViewController.swift in Sources */,
