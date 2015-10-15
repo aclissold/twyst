@@ -22,6 +22,6 @@ typedef NS_ENUM(int, SynthType) {
 - (void)stopPlaying;
 - (void)destroy;
 
-- (instancetype)initWithSynthType:(SynthType)synthType;
+- (nonnull instancetype)initWithSynthType:(SynthType)synthType;
 
 @end
