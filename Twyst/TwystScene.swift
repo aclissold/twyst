@@ -58,7 +58,9 @@ class TwystScene: SKScene {
     let synthNode = SynthNode(synthType: .Trumpet)
     var vibrato: CGFloat = 0 {
         didSet {
-            updateSynthNodeFrequency()
+            if !pendingUpdate {
+                updateSynthNodeFrequency()
+            }
         }
     }
 
