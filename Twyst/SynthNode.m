@@ -94,6 +94,9 @@ Synth synth = {
     // Set the audio renderer function
     AURenderCallbackStruct rendererCallback;
     switch (synthType) {
+        case SynthTypeSine:
+            rendererCallback.inputProc = SynthesizeSine;
+            break;
         case SynthTypeSineTink:
             rendererCallback.inputProc = SynthesizeSineTink;
             break;

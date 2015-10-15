@@ -9,6 +9,7 @@
 #import <SpriteKit/SpriteKit.h>
 
 typedef NS_ENUM(int, SynthType) {
+    SynthTypeSine,
     SynthTypeSineTink,
     SynthTypeTrumpet
 };

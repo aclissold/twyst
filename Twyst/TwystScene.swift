@@ -55,7 +55,7 @@ class TwystScene: SKScene {
 
     var noteLabelNode: SKLabelNode!
     var oneButton, twoButton, threeButton, flatButton, sharpButton: ButtonNode!
-    let synthNode = SynthNode(synthType: .Trumpet)
+    let synthNode = SynthNode(synthType: .Sine)
     var vibrato: CGFloat = 0 {
         didSet {
             if !pendingUpdate {
