@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B5018D171BA449D2002915D1 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5018D161BA449D2002915D1 /* Note.swift */; settings = {ASSET_TAGS = (); }; };
+		B5018D171BA449D2002915D1 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5018D161BA449D2002915D1 /* Note.swift */; };
 		B566F3BD1BA3E98900777821 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566F3BC1BA3E98900777821 /* AppDelegate.swift */; };
 		B566F3C11BA3E98900777821 /* TwystScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566F3C01BA3E98900777821 /* TwystScene.swift */; };
 		B566F3C31BA3E98900777821 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566F3C21BA3E98900777821 /* GameViewController.swift */; };
@@ -15,11 +15,18 @@
 		B566F3C81BA3E98900777821 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B566F3C71BA3E98900777821 /* Assets.xcassets */; };
 		B566F3CB1BA3E98900777821 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B566F3C91BA3E98900777821 /* LaunchScreen.xib */; };
 		B566F3D71BA3E98900777821 /* TwystTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566F3D61BA3E98900777821 /* TwystTests.swift */; };
-		B57EACF41BA501E8001B05D6 /* SKColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57EACF31BA501E8001B05D6 /* SKColorExtensions.swift */; settings = {ASSET_TAGS = (); }; };
-		B57EAD091BA5B4DF001B05D6 /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57EAD081BA5B4DF001B05D6 /* ButtonNode.swift */; settings = {ASSET_TAGS = (); }; };
-		B5AEB73C1BACD58300A8E070 /* ButtonNodeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AEB73B1BACD58300A8E070 /* ButtonNodeType.swift */; settings = {ASSET_TAGS = (); }; };
-		B5CECA1C1BCF1F3D004BF49C /* SynthFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CECA191BCF1F3D004BF49C /* SynthFunctions.m */; settings = {ASSET_TAGS = (); }; };
-		B5CECA1D1BCF1F3D004BF49C /* SynthNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CECA1B1BCF1F3D004BF49C /* SynthNode.m */; settings = {ASSET_TAGS = (); }; };
+		B57EACF41BA501E8001B05D6 /* SKColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57EACF31BA501E8001B05D6 /* SKColorExtensions.swift */; };
+		B57EAD091BA5B4DF001B05D6 /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57EAD081BA5B4DF001B05D6 /* ButtonNode.swift */; };
+		B5AEB73C1BACD58300A8E070 /* ButtonNodeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AEB73B1BACD58300A8E070 /* ButtonNodeType.swift */; };
+		B5CD16B21BD1983200A4A675 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CD16B11BD1983200A4A675 /* AppDelegate.swift */; };
+		B5CD16B41BD1983200A4A675 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B5CD16B31BD1983200A4A675 /* GameScene.sks */; };
+		B5CD16B61BD1983200A4A675 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CD16B51BD1983200A4A675 /* GameScene.swift */; };
+		B5CD16B81BD1983200A4A675 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CD16B71BD1983200A4A675 /* GameViewController.swift */; };
+		B5CD16BA1BD1983200A4A675 /* Game.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5CD16B91BD1983200A4A675 /* Game.xcassets */; };
+		B5CD16BD1BD1983200A4A675 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5CD16BB1BD1983200A4A675 /* Main.storyboard */; };
+		B5CD16BF1BD1983200A4A675 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5CD16BE1BD1983200A4A675 /* Assets.xcassets */; };
+		B5CECA1C1BCF1F3D004BF49C /* SynthFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CECA191BCF1F3D004BF49C /* SynthFunctions.m */; };
+		B5CECA1D1BCF1F3D004BF49C /* SynthNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CECA1B1BCF1F3D004BF49C /* SynthNode.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +69,15 @@
 		B57EAD081BA5B4DF001B05D6 /* ButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
 		B5ADB0DC1BA43A0B00B2A876 /* Twyst-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Twyst-Bridging-Header.h"; sourceTree = "<group>"; };
 		B5AEB73B1BACD58300A8E070 /* ButtonNodeType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonNodeType.swift; sourceTree = "<group>"; };
+		B5CD16AF1BD1983200A4A675 /* TwystTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwystTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5CD16B11BD1983200A4A675 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B5CD16B31BD1983200A4A675 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		B5CD16B51BD1983200A4A675 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		B5CD16B71BD1983200A4A675 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		B5CD16B91BD1983200A4A675 /* Game.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Game.xcassets; sourceTree = "<group>"; };
+		B5CD16BC1BD1983200A4A675 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B5CD16BE1BD1983200A4A675 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B5CD16C01BD1983200A4A675 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5CECA181BCF1F3D004BF49C /* SynthFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthFunctions.h; sourceTree = "<group>"; };
 		B5CECA191BCF1F3D004BF49C /* SynthFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SynthFunctions.m; sourceTree = "<group>"; };
 		B5CECA1A1BCF1F3D004BF49C /* SynthNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthNode.h; sourceTree = "<group>"; };
@@ -83,6 +99,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B5CD16AC1BD1983200A4A675 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -91,6 +114,7 @@
 			children = (
 				B566F3B91BA3E98900777821 /* Twyst */,
 				B566F3D31BA3E98900777821 /* TwystTests */,
+				B5CD16B01BD1983200A4A675 /* TwystTV */,
 				B566F3B81BA3E98900777821 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -100,6 +124,7 @@
 			children = (
 				B566F3B71BA3E98900777821 /* Twyst.app */,
 				B566F3D01BA3E98900777821 /* Twyst.xctest */,
+				B5CD16AF1BD1983200A4A675 /* TwystTV.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -152,6 +177,21 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		B5CD16B01BD1983200A4A675 /* TwystTV */ = {
+			isa = PBXGroup;
+			children = (
+				B5CD16B11BD1983200A4A675 /* AppDelegate.swift */,
+				B5CD16B31BD1983200A4A675 /* GameScene.sks */,
+				B5CD16B51BD1983200A4A675 /* GameScene.swift */,
+				B5CD16B71BD1983200A4A675 /* GameViewController.swift */,
+				B5CD16B91BD1983200A4A675 /* Game.xcassets */,
+				B5CD16BB1BD1983200A4A675 /* Main.storyboard */,
+				B5CD16BE1BD1983200A4A675 /* Assets.xcassets */,
+				B5CD16C01BD1983200A4A675 /* Info.plist */,
+			);
+			path = TwystTV;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -191,6 +231,23 @@
 			productReference = B566F3D01BA3E98900777821 /* Twyst.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		B5CD16AE1BD1983200A4A675 /* TwystTV */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B5CD16C31BD1983200A4A675 /* Build configuration list for PBXNativeTarget "TwystTV" */;
+			buildPhases = (
+				B5CD16AB1BD1983200A4A675 /* Sources */,
+				B5CD16AC1BD1983200A4A675 /* Frameworks */,
+				B5CD16AD1BD1983200A4A675 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TwystTV;
+			productName = TwystTV;
+			productReference = B5CD16AF1BD1983200A4A675 /* TwystTV.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -198,7 +255,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 0700;
-				LastSwiftUpdateCheck = 0700;
+				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Andrew Clissold";
 				TargetAttributes = {
@@ -209,6 +266,9 @@
 					B566F3CF1BA3E98900777821 = {
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = B566F3B61BA3E98900777821;
+					};
+					B5CD16AE1BD1983200A4A675 = {
+						CreatedOnToolsVersion = 7.1;
 					};
 				};
 			};
@@ -227,6 +287,7 @@
 			targets = (
 				B566F3B61BA3E98900777821 /* Twyst */,
 				B566F3CF1BA3E98900777821 /* TwystTests */,
+				B5CD16AE1BD1983200A4A675 /* TwystTV */,
 			);
 		};
 /* End PBXProject section */
@@ -246,6 +307,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5CD16AD1BD1983200A4A675 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5CD16BD1BD1983200A4A675 /* Main.storyboard in Resources */,
+				B5CD16B41BD1983200A4A675 /* GameScene.sks in Resources */,
+				B5CD16BF1BD1983200A4A675 /* Assets.xcassets in Resources */,
+				B5CD16BA1BD1983200A4A675 /* Game.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,6 +348,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B5CD16AB1BD1983200A4A675 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5CD16B61BD1983200A4A675 /* GameScene.swift in Sources */,
+				B5CD16B81BD1983200A4A675 /* GameViewController.swift in Sources */,
+				B5CD16B21BD1983200A4A675 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -301,6 +383,14 @@
 				B566F3CA1BA3E98900777821 /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		B5CD16BB1BD1983200A4A675 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B5CD16BC1BD1983200A4A675 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -456,6 +546,40 @@
 			};
 			name = Release;
 		};
+		B5CD16C11BD1983200A4A675 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = TwystTV/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.andrewclissold.TwystTV;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Debug;
+		};
+		B5CD16C21BD1983200A4A675 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = TwystTV/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.andrewclissold.TwystTV;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -485,6 +609,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		B5CD16C31BD1983200A4A675 /* Build configuration list for PBXNativeTarget "TwystTV" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5CD16C11BD1983200A4A675 /* Debug */,
+				B5CD16C21BD1983200A4A675 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
