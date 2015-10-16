@@ -15,8 +15,8 @@ import AudioToolbox
 class TwystScene: SKScene {
 
     let updateDelay = 0.03
+    let vibratoMultiplier: CGFloat = 6
 
-    let synth = SineSynth()
     let noteCodeMappings = [
         -1: Note.B3,
         0: .C4,
@@ -55,6 +55,14 @@ class TwystScene: SKScene {
 
     var noteLabelNode: SKLabelNode!
     var oneButton, twoButton, threeButton, flatButton, sharpButton: ButtonNode!
+    let synthNode = SynthNode(synthType: .Sine)
+    var vibrato: CGFloat = 0 {
+        didSet {
+            if !pendingUpdate {
+                updateSynthNodeFrequency()
+            }
+        }
+    }
 
     override func didMoveToView(view: SKView) {
         screenWidth = view.frame.width
@@ -63,9 +71,7 @@ class TwystScene: SKScene {
         addButtons()
         addLogo()
         addNoteLabelNode()
-
-        AKOrchestra.addInstrument(synth)
-        synth.play()
+        addChild(synthNode)
 
         motionManager.startDeviceMotionUpdatesToQueue(
             NSOperationQueue()) { (deviceMotion, error) in
@@ -84,7 +90,7 @@ class TwystScene: SKScene {
                 }
 
                 if let a = deviceMotion?.userAcceleration {
-                    self.synth.vibrato = Float(a.x + a.y + a.z)
+                    self.vibrato = CGFloat(a.x + a.y + a.z)
                 }
         }
     }
@@ -166,19 +172,25 @@ class TwystScene: SKScene {
         }
     }
 
-    var pendingNoteCode: Int? = 0
+    var pendingNoteCode: Int?
     func completePendingUpdate() {
+        updateSynthNodeFrequency()
+        pendingUpdate = false
+    }
+
+    func updateSynthNodeFrequency() {
         if let noteCode = pendingNoteCode {
             guard let note = noteCodeMappings[noteCode] else {
                 fatalError("unexpected note code: \(noteCode)")
             }
-            synth.note = note
+            synthNode.frequency = note.rawValue + vibratoMultiplier*vibrato
             updateShownNote()
-            synth.mute(false)
-        } else {
-            synth.mute(true)
+            if !synthNode.playing {
+                synthNode.startPlaying()
+            }
+        } else if synthNode.playing {
+            synthNode.stopPlaying()
         }
-        pendingUpdate = false
     }
 
     func updateShownNote() {

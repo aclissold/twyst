@@ -15,16 +15,11 @@
 		B566F3C81BA3E98900777821 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B566F3C71BA3E98900777821 /* Assets.xcassets */; };
 		B566F3CB1BA3E98900777821 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B566F3C91BA3E98900777821 /* LaunchScreen.xib */; };
 		B566F3D71BA3E98900777821 /* TwystTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566F3D61BA3E98900777821 /* TwystTests.swift */; };
-		B56F2B311BB37A5D00B141B4 /* libsndfile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B56F2B281BB379FD00B141B4 /* libsndfile.framework */; };
-		B56F2B321BB37A5D00B141B4 /* libsndfile.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B56F2B281BB379FD00B141B4 /* libsndfile.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B56F2B331BB37A5D00B141B4 /* CsoundLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B56F2B291BB379FD00B141B4 /* CsoundLib.framework */; };
-		B56F2B341BB37A5D00B141B4 /* CsoundLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B56F2B291BB379FD00B141B4 /* CsoundLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B57EACF41BA501E8001B05D6 /* SKColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57EACF31BA501E8001B05D6 /* SKColorExtensions.swift */; settings = {ASSET_TAGS = (); }; };
 		B57EAD091BA5B4DF001B05D6 /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57EAD081BA5B4DF001B05D6 /* ButtonNode.swift */; settings = {ASSET_TAGS = (); }; };
-		B5ADB0DB1BA439D000B2A876 /* AudioKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ADB0DA1BA439D000B2A876 /* AudioKit.swift */; settings = {ASSET_TAGS = (); }; };
-		B5ADB0E11BA43B8500B2A876 /* SineSynth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ADB0E01BA43B8500B2A876 /* SineSynth.swift */; settings = {ASSET_TAGS = (); }; };
 		B5AEB73C1BACD58300A8E070 /* ButtonNodeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AEB73B1BACD58300A8E070 /* ButtonNodeType.swift */; settings = {ASSET_TAGS = (); }; };
-		B5EA28EB1BA42C6B00BF8233 /* libAudioKit iOS Static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5EA28E41BA42B5E00BF8233 /* libAudioKit iOS Static.a */; };
+		B5CECA1C1BCF1F3D004BF49C /* SynthFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CECA191BCF1F3D004BF49C /* SynthFunctions.m */; settings = {ASSET_TAGS = (); }; };
+		B5CECA1D1BCF1F3D004BF49C /* SynthNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CECA1B1BCF1F3D004BF49C /* SynthNode.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,34 +30,6 @@
 			remoteGlobalIDString = B566F3B61BA3E98900777821;
 			remoteInfo = Instrument;
 		};
-		B5EA28E31BA42B5E00BF8233 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B5EA28DD1BA42B5E00BF8233 /* AudioKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = EA8E93D81AD3C5240057E979;
-			remoteInfo = "AudioKit iOS Static";
-		};
-		B5EA28E51BA42B5E00BF8233 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B5EA28DD1BA42B5E00BF8233 /* AudioKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = EAA0F5941AE71C8F007CD7C9;
-			remoteInfo = "AudioKit iOS Dynamic";
-		};
-		B5EA28E71BA42B5E00BF8233 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B5EA28DD1BA42B5E00BF8233 /* AudioKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = EA8E96591AD3C6FC0057E979;
-			remoteInfo = "AudioKit OS X";
-		};
-		B5EA28E91BA42C5E00BF8233 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B5EA28DD1BA42B5E00BF8233 /* AudioKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = EA8E93D71AD3C5240057E979;
-			remoteInfo = "AudioKit iOS Static";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -72,8 +39,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				B56F2B341BB37A5D00B141B4 /* CsoundLib.framework in Embed Frameworks */,
-				B56F2B321BB37A5D00B141B4 /* libsndfile.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -93,15 +58,14 @@
 		B566F3D01BA3E98900777821 /* Twyst.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Twyst.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B566F3D51BA3E98900777821 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B566F3D61BA3E98900777821 /* TwystTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwystTests.swift; sourceTree = "<group>"; };
-		B56F2B281BB379FD00B141B4 /* libsndfile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libsndfile.framework; path = ../AudioKit/AudioKit/Platforms/iOS/libsndfile.framework; sourceTree = "<group>"; };
-		B56F2B291BB379FD00B141B4 /* CsoundLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CsoundLib.framework; path = ../AudioKit/AudioKit/Platforms/iOS/CsoundLib.framework; sourceTree = "<group>"; };
 		B57EACF31BA501E8001B05D6 /* SKColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKColorExtensions.swift; sourceTree = "<group>"; };
 		B57EAD081BA5B4DF001B05D6 /* ButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
-		B5ADB0DA1BA439D000B2A876 /* AudioKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioKit.swift; sourceTree = "<group>"; };
 		B5ADB0DC1BA43A0B00B2A876 /* Twyst-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Twyst-Bridging-Header.h"; sourceTree = "<group>"; };
-		B5ADB0E01BA43B8500B2A876 /* SineSynth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SineSynth.swift; sourceTree = "<group>"; };
 		B5AEB73B1BACD58300A8E070 /* ButtonNodeType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonNodeType.swift; sourceTree = "<group>"; };
-		B5EA28DD1BA42B5E00BF8233 /* AudioKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AudioKit.xcodeproj; path = AudioKit/AudioKit.xcodeproj; sourceTree = "<group>"; };
+		B5CECA181BCF1F3D004BF49C /* SynthFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthFunctions.h; sourceTree = "<group>"; };
+		B5CECA191BCF1F3D004BF49C /* SynthFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SynthFunctions.m; sourceTree = "<group>"; };
+		B5CECA1A1BCF1F3D004BF49C /* SynthNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthNode.h; sourceTree = "<group>"; };
+		B5CECA1B1BCF1F3D004BF49C /* SynthNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SynthNode.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,9 +73,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B56F2B331BB37A5D00B141B4 /* CsoundLib.framework in Frameworks */,
-				B56F2B311BB37A5D00B141B4 /* libsndfile.framework in Frameworks */,
-				B5EA28EB1BA42C6B00BF8233 /* libAudioKit iOS Static.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,7 +89,6 @@
 		B566F3AE1BA3E98900777821 = {
 			isa = PBXGroup;
 			children = (
-				B5EA28DD1BA42B5E00BF8233 /* AudioKit.xcodeproj */,
 				B566F3B91BA3E98900777821 /* Twyst */,
 				B566F3D31BA3E98900777821 /* TwystTests */,
 				B566F3B81BA3E98900777821 /* Products */,
@@ -152,16 +112,16 @@
 				B57EAD081BA5B4DF001B05D6 /* ButtonNode.swift */,
 				B5AEB73B1BACD58300A8E070 /* ButtonNodeType.swift */,
 				B57EACF31BA501E8001B05D6 /* SKColorExtensions.swift */,
-				B5ADB0E01BA43B8500B2A876 /* SineSynth.swift */,
 				B5018D161BA449D2002915D1 /* Note.swift */,
 				B566F3C21BA3E98900777821 /* GameViewController.swift */,
+				B5CECA181BCF1F3D004BF49C /* SynthFunctions.h */,
+				B5CECA191BCF1F3D004BF49C /* SynthFunctions.m */,
+				B5CECA1A1BCF1F3D004BF49C /* SynthNode.h */,
+				B5CECA1B1BCF1F3D004BF49C /* SynthNode.m */,
 				B566F3C41BA3E98900777821 /* Main.storyboard */,
 				B566F3C71BA3E98900777821 /* Assets.xcassets */,
 				B566F3C91BA3E98900777821 /* LaunchScreen.xib */,
 				B566F3BA1BA3E98900777821 /* Supporting Files */,
-				B5ADB0DA1BA439D000B2A876 /* AudioKit.swift */,
-				B566F3BB1BA3E98900777821 /* Info.plist */,
-				B5ADB0DC1BA43A0B00B2A876 /* Twyst-Bridging-Header.h */,
 			);
 			path = Twyst;
 			sourceTree = "<group>";
@@ -169,8 +129,8 @@
 		B566F3BA1BA3E98900777821 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				B56F2B281BB379FD00B141B4 /* libsndfile.framework */,
-				B56F2B291BB379FD00B141B4 /* CsoundLib.framework */,
+				B566F3BB1BA3E98900777821 /* Info.plist */,
+				B5ADB0DC1BA43A0B00B2A876 /* Twyst-Bridging-Header.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -192,16 +152,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		B5EA28DE1BA42B5E00BF8233 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				B5EA28E41BA42B5E00BF8233 /* libAudioKit iOS Static.a */,
-				B5EA28E61BA42B5E00BF8233 /* libAudioKit iOS Dynamic.a */,
-				B5EA28E81BA42B5E00BF8233 /* libAudioKit OS X.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -213,12 +163,10 @@
 				B566F3B41BA3E98900777821 /* Frameworks */,
 				B566F3B51BA3E98900777821 /* Resources */,
 				B56F2B351BB37A5D00B141B4 /* Embed Frameworks */,
-				B56F2B361BB37A6A00B141B4 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				B5EA28EA1BA42C5E00BF8233 /* PBXTargetDependency */,
 			);
 			name = Twyst;
 			productName = Instrument;
@@ -275,12 +223,6 @@
 			mainGroup = B566F3AE1BA3E98900777821;
 			productRefGroup = B566F3B81BA3E98900777821 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = B5EA28DE1BA42B5E00BF8233 /* Products */;
-					ProjectRef = B5EA28DD1BA42B5E00BF8233 /* AudioKit.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				B566F3B61BA3E98900777821 /* Twyst */,
@@ -288,30 +230,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		B5EA28E41BA42B5E00BF8233 /* libAudioKit iOS Static.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libAudioKit iOS Static.a";
-			remoteRef = B5EA28E31BA42B5E00BF8233 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		B5EA28E61BA42B5E00BF8233 /* libAudioKit iOS Dynamic.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libAudioKit iOS Dynamic.a";
-			remoteRef = B5EA28E51BA42B5E00BF8233 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		B5EA28E81BA42B5E00BF8233 /* libAudioKit OS X.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libAudioKit OS X.a";
-			remoteRef = B5EA28E71BA42B5E00BF8233 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		B566F3B51BA3E98900777821 /* Resources */ = {
@@ -333,35 +251,19 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		B56F2B361BB37A6A00B141B4 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "\"${SRCROOT}/AudioKit/AudioKit/Platforms/iOS/run-script.sh\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		B566F3B31BA3E98900777821 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5CECA1D1BCF1F3D004BF49C /* SynthNode.m in Sources */,
 				B566F3C11BA3E98900777821 /* TwystScene.swift in Sources */,
-				B5ADB0E11BA43B8500B2A876 /* SineSynth.swift in Sources */,
 				B57EACF41BA501E8001B05D6 /* SKColorExtensions.swift in Sources */,
+				B5CECA1C1BCF1F3D004BF49C /* SynthFunctions.m in Sources */,
 				B566F3C31BA3E98900777821 /* GameViewController.swift in Sources */,
 				B566F3BD1BA3E98900777821 /* AppDelegate.swift in Sources */,
 				B57EAD091BA5B4DF001B05D6 /* ButtonNode.swift in Sources */,
 				B5AEB73C1BACD58300A8E070 /* ButtonNodeType.swift in Sources */,
-				B5ADB0DB1BA439D000B2A876 /* AudioKit.swift in Sources */,
 				B5018D171BA449D2002915D1 /* Note.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -381,11 +283,6 @@
 			isa = PBXTargetDependency;
 			target = B566F3B61BA3E98900777821 /* Twyst */;
 			targetProxy = B566F3D11BA3E98900777821 /* PBXContainerItemProxy */;
-		};
-		B5EA28EA1BA42C5E00BF8233 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "AudioKit iOS Static";
-			targetProxy = B5EA28E91BA42C5E00BF8233 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -500,21 +397,14 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/AudioKit/AudioKit/Platforms/iOS",
-					"$(PROJECT_DIR)/AudioKit/AudioKit/Platforms/iOS",
-				);
 				INFOPLIST_FILE = Twyst/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewclissold.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Twyst;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Twyst/Twyst-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				USER_HEADER_SEARCH_PATHS = "AudioKit/AudioKit/**";
 			};
 			name = Debug;
 		};
@@ -526,20 +416,13 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/AudioKit/AudioKit/Platforms/iOS",
-					"$(PROJECT_DIR)/AudioKit/AudioKit/Platforms/iOS",
-				);
 				INFOPLIST_FILE = Twyst/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewclissold.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Twyst;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Twyst/Twyst-Bridging-Header.h";
-				USER_HEADER_SEARCH_PATHS = "AudioKit/AudioKit/**";
 			};
 			name = Release;
 		};

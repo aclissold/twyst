@@ -6,7 +6,7 @@
 //  Copyright © 2015 Andrew Clissold. All rights reserved.
 //
 
-enum Note: Float {
+enum Note: CGFloat {
     /*case C0 = 16.35
     case Cs0 = 17.32
     case D0 = 18.35
