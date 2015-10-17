@@ -11,4 +11,29 @@ import SpriteKit
 
 class GameViewController: UIViewController {
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        guard let view = view as? SKView else {
+            return
+        }
+
+        let scene = TwystScene(size: view.frame.size)
+
+        view.ignoresSiblingOrder = true
+
+        let showDebugOverlay = false
+        view.showsFPS = showDebugOverlay
+        view.showsNodeCount = showDebugOverlay
+
+        scene.scaleMode = .AspectFill
+        scene.backgroundColor = SKColor(rgba: "#2c3e50")
+
+        view.presentScene(scene)
+    }
+
+    override func viewDidLayoutSubviews() {
+    }
+
+
 }

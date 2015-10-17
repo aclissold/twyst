@@ -6,7 +6,9 @@
 //  Copyright © 2015 Andrew Clissold. All rights reserved.
 //
 
-enum Note: CGFloat {
+import Foundation
+
+enum Note: CGFloat, RawRepresentable {
     /*case C0 = 16.35
     case Cs0 = 17.32
     case D0 = 18.35
@@ -115,4 +117,5 @@ enum Note: CGFloat {
     case A8 = 7040.00
     case As8 = 7458.62
     case B8 = 7902.13*/
+
 }

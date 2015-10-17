@@ -18,7 +18,7 @@ class GameViewController: UIViewController {
             return
         }
 
-        let scene = TwystScene(size: view.frame.size)
+        let scene = TwystPhoneScene(size: view.frame.size)
 
         view.ignoresSiblingOrder = true
         view.multipleTouchEnabled = true
