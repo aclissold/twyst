@@ -14,7 +14,6 @@
 		B566F3C61BA3E98900777821 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B566F3C41BA3E98900777821 /* Main.storyboard */; };
 		B566F3C81BA3E98900777821 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B566F3C71BA3E98900777821 /* Assets.xcassets */; };
 		B566F3CB1BA3E98900777821 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B566F3C91BA3E98900777821 /* LaunchScreen.xib */; };
-		B566F3D71BA3E98900777821 /* TwystTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566F3D61BA3E98900777821 /* TwystTests.swift */; };
 		B57268CE1BD1E44200DAF183 /* TwystScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566F3C01BA3E98900777821 /* TwystScene.swift */; };
 		B57268D01BD1E46200DAF183 /* TwystPhoneScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57268CF1BD1E46200DAF183 /* TwystPhoneScene.swift */; };
 		B57268D11BD1E48A00DAF183 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5018D161BA449D2002915D1 /* Note.swift */; };
@@ -34,16 +33,6 @@
 		B5CECA1C1BCF1F3D004BF49C /* SynthFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CECA191BCF1F3D004BF49C /* SynthFunctions.m */; };
 		B5CECA1D1BCF1F3D004BF49C /* SynthNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CECA1B1BCF1F3D004BF49C /* SynthNode.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		B566F3D11BA3E98900777821 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B566F3AF1BA3E98900777821 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B566F3B61BA3E98900777821;
-			remoteInfo = Instrument;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		B56F2B351BB37A5D00B141B4 /* Embed Frameworks */ = {
@@ -68,9 +57,6 @@
 		B566F3C51BA3E98900777821 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B566F3C71BA3E98900777821 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Twyst/Assets.xcassets; sourceTree = "<group>"; };
 		B566F3CA1BA3E98900777821 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		B566F3D01BA3E98900777821 /* Twyst.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Twyst.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B566F3D51BA3E98900777821 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B566F3D61BA3E98900777821 /* TwystTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwystTests.swift; sourceTree = "<group>"; };
 		B57268CF1BD1E46200DAF183 /* TwystPhoneScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwystPhoneScene.swift; sourceTree = SOURCE_ROOT; };
 		B57268E11BD1E5E200DAF183 /* TwystTV-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TwystTV-Bridging-Header.h"; sourceTree = "<group>"; };
 		B57EACF31BA501E8001B05D6 /* SKColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SKColorExtensions.swift; path = Twyst/SKColorExtensions.swift; sourceTree = "<group>"; };
@@ -97,13 +83,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B566F3CD1BA3E98900777821 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		B5CD16AC1BD1983200A4A675 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -119,7 +98,6 @@
 			children = (
 				B57268CD1BD1E43D00DAF183 /* Common */,
 				B566F3B91BA3E98900777821 /* Twyst */,
-				B566F3D31BA3E98900777821 /* TwystTests */,
 				B5CD16B01BD1983200A4A675 /* TwystTV */,
 				B566F3B81BA3E98900777821 /* Products */,
 			);
@@ -129,7 +107,6 @@
 			isa = PBXGroup;
 			children = (
 				B566F3B71BA3E98900777821 /* Twyst.app */,
-				B566F3D01BA3E98900777821 /* Twyst.xctest */,
 				B5CD16AF1BD1983200A4A675 /* TwystTV.app */,
 			);
 			name = Products;
@@ -153,23 +130,6 @@
 			children = (
 				B566F3BB1BA3E98900777821 /* Info.plist */,
 				B5ADB0DC1BA43A0B00B2A876 /* Twyst-Bridging-Header.h */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		B566F3D31BA3E98900777821 /* TwystTests */ = {
-			isa = PBXGroup;
-			children = (
-				B566F3D61BA3E98900777821 /* TwystTests.swift */,
-				B566F3D41BA3E98900777821 /* Supporting Files */,
-			);
-			path = TwystTests;
-			sourceTree = "<group>";
-		};
-		B566F3D41BA3E98900777821 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				B566F3D51BA3E98900777821 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -225,24 +185,6 @@
 			productReference = B566F3B71BA3E98900777821 /* Twyst.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B566F3CF1BA3E98900777821 /* TwystTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B566F3DD1BA3E98900777821 /* Build configuration list for PBXNativeTarget "TwystTests" */;
-			buildPhases = (
-				B566F3CC1BA3E98900777821 /* Sources */,
-				B566F3CD1BA3E98900777821 /* Frameworks */,
-				B566F3CE1BA3E98900777821 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B566F3D21BA3E98900777821 /* PBXTargetDependency */,
-			);
-			name = TwystTests;
-			productName = InstrumentTests;
-			productReference = B566F3D01BA3E98900777821 /* Twyst.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		B5CD16AE1BD1983200A4A675 /* TwystTV */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B5CD16C31BD1983200A4A675 /* Build configuration list for PBXNativeTarget "TwystTV" */;
@@ -275,10 +217,6 @@
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = DVS6NR923Y;
 					};
-					B566F3CF1BA3E98900777821 = {
-						CreatedOnToolsVersion = 6.2;
-						TestTargetID = B566F3B61BA3E98900777821;
-					};
 					B5CD16AE1BD1983200A4A675 = {
 						CreatedOnToolsVersion = 7.1;
 					};
@@ -298,7 +236,6 @@
 			projectRoot = "";
 			targets = (
 				B566F3B61BA3E98900777821 /* Twyst */,
-				B566F3CF1BA3E98900777821 /* TwystTests */,
 				B5CD16AE1BD1983200A4A675 /* TwystTV */,
 			);
 		};
@@ -312,13 +249,6 @@
 				B566F3CB1BA3E98900777821 /* LaunchScreen.xib in Resources */,
 				B566F3C81BA3E98900777821 /* Assets.xcassets in Resources */,
 				B566F3C61BA3E98900777821 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B566F3CE1BA3E98900777821 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,14 +282,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B566F3CC1BA3E98900777821 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B566F3D71BA3E98900777821 /* TwystTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		B5CD16AB1BD1983200A4A675 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -377,14 +299,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		B566F3D21BA3E98900777821 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B566F3B61BA3E98900777821 /* Twyst */;
-			targetProxy = B566F3D11BA3E98900777821 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		B566F3C41BA3E98900777821 /* Main.storyboard */ = {
@@ -534,41 +448,6 @@
 			};
 			name = Release;
 		};
-		B566F3DE1BA3E98900777821 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_MODULES = YES;
-				ENABLE_BITCODE = NO;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = TwystTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewclissold.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = Twyst;
-				SWIFT_OBJC_BRIDGING_HEADER = "TwystTests/TwystTests-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Twyst.app/Twyst";
-			};
-			name = Debug;
-		};
-		B566F3DF1BA3E98900777821 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_MODULES = YES;
-				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = TwystTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewclissold.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = Twyst;
-				SWIFT_OBJC_BRIDGING_HEADER = "TwystTests/TwystTests-Bridging-Header.h";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Twyst.app/Twyst";
-			};
-			name = Release;
-		};
 		B5CD16C11BD1983200A4A675 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -622,15 +501,6 @@
 			buildConfigurations = (
 				B566F3DB1BA3E98900777821 /* Debug */,
 				B566F3DC1BA3E98900777821 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B566F3DD1BA3E98900777821 /* Build configuration list for PBXNativeTarget "TwystTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B566F3DE1BA3E98900777821 /* Debug */,
-				B566F3DF1BA3E98900777821 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
