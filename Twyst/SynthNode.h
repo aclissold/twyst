@@ -18,11 +18,15 @@ typedef NS_ENUM(int, SynthType) {
 
 @property (readonly, getter = isPlaying) BOOL playing;
 @property (nonatomic) CGFloat frequency;
+@property (nonatomic) SynthType synthType;
 
 - (void)startPlaying;
 - (void)stopPlaying;
 - (void)destroy;
 
-- (nonnull instancetype)initWithSynthType:(SynthType)synthType;
+/// Singleton accessor. This class is a singleton to ensure that the underlying
+/// audio unit stuff is only ever initialized once. Initializing it more than
+/// once without destroying it in between causes audio anomalies.
++ (nonnull instancetype)sharedSynthNode;
 
 @end

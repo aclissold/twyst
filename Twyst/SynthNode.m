@@ -23,7 +23,7 @@
 static const double kSampleRate = 44100.0;
 static const double A440        = 440.0;
 
-int synthType;
+int synthType = SynthTypeSine;
 
 Synth synth = {
     .theta      = 0,
@@ -34,10 +34,9 @@ Synth synth = {
 
 @implementation SynthNode
 
-- (instancetype)initWithSynthType:(SynthType)type {
+- (instancetype)init {
     self = [super init];
     if (self) {
-        synthType = type;
         self.name = @"synthNode";
         [self createToneUnit];
         [self prepareAudioPlayback];
@@ -45,12 +44,22 @@ Synth synth = {
     return self;
 }
 
-// Secretly use the synth struct's frequency instead of the declared ivar
++ (instancetype)sharedSynthNode {
+    static SynthNode *synthNode = nil;
+    static dispatch_once_t once_token;
+    dispatch_once(&once_token, ^{
+        synthNode = [[self alloc] init];
+    });
+    return synthNode;
+}
+
+- (void)setSynthType:(SynthType)aSynthType {
+    synthType = aSynthType;
+    [self updateCallback];
+}
+
 - (void)setFrequency:(CGFloat)frequency {
     synth.frequency = frequency;
-}
-- (CGFloat)frequency {
-    return synth.frequency;
 }
 
 - (void)createToneUnit {
@@ -91,6 +100,11 @@ Synth synth = {
                                   0, &format, sizeof(AudioStreamBasicDescription));
     NSAssert1(status == noErr, @"Error setting stream format: %d", (int)status);
 
+    [self updateCallback];
+}
+
+/// Updates the synth struct's callback to reflect the current synth type.
+- (void)updateCallback {
     // Set the audio renderer function
     AURenderCallbackStruct rendererCallback;
     switch (synthType) {
@@ -108,7 +122,7 @@ Synth synth = {
             break;
     }
     rendererCallback.inputProcRefCon = &synth;
-    status = AudioUnitSetProperty(toneUnit,
+    OSStatus status = AudioUnitSetProperty(toneUnit,
                                   kAudioUnitProperty_SetRenderCallback,
                                   kAudioUnitScope_Input,
                                   0, &rendererCallback, sizeof(AURenderCallbackStruct));
