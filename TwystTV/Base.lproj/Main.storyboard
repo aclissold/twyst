@@ -12,7 +12,7 @@
                         <viewControllerLayoutGuide type="top" id="TiC-Vw-u93"/>
                         <viewControllerLayoutGuide type="bottom" id="3TX-uQ-fmp"/>
                     </layoutGuides>
-                    <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="weF-Pa-zaM" customClass="SKView">
+                    <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="weF-Pa-zaM" customClass="PlayPauseView" customModule="TwystTV" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>

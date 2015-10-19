@@ -35,5 +35,4 @@ class GameViewController: UIViewController {
     override func viewDidLayoutSubviews() {
     }
 
-
 }
