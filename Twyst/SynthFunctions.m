@@ -14,7 +14,12 @@
 
 static const int channel = 0;
 
+#if TARGET_OS_TV
+static const Float32 kMaxAmplitude = 0.4;
+#else
 static const Float32 kMaxAmplitude = 0.7;
+#endif
+
 static const Float32 kMinAmplitude = 0.0;
 
 static const Float32 kSineAttackDelta  = 0.002;
