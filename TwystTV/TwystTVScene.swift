@@ -74,11 +74,9 @@ class TwystTVScene: TwystScene {
                 if element == microGamepad.dpad {
                     self.handleDpad(element as! GCControllerDirectionPad)
                 } else if element == microGamepad.buttonA {
-                    let button = element as! GCControllerButtonInput
-                    self.handleButtonA(pressed: button.pressed)
+                    self.handleButtonA(element as! GCControllerButtonInput)
                 } else if element == microGamepad.buttonX {
-                    let button = element as! GCControllerButtonInput
-                    self.handleButtonX(pressed: button.pressed)
+                    self.handleButtonX(element as! GCControllerButtonInput)
                 }
             }
         }
@@ -125,26 +123,24 @@ class TwystTVScene: TwystScene {
 
         if max > threshold {
             self.buttonPressed(type)
-        } else {
-            handleButtonA(pressed: true)
         }
     }
 
-    func handleButtonA(pressed pressed: Bool) {
-        if pressed && buttonXPending {
+    func handleButtonA(button: GCControllerButtonInput) {
+        if button.pressed && buttonXPending {
             buttonXPending = false
             buttonPressed(.Menu)
-        } else if pressed {
+        } else if button.pressed {
             buttonAPending = true
             eventDate = NSDate()
         }
     }
 
-    func handleButtonX(pressed pressed: Bool) {
-        if pressed && buttonAPending {
+    func handleButtonX(button: GCControllerButtonInput) {
+        if button.pressed && buttonAPending {
             buttonAPending = false
             buttonPressed(.Menu)
-        } else if pressed {
+        } else if button.pressed {
             buttonXPending = true
             eventDate = NSDate()
         }
