@@ -142,15 +142,6 @@ class TwystPhoneScene: TwystScene {
         return noteCode
     }
 
-    override func updateShownNote() {
-        if let noteCode = getCurrentNoteCode() {
-            let noteString = getNoteString(noteCode)
-            noteLabelNode.text = noteString
-        } else {
-            noteLabelNode.text = ""
-        }
-    }
-
     override func update(currentTime: NSTimeInterval) {
         if pendingUpdate && abs(eventDate.timeIntervalSinceNow) > updateDelay {
             completePendingUpdate()
@@ -174,23 +165,55 @@ class TwystPhoneScene: TwystScene {
                 fatalError("unexpected note code: \(noteCode)")
             }
             synthNode.frequency = note.rawValue + vibratoMultiplier*vibrato
-            updateShownNote()
+            noteLabelNode.text = currentNoteName
             if !synthNode.playing {
                 synthNode.startPlaying()
             }
         } else if synthNode.playing {
             synthNode.stopPlaying()
+            noteLabelNode.text = ""
         }
     }
 
     func buttonTapped(node: ButtonNode) {
-        if node.active {
-            updateShownNote()
-        } else {
-            noteLabelNode.text = ""
-        }
-
         triggerUpdate()
+    }
+
+    // MARK: Ugly
+
+    var currentNoteName: String {
+        switch (oneButton.active, twoButton.active, threeButton.active, sharpButton.active, flatButton.active) {
+
+        // Natural
+        case (false, false, false, false, false), (false, false, false, true, true): return ""
+        case (true, false, false, false, false), (true, false, false, true, true): return "C"
+        case (false, true, false, false, false), (false, true, false, true, true): return "D"
+        case (false, false, true, false, false), (false, false, true, true, true): return "E"
+        case (true, true, false, false, false), (true, true, false, true, true): return "F"
+        case (true, false, true, false, false), (true, false, true, true, true): return "G"
+        case (false, true, true, false, false), (false, true, true, true, true): return "A"
+        case (true, true, true, false, false), (true, true, true, true, true): return "B"
+
+        // Sharp
+        case (false, false, false, true, false): return ""
+        case (true, false, false, true, false): return "C♯"
+        case (false, true, false, true, false): return "D♯"
+        case (false, false, true, true, false): return "F"
+        case (true, true, false, true, false): return "F♯"
+        case (true, false, true, true, false): return "G♯"
+        case (false, true, true, true, false): return "A♯"
+        case (true, true, true, true, false): return "C"
+
+        // Flat
+        case (false, false, false, false, true): return ""
+        case (true, false, false, false, true): return "B"
+        case (false, true, false, false, true): return "D♭"
+        case (false, false, true, false, true): return "E♭"
+        case (true, true, false, false, true): return "E"
+        case (true, false, true, false, true): return "G♭"
+        case (false, true, true, false, true): return "A♭"
+        case (true, true, true, false, true): return "B♭"
+        }
     }
 
 }
