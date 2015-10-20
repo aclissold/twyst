@@ -142,10 +142,6 @@ class TwystPhoneScene: TwystScene {
         return noteCode
     }
 
-    override func updateShownNote() {
-        noteLabelNode.text = currentNoteName
-    }
-
     override func update(currentTime: NSTimeInterval) {
         if pendingUpdate && abs(eventDate.timeIntervalSinceNow) > updateDelay {
             completePendingUpdate()
@@ -169,22 +165,17 @@ class TwystPhoneScene: TwystScene {
                 fatalError("unexpected note code: \(noteCode)")
             }
             synthNode.frequency = note.rawValue + vibratoMultiplier*vibrato
-            updateShownNote()
+            noteLabelNode.text = currentNoteName
             if !synthNode.playing {
                 synthNode.startPlaying()
             }
         } else if synthNode.playing {
             synthNode.stopPlaying()
+            noteLabelNode.text = ""
         }
     }
 
     func buttonTapped(node: ButtonNode) {
-        if node.active {
-            updateShownNote()
-        } else {
-            noteLabelNode.text = ""
-        }
-
         triggerUpdate()
     }
 
@@ -192,6 +183,7 @@ class TwystPhoneScene: TwystScene {
 
     var currentNoteName: String {
         switch (oneButton.active, twoButton.active, threeButton.active, sharpButton.active, flatButton.active) {
+
         // Natural
         case (false, false, false, false, false), (false, false, false, true, true): return ""
         case (true, false, false, false, false), (true, false, false, true, true): return "C"
