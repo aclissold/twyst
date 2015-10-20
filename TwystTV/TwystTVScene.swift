@@ -65,19 +65,20 @@ class TwystTVScene: TwystScene {
                 self.gamepadActive = false
                 return
         }
-
         if self.gamepadActive {
             return
         }
-
         self.gamepadActive = true
 
+        let threshold: Float = 0.4 // found by trial and error to minimize wrong notes
         var max: Float = 0
         var type = UIPressType.Select
+
         let up = dpad.up.value
         let down = dpad.down.value
         let left = dpad.left.value
         let right = dpad.right.value
+
         if up > max {
             max = up
             type = .UpArrow
@@ -95,7 +96,9 @@ class TwystTVScene: TwystScene {
             type = .RightArrow
         }
 
-        self.buttonPressed(type)
+        if max > threshold {
+            self.buttonPressed(type)
+        }
     }
 
     func handleButtonA(button: GCControllerButtonInput) {
