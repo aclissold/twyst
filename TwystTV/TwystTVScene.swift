@@ -8,9 +8,32 @@
 
 import GameController
 
-class TwystTVScene: TwystScene, ArrowPressable, PlayPauseActivatable, UIGestureRecognizerDelegate {
+class TwystTVScene: TwystScene {
 
-    var playPauseActive = false
+    let octaveMultiplier = CGFloat(pow(pow(2.0, 1.0/12.0), 12.0))
+    var microGamepad: GCMicroGamepad?
+    var gamepadActive = false
+
+    let frequencies: [UIPressType: CGFloat] = [
+        .UpArrow: Note.D4.rawValue,
+        .DownArrow: Note.F4.rawValue,
+        .LeftArrow: Note.C4.rawValue,
+        .RightArrow: Note.E4.rawValue,
+        .PlayPause: Note.G4.rawValue,
+        .Select: Note.A4.rawValue,
+    ]
+
+    override init(size: CGSize) {
+        super.init(size: size)
+        NSNotificationCenter.defaultCenter().addObserver(self,
+            selector: "controllerDidConnect:",
+            name: GCControllerDidConnectNotification,
+            object: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
@@ -18,7 +41,76 @@ class TwystTVScene: TwystScene, ArrowPressable, PlayPauseActivatable, UIGestureR
         synthNode.synthType = .SineTink
     }
 
-    func arrowPressed(direction: ArrowDirection) {
+    func controllerDidConnect(notification: NSNotification) {
+        if let microGamepad = (notification.object as? GCController)?.microGamepad {
+            self.microGamepad = microGamepad
+            microGamepad.reportsAbsoluteDpadValues = true
+            microGamepad.valueChangedHandler = { (gamepad, element) in
+                if element == microGamepad.dpad {
+                    self.handleDpad(element as! GCControllerDirectionPad)
+                } else if element == microGamepad.buttonA {
+                    self.handleButtonA(element as! GCControllerButtonInput)
+                } else if element == microGamepad.buttonX {
+                    self.handleButtonX(element as! GCControllerButtonInput)
+                }
+            }
+        }
+    }
+
+    func handleDpad(dpad: GCControllerDirectionPad) {
+        if !dpad.up.pressed
+            && !dpad.down.pressed
+            && !dpad.left.pressed
+            && !dpad.right.pressed {
+                self.gamepadActive = false
+                return
+        }
+
+        if self.gamepadActive {
+            return
+        }
+
+        self.gamepadActive = true
+
+        var max: Float = 0
+        var type = UIPressType.Select
+        let up = dpad.up.value
+        let down = dpad.down.value
+        let left = dpad.left.value
+        let right = dpad.right.value
+        if up > max {
+            max = up
+            type = .UpArrow
+        }
+        if down > max {
+            max = down
+            type = .DownArrow
+        }
+        if left > max {
+            max = left
+            type = .LeftArrow
+        }
+        if right > max {
+            max = right
+            type = .RightArrow
+        }
+
+        self.buttonPressed(type)
+    }
+
+    func handleButtonA(button: GCControllerButtonInput) {
+        if button.pressed {
+            buttonPressed(.Select)
+        }
+    }
+
+    func handleButtonX(button: GCControllerButtonInput) {
+        if button.pressed {
+            buttonPressed(.PlayPause)
+        }
+    }
+
+    func buttonPressed(pressType: UIPressType) {
         for controller in GCController.controllers() {
             if let gravity = controller.motion?.gravity {
                 upAnOctave = gravity.z > -2.0/3.0
@@ -26,45 +118,9 @@ class TwystTVScene: TwystScene, ArrowPressable, PlayPauseActivatable, UIGestureR
             }
         }
 
-        synthNode.frequency = frequency(direction, playPauseActive, upAnOctave)
-        synthNode.startPlaying()
-    }
-
-    /// Converts the Siri Remote's state into a note frequency.
-    func frequency(direction: ArrowDirection, _ upAFifth: Bool, _ upAnOctave: Bool) -> CGFloat {
-        switch (direction, upAFifth, upAnOctave) {
-        case (.Up, false, false):
-            return Note.D4.rawValue
-        case (.Up, true, false):
-            return Note.A4.rawValue
-        case (.Up, false, true):
-            return Note.D5.rawValue
-        case (.Up, true, true):
-            return Note.A5.rawValue
-        case (.Down, false, false):
-            return Note.F4.rawValue
-        case (.Down, true, false):
-            return Note.C5.rawValue
-        case (.Down, false, true):
-            return Note.F5.rawValue
-        case (.Down, true, true):
-            return Note.C6.rawValue
-        case (.Left, false, false):
-            return Note.C4.rawValue
-        case (.Left, true, false):
-            return Note.G4.rawValue
-        case (.Left, false, true):
-            return Note.C5.rawValue
-        case (.Left, true, true):
-            return Note.G5.rawValue
-        case (.Right, false, false):
-            return Note.E4.rawValue
-        case (.Right, true, false):
-            return Note.B4.rawValue
-        case (.Right, false, true):
-            return Note.E5.rawValue
-        case (.Right, true, true):
-            return Note.B5.rawValue
+        if let frequency = frequencies[pressType] {
+            synthNode.frequency = upAnOctave ? frequency * octaveMultiplier : frequency
+            synthNode.startPlaying()
         }
     }
 
