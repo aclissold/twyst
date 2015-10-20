@@ -18,11 +18,8 @@
 		B57268D01BD1E46200DAF183 /* TwystPhoneScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57268CF1BD1E46200DAF183 /* TwystPhoneScene.swift */; };
 		B57268D11BD1E48A00DAF183 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5018D161BA449D2002915D1 /* Note.swift */; };
 		B57268D21BD1E53000DAF183 /* SKColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57EACF31BA501E8001B05D6 /* SKColorExtensions.swift */; };
-		B57268D31BD1E55A00DAF183 /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57EAD081BA5B4DF001B05D6 /* ButtonNode.swift */; };
-		B57268D41BD1E56500DAF183 /* ButtonNodeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AEB73B1BACD58300A8E070 /* ButtonNodeType.swift */; };
 		B57268D51BD1E57500DAF183 /* SynthNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CECA1B1BCF1F3D004BF49C /* SynthNode.m */; };
 		B57268E21BD1E66F00DAF183 /* SynthFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CECA191BCF1F3D004BF49C /* SynthFunctions.m */; };
-		B57268E31BD1E68D00DAF183 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B566F3C71BA3E98900777821 /* Assets.xcassets */; };
 		B57268E51BD1E7D200DAF183 /* TwystTVScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57268E41BD1E7D200DAF183 /* TwystTVScene.swift */; };
 		B57EACF41BA501E8001B05D6 /* SKColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57EACF31BA501E8001B05D6 /* SKColorExtensions.swift */; };
 		B57EAD091BA5B4DF001B05D6 /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57EAD081BA5B4DF001B05D6 /* ButtonNode.swift */; };
@@ -56,15 +53,15 @@
 		B566F3C01BA3E98900777821 /* TwystScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TwystScene.swift; path = Twyst/TwystScene.swift; sourceTree = "<group>"; };
 		B566F3C21BA3E98900777821 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		B566F3C51BA3E98900777821 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		B566F3C71BA3E98900777821 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Twyst/Assets.xcassets; sourceTree = "<group>"; };
+		B566F3C71BA3E98900777821 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B566F3CA1BA3E98900777821 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		B57268CF1BD1E46200DAF183 /* TwystPhoneScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwystPhoneScene.swift; sourceTree = SOURCE_ROOT; };
 		B57268E11BD1E5E200DAF183 /* TwystTV-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TwystTV-Bridging-Header.h"; sourceTree = "<group>"; };
 		B57268E41BD1E7D200DAF183 /* TwystTVScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwystTVScene.swift; sourceTree = "<group>"; };
 		B57EACF31BA501E8001B05D6 /* SKColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SKColorExtensions.swift; path = Twyst/SKColorExtensions.swift; sourceTree = "<group>"; };
-		B57EAD081BA5B4DF001B05D6 /* ButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ButtonNode.swift; path = Twyst/ButtonNode.swift; sourceTree = "<group>"; };
+		B57EAD081BA5B4DF001B05D6 /* ButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
 		B5ADB0DC1BA43A0B00B2A876 /* Twyst-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Twyst-Bridging-Header.h"; sourceTree = "<group>"; };
-		B5AEB73B1BACD58300A8E070 /* ButtonNodeType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ButtonNodeType.swift; path = Twyst/ButtonNodeType.swift; sourceTree = "<group>"; };
+		B5AEB73B1BACD58300A8E070 /* ButtonNodeType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonNodeType.swift; sourceTree = "<group>"; };
 		B5CD16AF1BD1983200A4A675 /* TwystTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwystTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5CD16B11BD1983200A4A675 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5CD16B71BD1983200A4A675 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -118,10 +115,13 @@
 			isa = PBXGroup;
 			children = (
 				B566F3BC1BA3E98900777821 /* AppDelegate.swift */,
+				B57EAD081BA5B4DF001B05D6 /* ButtonNode.swift */,
+				B5AEB73B1BACD58300A8E070 /* ButtonNodeType.swift */,
 				B57268CF1BD1E46200DAF183 /* TwystPhoneScene.swift */,
 				B566F3C21BA3E98900777821 /* GameViewController.swift */,
 				B566F3C41BA3E98900777821 /* Main.storyboard */,
 				B566F3C91BA3E98900777821 /* LaunchScreen.xib */,
+				B566F3C71BA3E98900777821 /* Assets.xcassets */,
 				B566F3BA1BA3E98900777821 /* Supporting Files */,
 			);
 			path = Twyst;
@@ -139,8 +139,6 @@
 		B57268CD1BD1E43D00DAF183 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				B57EAD081BA5B4DF001B05D6 /* ButtonNode.swift */,
-				B5AEB73B1BACD58300A8E070 /* ButtonNodeType.swift */,
 				B566F3C01BA3E98900777821 /* TwystScene.swift */,
 				B5018D161BA449D2002915D1 /* Note.swift */,
 				B57EACF31BA501E8001B05D6 /* SKColorExtensions.swift */,
@@ -148,7 +146,6 @@
 				B5CECA1B1BCF1F3D004BF49C /* SynthNode.m */,
 				B5CECA181BCF1F3D004BF49C /* SynthFunctions.h */,
 				B5CECA191BCF1F3D004BF49C /* SynthFunctions.m */,
-				B566F3C71BA3E98900777821 /* Assets.xcassets */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -260,7 +257,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5CD16BD1BD1983200A4A675 /* Main.storyboard in Resources */,
-				B57268E31BD1E68D00DAF183 /* Assets.xcassets in Resources */,
 				B5CD16BF1BD1983200A4A675 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -290,7 +286,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5CD16B81BD1983200A4A675 /* GameViewController.swift in Sources */,
-				B57268D41BD1E56500DAF183 /* ButtonNodeType.swift in Sources */,
 				B57268D51BD1E57500DAF183 /* SynthNode.m in Sources */,
 				B57268E21BD1E66F00DAF183 /* SynthFunctions.m in Sources */,
 				B57268CE1BD1E44200DAF183 /* TwystScene.swift in Sources */,
@@ -298,7 +293,6 @@
 				B57268E51BD1E7D200DAF183 /* TwystTVScene.swift in Sources */,
 				B57268D11BD1E48A00DAF183 /* Note.swift in Sources */,
 				B57268D21BD1E53000DAF183 /* SKColorExtensions.swift in Sources */,
-				B57268D31BD1E55A00DAF183 /* ButtonNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
