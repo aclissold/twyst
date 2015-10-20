@@ -26,10 +26,10 @@ class ButtonNode: SKSpriteNode {
     var active = false
     let type: ButtonNodeType
 
-    init(type: ButtonNodeType, size: CGSize) {
+    init(type: ButtonNodeType) {
         self.type = type
         let texture = restingTexture(type)
-        super.init(texture: texture, color: SKColor.clearColor(), size: size)
+        super.init(texture: texture, color: SKColor.clearColor(), size: CGSizeZero)
         userInteractionEnabled = true
     }
 
@@ -55,7 +55,7 @@ class ButtonNode: SKSpriteNode {
         }
         texture = SKTexture(imageNamed: imageName)
 
-        (parent as? TwystScene)?.buttonTapped(self)
+        (parent as? TwystPhoneScene)?.buttonTapped(self)
     }
 
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -72,11 +72,11 @@ class ButtonNode: SKSpriteNode {
         }
         texture = SKTexture(imageNamed: imageName)
 
-        (parent as? TwystScene)?.buttonTapped(self)
+        (parent as? TwystPhoneScene)?.buttonTapped(self)
     }
 
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        guard let parent = parent as? TwystScene else {
+        guard let parent = parent as? TwystPhoneScene else {
             return
         }
 

@@ -13,6 +13,8 @@ class TwystTVScene: TwystScene {
     let octaveMultiplier = CGFloat(pow(pow(2.0, 1.0/12.0), 12.0))
     var microGamepad: GCMicroGamepad?
     var gamepadActive = false
+    var buttonAPending = false
+    var buttonXPending = false
 
     let frequencies: [UIPressType: CGFloat] = [
         .UpArrow: Note.D4.rawValue,
@@ -21,6 +23,7 @@ class TwystTVScene: TwystScene {
         .RightArrow: Note.E4.rawValue,
         .PlayPause: Note.G4.rawValue,
         .Select: Note.A4.rawValue,
+        .Menu: Note.B4.rawValue // really .PlayPause + .Select
     ]
 
     override init(size: CGSize) {
@@ -38,7 +41,29 @@ class TwystTVScene: TwystScene {
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
 
+        updateDelay = 0.03
+
         synthNode.synthType = .SineTink
+    }
+
+    override func update(currentTime: NSTimeInterval) {
+        if (buttonAPending || buttonXPending) && abs(eventDate.timeIntervalSinceNow) > updateDelay {
+            completePendingUpdate()
+        }
+    }
+
+    override func completePendingUpdate() {
+        if buttonAPending && buttonXPending {
+            buttonPressed(.Menu)
+            buttonAPending = false
+            buttonXPending = false
+        } else if buttonAPending {
+            buttonPressed(.Select)
+            buttonAPending = false
+        } else if buttonXPending {
+            buttonPressed(.PlayPause)
+            buttonXPending = false
+        }
     }
 
     func controllerDidConnect(notification: NSNotification) {
@@ -70,7 +95,7 @@ class TwystTVScene: TwystScene {
         }
         self.gamepadActive = true
 
-        let threshold: Float = 0.4 // found by trial and error to minimize wrong notes
+        let threshold: Float = 0.4
         var max: Float = 0
         var type = UIPressType.Select
 
@@ -102,14 +127,22 @@ class TwystTVScene: TwystScene {
     }
 
     func handleButtonA(button: GCControllerButtonInput) {
-        if button.pressed {
-            buttonPressed(.Select)
+        if button.pressed && buttonXPending {
+            buttonXPending = false
+            buttonPressed(.Menu)
+        } else if button.pressed {
+            buttonAPending = true
+            eventDate = NSDate()
         }
     }
 
     func handleButtonX(button: GCControllerButtonInput) {
-        if button.pressed {
-            buttonPressed(.PlayPause)
+        if button.pressed && buttonAPending {
+            buttonAPending = false
+            buttonPressed(.Menu)
+        } else if button.pressed {
+            buttonXPending = true
+            eventDate = NSDate()
         }
     }
 
