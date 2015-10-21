@@ -23,24 +23,23 @@ class TwystScene: SKScene {
     var upAnOctave = false
 
     let noteLabelNode = SKLabelNode(fontNamed: "Avenir-Light")
+    let wordmarkNode = SKSpriteNode(imageNamed: "Wordmark")
     let synthNode = SynthNode.sharedSynthNode()
 
     override func didMoveToView(view: SKView) {
         screenWidth = view.frame.width
         screenHeight = view.frame.height
 
-        addLogo()
+        addWordmarkNode()
         addNoteLabelNode()
         addChild(synthNode)
     }
 
 
-    func addLogo() {
-        let logoNode = SKSpriteNode(texture: SKTexture(imageNamed: "Wordmark"))
-        logoNode.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        logoNode.position = CGPoint(x: screenWidth/2, y: screenHeight/2)
+    func addWordmarkNode() {
+        wordmarkNode.position = CGPoint(x: screenWidth/2, y: screenHeight/2)
 
-        self.addChild(logoNode)
+        self.addChild(wordmarkNode)
     }
 
     func updateShownNote() {
