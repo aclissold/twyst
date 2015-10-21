@@ -53,8 +53,7 @@ class TwystTVScene: TwystScene {
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
 
-        updateDelay = 0.02
-
+        updateDelay = 0.03
         synthNode.synthType = .SineTink
 
         addButtonNodes()
