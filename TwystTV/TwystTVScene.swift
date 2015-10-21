@@ -11,8 +11,10 @@ import GameController
 class TwystTVScene: TwystScene {
 
     let octaveMultiplier = CGFloat(pow(pow(2.0, 1.0/12.0), 12.0))
-    var microGamepad: GCMicroGamepad?
-    var gamepadActive = false
+    let animationDuration = 0.4
+
+    var controller: GCController?
+    var dpadActive = false
     var buttonAPending = false
     var buttonXPending = false
 
@@ -25,6 +27,16 @@ class TwystTVScene: TwystScene {
         .Select: Note.A4.rawValue,
         .Menu: Note.B4.rawValue // really .PlayPause + .Select
     ]
+
+    let wordmarkActiveNode = SKSpriteNode(imageNamed: "Wordmark Active")
+    let upButtonNode = SKSpriteNode(imageNamed: "Up")
+    let downButtonNode = SKSpriteNode(imageNamed: "Down")
+    let leftButtonNode = SKSpriteNode(imageNamed: "Left")
+    let rightButtonNode = SKSpriteNode(imageNamed: "Right")
+    let centerButtonNode = SKSpriteNode(imageNamed: "Center")
+    let playPauseButtonNode = SKSpriteNode(imageNamed: "PlayPause")
+    let bothLeftNode = SKSpriteNode(imageNamed: "Both Left")
+    let bothRightNode = SKSpriteNode(imageNamed: "Both Right")
 
     override init(size: CGSize) {
         super.init(size: size)
@@ -44,9 +56,65 @@ class TwystTVScene: TwystScene {
         updateDelay = 0.02
 
         synthNode.synthType = .SineTink
+
+        addButtonNodes()
+    }
+
+    override func addWordmarkNode() {
+        super.addWordmarkNode()
+
+        wordmarkActiveNode.position = wordmarkNode.position
+        wordmarkActiveNode.alpha = 0
+        wordmarkActiveNode.zPosition = 1
+
+        addChild(wordmarkActiveNode)
+    }
+
+    func addButtonNodes() {
+        let touchpadPosition = CGPoint(
+            x: (screenWidth/2 - wordmarkNode.frame.size.width/2)/2,
+            y: wordmarkNode.position.y)
+        let playPausePosition = CGPoint(
+            x: screenWidth - (screenWidth/2 - wordmarkNode.frame.size.width/2)/2,
+            y: wordmarkNode.position.y)
+
+        let touchpadOutlineNode = SKSpriteNode(imageNamed: "Touchpad Outline")
+        touchpadOutlineNode.position = touchpadPosition
+        addChild(touchpadOutlineNode)
+
+        let playPauseOutlineNode = SKSpriteNode(imageNamed: "PlayPause Outline")
+        playPauseOutlineNode.position = playPausePosition
+        addChild(playPauseOutlineNode)
+
+        for buttonNode in [upButtonNode, downButtonNode, leftButtonNode, rightButtonNode, centerButtonNode, bothLeftNode] {
+            buttonNode.position = touchpadPosition
+            buttonNode.alpha = 0
+            addChild(buttonNode)
+        }
+
+        for buttonNode in [playPauseButtonNode, bothRightNode] {
+            buttonNode.position = playPausePosition
+            buttonNode.alpha = 0
+            addChild(buttonNode)
+        }
     }
 
     override func update(currentTime: NSTimeInterval) {
+        if let gravity = self.controller?.motion?.gravity
+            where upAnOctave != (gravity.z > -2.0/3.0) {
+                upAnOctave = !upAnOctave
+
+                if upAnOctave {
+                    wordmarkActiveNode.runAction(
+                        SKAction.fadeInWithDuration(0.4*animationDuration),
+                        withKey: "Wordmark Active")
+                } else {
+                    wordmarkActiveNode.runAction(
+                        SKAction.fadeOutWithDuration(0.4*animationDuration),
+                        withKey: "Wordmark Active")
+                }
+        }
+
         if (buttonAPending || buttonXPending) && abs(eventDate.timeIntervalSinceNow) > updateDelay {
             completePendingUpdate()
         }
@@ -67,17 +135,15 @@ class TwystTVScene: TwystScene {
     }
 
     func controllerDidConnect(notification: NSNotification) {
-        if let microGamepad = (notification.object as? GCController)?.microGamepad {
-            self.microGamepad = microGamepad
-            microGamepad.reportsAbsoluteDpadValues = true
-            microGamepad.valueChangedHandler = { (gamepad, element) in
-                if element == microGamepad.dpad {
-                    self.handleDpad(element as! GCControllerDirectionPad)
-                } else if element == microGamepad.buttonA {
-                    self.handleButtonA(element as! GCControllerButtonInput)
-                } else if element == microGamepad.buttonX {
-                    self.handleButtonX(element as! GCControllerButtonInput)
-                }
+        self.controller = notification.object as? GCController
+        self.controller?.microGamepad?.reportsAbsoluteDpadValues = true
+        self.controller?.microGamepad?.valueChangedHandler = { (gamepad, element) in
+            if element == gamepad.dpad {
+                self.handleDpad(element as! GCControllerDirectionPad)
+            } else if element == gamepad.buttonA {
+                self.handleButtonA(element as! GCControllerButtonInput)
+            } else if element == gamepad.buttonX {
+                self.handleButtonX(element as! GCControllerButtonInput)
             }
         }
     }
@@ -87,13 +153,13 @@ class TwystTVScene: TwystScene {
             && !dpad.down.pressed
             && !dpad.left.pressed
             && !dpad.right.pressed {
-                self.gamepadActive = false
+                self.dpadActive = false
                 return
         }
-        if self.gamepadActive {
+        if self.dpadActive {
             return
         }
-        self.gamepadActive = true
+        self.dpadActive = true
 
         let threshold: Float = 0.4
         var max: Float = 0
@@ -147,17 +213,38 @@ class TwystTVScene: TwystScene {
     }
 
     func buttonPressed(pressType: UIPressType) {
-        for controller in GCController.controllers() {
-            if let gravity = controller.motion?.gravity {
-                upAnOctave = gravity.z > -2.0/3.0
-                break
-            }
-        }
-
         if let frequency = frequencies[pressType] {
             synthNode.frequency = upAnOctave ? frequency * octaveMultiplier : frequency
             synthNode.startPlaying()
         }
+
+        animateButtonNode(pressType)
+    }
+
+    func animateButtonNode(pressType: UIPressType) {
+        let buttonNode: SKSpriteNode
+        switch pressType {
+        case .UpArrow: buttonNode = leftButtonNode
+        case .DownArrow: buttonNode = rightButtonNode
+        case .LeftArrow: buttonNode = downButtonNode
+        case .RightArrow: buttonNode = upButtonNode
+        case .PlayPause: buttonNode = playPauseButtonNode
+        case .Select: buttonNode = centerButtonNode
+        case .Menu:
+            bothLeftNode.alpha = 1
+            bothLeftNode.runAction(
+                SKAction.fadeOutWithDuration(animationDuration),
+                withKey: "\(UIPressType.Select.hashValue)")
+            bothRightNode.alpha = 1
+            bothRightNode.runAction(
+                SKAction.fadeOutWithDuration(animationDuration),
+                withKey: "\(UIPressType.PlayPause.hashValue)")
+            return
+        }
+        buttonNode.alpha = 1
+        buttonNode.runAction(
+            SKAction.fadeOutWithDuration(animationDuration),
+            withKey: "\(pressType.hashValue)")
     }
 
 }
