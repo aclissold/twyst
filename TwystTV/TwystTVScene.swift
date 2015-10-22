@@ -12,11 +12,13 @@ class TwystTVScene: TwystScene {
 
     let octaveMultiplier = CGFloat(pow(pow(2.0, 1.0/12.0), 12.0))
     let animationDuration = 0.4
+    let ranDemoKey = "ranDemo"
 
     var controller: GCController?
     var dpadActive = false
     var buttonAPending = false
     var buttonXPending = false
+    var demoFinished = false
 
     let frequencies: [UIPressType: CGFloat] = [
         .UpArrow: Note.D4.rawValue,
@@ -62,6 +64,8 @@ class TwystTVScene: TwystScene {
             y: (1/8)*screenHeight)
 
         addButtonNodes()
+
+        runDemoIfNecessary()
     }
 
     override func addWordmarkNode() {
@@ -105,7 +109,7 @@ class TwystTVScene: TwystScene {
 
     override func update(currentTime: NSTimeInterval) {
         if let gravity = self.controller?.motion?.gravity
-            where upAnOctave != (gravity.z > -2.0/3.0) {
+            where upAnOctave != (gravity.z > -2.0/3.0) && demoFinished {
                 upAnOctave = !upAnOctave
 
                 if upAnOctave {
@@ -142,6 +146,10 @@ class TwystTVScene: TwystScene {
         self.controller = notification.object as? GCController
         self.controller?.microGamepad?.reportsAbsoluteDpadValues = true
         self.controller?.microGamepad?.valueChangedHandler = { (gamepad, element) in
+            if !self.demoFinished {
+                return
+            }
+
             if element == gamepad.dpad {
                 self.handleDpad(element as! GCControllerDirectionPad)
             } else if element == gamepad.buttonA {
@@ -268,6 +276,85 @@ class TwystTVScene: TwystScene {
             SKAction.waitForDuration(animationDuration),
             SKAction.fadeOutWithDuration(animationDuration)
         ]), withKey: "Animate Note Label Node")
+    }
+
+    // MARK: Ugly
+
+    func runDemoIfNecessary() {
+        if NSUserDefaults.standardUserDefaults().boolForKey(ranDemoKey) {
+            demoFinished = true
+            return
+        }
+
+        synthNode.runAction(SKAction.sequence([
+            // First octave
+            SKAction.waitForDuration(4*animationDuration),
+            SKAction.runBlock { self.playNote(.LeftArrow) },
+            SKAction.waitForDuration(animationDuration),
+            SKAction.runBlock { self.playNote(.UpArrow) },
+            SKAction.waitForDuration(animationDuration),
+            SKAction.runBlock { self.playNote(.RightArrow) },
+            SKAction.waitForDuration(animationDuration),
+            SKAction.runBlock { self.playNote(.DownArrow) },
+            SKAction.waitForDuration(animationDuration),
+            SKAction.runBlock { self.playNote(.PlayPause) },
+            SKAction.waitForDuration(animationDuration),
+            SKAction.runBlock { self.playNote(.Select) },
+            SKAction.waitForDuration(animationDuration),
+            SKAction.runBlock { self.playNote(.Menu) },
+            SKAction.waitForDuration(animationDuration),
+
+            // Second octave
+            SKAction.runBlock {
+                self.upAnOctave = true
+                self.wordmarkActiveNode.runAction(
+                    SKAction.fadeInWithDuration(0.4*self.animationDuration),
+                    withKey: "Wordmark Active")
+            },
+            SKAction.waitForDuration(animationDuration),
+            SKAction.runBlock { self.playNote(.LeftArrow) },
+            SKAction.waitForDuration(animationDuration),
+            SKAction.runBlock { self.playNote(.UpArrow) },
+            SKAction.waitForDuration(animationDuration),
+            SKAction.runBlock { self.playNote(.RightArrow) },
+            SKAction.waitForDuration(animationDuration),
+            SKAction.runBlock { self.playNote(.DownArrow) },
+            SKAction.waitForDuration(animationDuration),
+            SKAction.runBlock { self.playNote(.PlayPause) },
+            SKAction.waitForDuration(animationDuration),
+            SKAction.runBlock { self.playNote(.Select) },
+            SKAction.waitForDuration(animationDuration),
+            SKAction.runBlock { self.playNote(.Menu) },
+            SKAction.waitForDuration(2*animationDuration),
+
+            // Jingle
+            SKAction.runBlock { self.playNote(.Menu) },
+            SKAction.waitForDuration(animationDuration),
+            SKAction.runBlock { self.playNote(.PlayPause) },
+            SKAction.waitForDuration((1/2)*animationDuration),
+            SKAction.runBlock { self.playNote(.RightArrow) },
+            SKAction.waitForDuration((1/2)*animationDuration),
+            SKAction.runBlock { self.playNote(.DownArrow) },
+            SKAction.waitForDuration(animationDuration),
+            SKAction.runBlock { self.playNote(.UpArrow) },
+            SKAction.waitForDuration(animationDuration),
+            SKAction.runBlock { self.playNote(.LeftArrow) },
+            SKAction.waitForDuration(animationDuration),
+            SKAction.runBlock {
+                self.upAnOctave = false
+                self.wordmarkActiveNode.runAction(
+                    SKAction.fadeOutWithDuration(0.4*self.animationDuration),
+                    withKey: "Wordmark Active")
+            },
+            SKAction.waitForDuration(animationDuration),
+            SKAction.runBlock { self.playNote(.LeftArrow) },
+            SKAction.waitForDuration(2*animationDuration),
+
+            // Reset
+            SKAction.runBlock { self.demoFinished = true }
+        ]))
+
+        NSUserDefaults.standardUserDefaults().setBool(true, forKey: ranDemoKey)
     }
 
 }
