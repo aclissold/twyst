@@ -24,6 +24,7 @@
 		B57EACF41BA501E8001B05D6 /* SKColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57EACF31BA501E8001B05D6 /* SKColorExtensions.swift */; };
 		B57EAD091BA5B4DF001B05D6 /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57EAD081BA5B4DF001B05D6 /* ButtonNode.swift */; };
 		B5AEB73C1BACD58300A8E070 /* ButtonNodeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AEB73B1BACD58300A8E070 /* ButtonNodeType.swift */; };
+		B5B40EF01BD9832900F1A090 /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5B40EEF1BD9832900F1A090 /* GameController.framework */; };
 		B5CD16B21BD1983200A4A675 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CD16B11BD1983200A4A675 /* AppDelegate.swift */; };
 		B5CD16B81BD1983200A4A675 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CD16B71BD1983200A4A675 /* GameViewController.swift */; };
 		B5CD16BD1BD1983200A4A675 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5CD16BB1BD1983200A4A675 /* Main.storyboard */; };
@@ -61,6 +62,7 @@
 		B57EAD081BA5B4DF001B05D6 /* ButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
 		B5ADB0DC1BA43A0B00B2A876 /* Twyst-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Twyst-Bridging-Header.h"; sourceTree = "<group>"; };
 		B5AEB73B1BACD58300A8E070 /* ButtonNodeType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonNodeType.swift; sourceTree = "<group>"; };
+		B5B40EEF1BD9832900F1A090 /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.0.sdk/System/Library/Frameworks/GameController.framework; sourceTree = DEVELOPER_DIR; };
 		B5CD16AF1BD1983200A4A675 /* TwystTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwystTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5CD16B11BD1983200A4A675 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5CD16B71BD1983200A4A675 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5B40EF01BD9832900F1A090 /* GameController.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +105,7 @@
 		B566F3AE1BA3E98900777821 = {
 			isa = PBXGroup;
 			children = (
+				B5B40EEF1BD9832900F1A090 /* GameController.framework */,
 				B57268CD1BD1E43D00DAF183 /* Common */,
 				B566F3B91BA3E98900777821 /* iOS */,
 				B5CD16B01BD1983200A4A675 /* tvOS */,
@@ -226,6 +230,11 @@
 					B5CD16AE1BD1983200A4A675 = {
 						CreatedOnToolsVersion = 7.1;
 						DevelopmentTeam = DVS6NR923Y;
+						SystemCapabilities = {
+							com.apple.GameControllers.appletvos = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
