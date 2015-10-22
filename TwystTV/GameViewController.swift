@@ -1,8 +1,8 @@
 //
 //  GameViewController.swift
-//  Twyst
+//  TwystTV
 //
-//  Created by Andrew Clissold on 9/12/15.
+//  Created by Andrew Clissold on 10/16/15.
 //  Copyright (c) 2015 Andrew Clissold. All rights reserved.
 //
 
@@ -18,10 +18,9 @@ class GameViewController: UIViewController {
             return
         }
 
-        let scene = TwystPhoneScene(size: view.frame.size)
+        let scene = TwystTVScene(size: view.frame.size)
 
         view.ignoresSiblingOrder = true
-        view.multipleTouchEnabled = true
 
         let showDebugOverlay = false
         view.showsFPS = showDebugOverlay
@@ -33,16 +32,7 @@ class GameViewController: UIViewController {
         view.presentScene(scene)
     }
 
-    override func shouldAutorotate() -> Bool {
-        return true
-    }
-
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.Landscape
-    }
-
-    override func prefersStatusBarHidden() -> Bool {
-        return true
+    override func viewDidLayoutSubviews() {
     }
 
 }
