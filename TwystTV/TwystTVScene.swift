@@ -56,7 +56,6 @@ class TwystTVScene: TwystScene {
         updateDelay = 0.03
         synthNode.synthType = .SineTink
 
-        noteLabelNode.text = "C"
         noteLabelNode.fontSize = 156
         noteLabelNode.position = CGPoint(
             x: (1/2)*screenWidth,
@@ -224,6 +223,7 @@ class TwystTVScene: TwystScene {
         }
 
         animateButtonNode(pressType)
+        animateNoteLabelNode(pressType)
     }
 
     func animateButtonNode(pressType: UIPressType) {
@@ -250,6 +250,24 @@ class TwystTVScene: TwystScene {
         buttonNode.runAction(
             SKAction.fadeOutWithDuration(animationDuration),
             withKey: "\(pressType.hashValue)")
+    }
+
+    func animateNoteLabelNode(pressType: UIPressType) {
+        switch pressType {
+        case .UpArrow: noteLabelNode.text = "D"
+        case .DownArrow: noteLabelNode.text = "F"
+        case .LeftArrow: noteLabelNode.text = "C"
+        case .RightArrow: noteLabelNode.text = "E"
+        case .PlayPause: noteLabelNode.text = "G"
+        case .Select: noteLabelNode.text = "A"
+        case .Menu: noteLabelNode.text = "B"
+        }
+
+        noteLabelNode.alpha = 1
+        noteLabelNode.runAction(SKAction.sequence([
+            SKAction.waitForDuration(animationDuration),
+            SKAction.fadeOutWithDuration(animationDuration)
+        ]), withKey: "Animate Note Label Node")
     }
 
 }
