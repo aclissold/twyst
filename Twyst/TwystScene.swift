@@ -51,7 +51,6 @@ class TwystScene: SKScene {
     }
 
     func addNoteLabelNode() {
-        noteLabelNode.fontSize = 52
         noteLabelNode.horizontalAlignmentMode = .Center
         noteLabelNode.verticalAlignmentMode = .Center
         noteLabelNode.fontColor = SKColor(rgba: "#6e8499")

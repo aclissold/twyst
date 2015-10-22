@@ -56,6 +56,12 @@ class TwystTVScene: TwystScene {
         updateDelay = 0.03
         synthNode.synthType = .SineTink
 
+        noteLabelNode.text = "C"
+        noteLabelNode.fontSize = 156
+        noteLabelNode.position = CGPoint(
+            x: (1/2)*screenWidth,
+            y: (1/8)*screenHeight)
+
         addButtonNodes()
     }
 
