@@ -61,7 +61,7 @@
 		B57EAD081BA5B4DF001B05D6 /* ButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
 		B5ADB0DC1BA43A0B00B2A876 /* Twyst-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Twyst-Bridging-Header.h"; path = "Twyst/Twyst-Bridging-Header.h"; sourceTree = "<group>"; };
 		B5AEB73B1BACD58300A8E070 /* ButtonNodeType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonNodeType.swift; sourceTree = "<group>"; };
-		B5CD16AF1BD1983200A4A675 /* tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tvOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5CD16AF1BD1983200A4A675 /* Twyst (tvOS).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Twyst (tvOS).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5CD16B11BD1983200A4A675 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5CD16B71BD1983200A4A675 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		B5CD16BC1BD1983200A4A675 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -113,7 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				B566F3B71BA3E98900777821 /* Twyst.app */,
-				B5CD16AF1BD1983200A4A675 /* tvOS.app */,
+				B5CD16AF1BD1983200A4A675 /* Twyst (tvOS).app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -175,9 +175,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B566F3B61BA3E98900777821 /* iOS */ = {
+		B566F3B61BA3E98900777821 /* Twyst (iOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B566F3DA1BA3E98900777821 /* Build configuration list for PBXNativeTarget "iOS" */;
+			buildConfigurationList = B566F3DA1BA3E98900777821 /* Build configuration list for PBXNativeTarget "Twyst (iOS)" */;
 			buildPhases = (
 				B566F3B31BA3E98900777821 /* Sources */,
 				B566F3B41BA3E98900777821 /* Frameworks */,
@@ -188,14 +188,14 @@
 			);
 			dependencies = (
 			);
-			name = iOS;
+			name = "Twyst (iOS)";
 			productName = Instrument;
 			productReference = B566F3B71BA3E98900777821 /* Twyst.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B5CD16AE1BD1983200A4A675 /* tvOS */ = {
+		B5CD16AE1BD1983200A4A675 /* Twyst (tvOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B5CD16C31BD1983200A4A675 /* Build configuration list for PBXNativeTarget "tvOS" */;
+			buildConfigurationList = B5CD16C31BD1983200A4A675 /* Build configuration list for PBXNativeTarget "Twyst (tvOS)" */;
 			buildPhases = (
 				B5CD16AB1BD1983200A4A675 /* Sources */,
 				B5CD16AC1BD1983200A4A675 /* Frameworks */,
@@ -205,9 +205,9 @@
 			);
 			dependencies = (
 			);
-			name = tvOS;
+			name = "Twyst (tvOS)";
 			productName = TwystTV;
-			productReference = B5CD16AF1BD1983200A4A675 /* tvOS.app */;
+			productReference = B5CD16AF1BD1983200A4A675 /* Twyst (tvOS).app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -243,8 +243,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B566F3B61BA3E98900777821 /* iOS */,
-				B5CD16AE1BD1983200A4A675 /* tvOS */,
+				B566F3B61BA3E98900777821 /* Twyst (iOS) */,
+				B5CD16AE1BD1983200A4A675 /* Twyst (tvOS) */,
 			);
 		};
 /* End PBXProject section */
@@ -502,7 +502,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B566F3DA1BA3E98900777821 /* Build configuration list for PBXNativeTarget "iOS" */ = {
+		B566F3DA1BA3E98900777821 /* Build configuration list for PBXNativeTarget "Twyst (iOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B566F3DB1BA3E98900777821 /* Debug */,
@@ -511,7 +511,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B5CD16C31BD1983200A4A675 /* Build configuration list for PBXNativeTarget "tvOS" */ = {
+		B5CD16C31BD1983200A4A675 /* Build configuration list for PBXNativeTarget "Twyst (tvOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B5CD16C11BD1983200A4A675 /* Debug */,
