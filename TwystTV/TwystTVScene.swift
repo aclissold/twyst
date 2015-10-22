@@ -56,6 +56,11 @@ class TwystTVScene: TwystScene {
         updateDelay = 0.03
         synthNode.synthType = .SineTink
 
+        noteLabelNode.fontSize = 156
+        noteLabelNode.position = CGPoint(
+            x: (1/2)*screenWidth,
+            y: (1/8)*screenHeight)
+
         addButtonNodes()
     }
 
@@ -121,14 +126,14 @@ class TwystTVScene: TwystScene {
 
     override func completePendingUpdate() {
         if buttonAPending && buttonXPending {
-            buttonPressed(.Menu)
+            playNote(.Menu)
             buttonAPending = false
             buttonXPending = false
         } else if buttonAPending {
-            buttonPressed(.Select)
+            playNote(.Select)
             buttonAPending = false
         } else if buttonXPending {
-            buttonPressed(.PlayPause)
+            playNote(.PlayPause)
             buttonXPending = false
         }
     }
@@ -162,7 +167,7 @@ class TwystTVScene: TwystScene {
 
         let threshold: Float = 0.4
         var max: Float = 0
-        var type = UIPressType.Select
+        var pressType = UIPressType.Select
 
         let up = dpad.up.value
         let down = dpad.down.value
@@ -171,30 +176,30 @@ class TwystTVScene: TwystScene {
 
         if up > max {
             max = up
-            type = .UpArrow
+            pressType = .UpArrow
         }
         if down > max {
             max = down
-            type = .DownArrow
+            pressType = .DownArrow
         }
         if left > max {
             max = left
-            type = .LeftArrow
+            pressType = .LeftArrow
         }
         if right > max {
             max = right
-            type = .RightArrow
+            pressType = .RightArrow
         }
 
         if max > threshold {
-            self.buttonPressed(type)
+            self.playNote(pressType)
         }
     }
 
     func handleButtonA(button: GCControllerButtonInput) {
         if button.pressed && buttonXPending {
             buttonXPending = false
-            buttonPressed(.Menu)
+            playNote(.Menu)
         } else if button.pressed {
             buttonAPending = true
             eventDate = NSDate()
@@ -204,20 +209,21 @@ class TwystTVScene: TwystScene {
     func handleButtonX(button: GCControllerButtonInput) {
         if button.pressed && buttonAPending {
             buttonAPending = false
-            buttonPressed(.Menu)
+            playNote(.Menu)
         } else if button.pressed {
             buttonXPending = true
             eventDate = NSDate()
         }
     }
 
-    func buttonPressed(pressType: UIPressType) {
+    func playNote(pressType: UIPressType) {
         if let frequency = frequencies[pressType] {
             synthNode.frequency = upAnOctave ? frequency * octaveMultiplier : frequency
             synthNode.startPlaying()
         }
 
         animateButtonNode(pressType)
+        animateNoteLabelNode(pressType)
     }
 
     func animateButtonNode(pressType: UIPressType) {
@@ -244,6 +250,24 @@ class TwystTVScene: TwystScene {
         buttonNode.runAction(
             SKAction.fadeOutWithDuration(animationDuration),
             withKey: "\(pressType.hashValue)")
+    }
+
+    func animateNoteLabelNode(pressType: UIPressType) {
+        switch pressType {
+        case .UpArrow: noteLabelNode.text = "D"
+        case .DownArrow: noteLabelNode.text = "F"
+        case .LeftArrow: noteLabelNode.text = "C"
+        case .RightArrow: noteLabelNode.text = "E"
+        case .PlayPause: noteLabelNode.text = "G"
+        case .Select: noteLabelNode.text = "A"
+        case .Menu: noteLabelNode.text = "B"
+        }
+
+        noteLabelNode.alpha = 1
+        noteLabelNode.runAction(SKAction.sequence([
+            SKAction.waitForDuration(animationDuration),
+            SKAction.fadeOutWithDuration(animationDuration)
+        ]), withKey: "Animate Note Label Node")
     }
 
 }

@@ -63,6 +63,8 @@ class TwystPhoneScene: TwystScene {
         updateDelay = 0.03
 
         addButtons()
+
+        noteLabelNode.fontSize = 52
         noteLabelNode.position = CGPoint(x: (1/2)*screenWidth, y: oneButton.frame.midY)
 
         motionManager.startDeviceMotionUpdatesToQueue(NSOperationQueue()) { (deviceMotion, error) in
