@@ -46,20 +46,20 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		B5018D161BA449D2002915D1 /* Note.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Note.swift; path = Twyst/Note.swift; sourceTree = "<group>"; };
+		B5018D161BA449D2002915D1 /* Note.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		B566F3B71BA3E98900777821 /* Twyst.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Twyst.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B566F3BB1BA3E98900777821 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B566F3BC1BA3E98900777821 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B566F3C01BA3E98900777821 /* TwystScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TwystScene.swift; path = Twyst/TwystScene.swift; sourceTree = "<group>"; };
+		B566F3C01BA3E98900777821 /* TwystScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwystScene.swift; sourceTree = "<group>"; };
 		B566F3C21BA3E98900777821 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		B566F3C51BA3E98900777821 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B566F3C71BA3E98900777821 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B566F3CA1BA3E98900777821 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		B57268CF1BD1E46200DAF183 /* TwystPhoneScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwystPhoneScene.swift; sourceTree = SOURCE_ROOT; };
+		B57268CF1BD1E46200DAF183 /* TwystPhoneScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TwystPhoneScene.swift; path = iOS/TwystPhoneScene.swift; sourceTree = SOURCE_ROOT; };
 		B57268E41BD1E7D200DAF183 /* TwystTVScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwystTVScene.swift; sourceTree = "<group>"; };
-		B57EACF31BA501E8001B05D6 /* SKColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SKColorExtensions.swift; path = Twyst/SKColorExtensions.swift; sourceTree = "<group>"; };
+		B57EACF31BA501E8001B05D6 /* SKColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKColorExtensions.swift; sourceTree = "<group>"; };
 		B57EAD081BA5B4DF001B05D6 /* ButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
-		B5ADB0DC1BA43A0B00B2A876 /* Twyst-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Twyst-Bridging-Header.h"; path = "Twyst/Twyst-Bridging-Header.h"; sourceTree = "<group>"; };
+		B5ADB0DC1BA43A0B00B2A876 /* Twyst-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Twyst-Bridging-Header.h"; sourceTree = "<group>"; };
 		B5AEB73B1BACD58300A8E070 /* ButtonNodeType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonNodeType.swift; sourceTree = "<group>"; };
 		B5CD16AF1BD1983200A4A675 /* Twyst (tvOS).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Twyst (tvOS).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5CD16B11BD1983200A4A675 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -67,10 +67,10 @@
 		B5CD16BC1BD1983200A4A675 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B5CD16BE1BD1983200A4A675 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5CD16C01BD1983200A4A675 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B5CECA181BCF1F3D004BF49C /* SynthFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SynthFunctions.h; path = Twyst/SynthFunctions.h; sourceTree = "<group>"; };
-		B5CECA191BCF1F3D004BF49C /* SynthFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SynthFunctions.m; path = Twyst/SynthFunctions.m; sourceTree = "<group>"; };
-		B5CECA1A1BCF1F3D004BF49C /* SynthNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SynthNode.h; path = Twyst/SynthNode.h; sourceTree = "<group>"; };
-		B5CECA1B1BCF1F3D004BF49C /* SynthNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SynthNode.m; path = Twyst/SynthNode.m; sourceTree = "<group>"; };
+		B5CECA181BCF1F3D004BF49C /* SynthFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthFunctions.h; sourceTree = "<group>"; };
+		B5CECA191BCF1F3D004BF49C /* SynthFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SynthFunctions.m; sourceTree = "<group>"; };
+		B5CECA1A1BCF1F3D004BF49C /* SynthNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthNode.h; sourceTree = "<group>"; };
+		B5CECA1B1BCF1F3D004BF49C /* SynthNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SynthNode.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,8 +131,7 @@
 				B566F3C71BA3E98900777821 /* Assets.xcassets */,
 				B566F3BA1BA3E98900777821 /* Supporting Files */,
 			);
-			name = iOS;
-			path = Twyst;
+			path = iOS;
 			sourceTree = "<group>";
 		};
 		B566F3BA1BA3E98900777821 /* Supporting Files */ = {
@@ -155,7 +154,7 @@
 				B5CECA191BCF1F3D004BF49C /* SynthFunctions.m */,
 				B5ADB0DC1BA43A0B00B2A876 /* Twyst-Bridging-Header.h */,
 			);
-			name = Common;
+			path = Common;
 			sourceTree = "<group>";
 		};
 		B5CD16B01BD1983200A4A675 /* tvOS */ = {
@@ -168,8 +167,7 @@
 				B5CD16BE1BD1983200A4A675 /* Assets.xcassets */,
 				B508DF331BD9364D00134EF0 /* Supporting Files */,
 			);
-			name = tvOS;
-			path = TwystTV;
+			path = tvOS;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -425,13 +423,13 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = YES;
-				INFOPLIST_FILE = Twyst/Info.plist;
+				INFOPLIST_FILE = iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewclissold.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Twyst;
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Twyst/Twyst-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Common/Twyst-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -444,13 +442,13 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = YES;
-				INFOPLIST_FILE = Twyst/Info.plist;
+				INFOPLIST_FILE = iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewclissold.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Twyst;
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Twyst/Twyst-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Common/Twyst-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -461,12 +459,12 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = TwystTV/Info.plist;
+				INFOPLIST_FILE = tvOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewclissold.Twyst;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				SWIFT_OBJC_BRIDGING_HEADER = "Twyst/Twyst-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Common/Twyst-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
@@ -479,12 +477,12 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = TwystTV/Info.plist;
+				INFOPLIST_FILE = tvOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewclissold.Twyst;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				SWIFT_OBJC_BRIDGING_HEADER = "Twyst/Twyst-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Common/Twyst-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
