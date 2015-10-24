@@ -8,9 +8,9 @@
 
 import GameController
 
-class TwystTVScene: TwystScene {
+class TwystTVScene: TwystScene, Jinglable {
 
-    let animationDuration = 0.4
+    var quarterNoteDuration: Double { return 0.4 }
     let ranDemoKey = "ranDemo"
 
     var controller: GCController?
@@ -18,6 +18,20 @@ class TwystTVScene: TwystScene {
     var buttonAPending = false
     var buttonXPending = false
     var demoFinished = false
+
+    override var upAnOctave: Bool {
+        didSet {
+            if upAnOctave && !oldValue {
+                wordmarkActiveNode.runAction(
+                    SKAction.fadeInWithDuration(0.4*quarterNoteDuration),
+                    withKey: "Wordmark Active")
+            } else if !upAnOctave && oldValue {
+                wordmarkActiveNode.runAction(
+                    SKAction.fadeOutWithDuration(0.4*quarterNoteDuration),
+                    withKey: "Wordmark Active")
+            }
+        }
+    }
 
     let notes: [UIPressType: Note] = [
         .UpArrow: .D,
@@ -110,16 +124,6 @@ class TwystTVScene: TwystScene {
         if let gravity = self.controller?.motion?.gravity
             where upAnOctave != (gravity.z > -2.0/3.0) && demoFinished {
                 upAnOctave = !upAnOctave
-
-                if upAnOctave {
-                    wordmarkActiveNode.runAction(
-                        SKAction.fadeInWithDuration(0.4*animationDuration),
-                        withKey: "Wordmark Active")
-                } else {
-                    wordmarkActiveNode.runAction(
-                        SKAction.fadeOutWithDuration(0.4*animationDuration),
-                        withKey: "Wordmark Active")
-                }
         }
 
         if (buttonAPending || buttonXPending) && abs(eventDate.timeIntervalSinceNow) > updateDelay {
@@ -244,11 +248,11 @@ class TwystTVScene: TwystScene {
         case .B:
             bothLeftNode.alpha = 1
             bothLeftNode.runAction(
-                SKAction.fadeOutWithDuration(animationDuration),
+                SKAction.fadeOutWithDuration(quarterNoteDuration),
                 withKey: "\(UIPressType.Select.hashValue)")
             bothRightNode.alpha = 1
             bothRightNode.runAction(
-                SKAction.fadeOutWithDuration(animationDuration),
+                SKAction.fadeOutWithDuration(quarterNoteDuration),
                 withKey: "\(UIPressType.PlayPause.hashValue)")
             return
         default:
@@ -256,7 +260,7 @@ class TwystTVScene: TwystScene {
         }
         buttonNode.alpha = 1
         buttonNode.runAction(
-            SKAction.fadeOutWithDuration(animationDuration),
+            SKAction.fadeOutWithDuration(quarterNoteDuration),
             withKey: "\(note.rawValue)")
     }
 
@@ -275,8 +279,8 @@ class TwystTVScene: TwystScene {
 
         noteLabelNode.alpha = 1
         noteLabelNode.runAction(SKAction.sequence([
-            SKAction.waitForDuration(animationDuration),
-            SKAction.fadeOutWithDuration(animationDuration)
+            SKAction.waitForDuration(quarterNoteDuration),
+            SKAction.fadeOutWithDuration(quarterNoteDuration)
         ]), withKey: "Animate Note Label Node")
     }
 
@@ -288,74 +292,7 @@ class TwystTVScene: TwystScene {
             return
         }
 
-        synthNode.runAction(SKAction.sequence([
-            // First octave
-            SKAction.waitForDuration(4*animationDuration),
-            SKAction.runBlock { self.playNote(.C) },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock { self.playNote(.D) },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock { self.playNote(.E) },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock { self.playNote(.F) },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock { self.playNote(.G) },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock { self.playNote(.A) },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock { self.playNote(.B) },
-            SKAction.waitForDuration(animationDuration),
-
-            // Second octave
-            SKAction.runBlock {
-                self.upAnOctave = true
-                self.wordmarkActiveNode.runAction(
-                    SKAction.fadeInWithDuration(0.4*self.animationDuration),
-                    withKey: "Wordmark Active")
-            },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock { self.playNote(.C) },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock { self.playNote(.D) },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock { self.playNote(.E) },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock { self.playNote(.F) },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock { self.playNote(.G) },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock { self.playNote(.A) },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock { self.playNote(.B) },
-            SKAction.waitForDuration(2*animationDuration),
-
-            // Jingle
-            SKAction.runBlock { self.playNote(.B) },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock { self.playNote(.G) },
-            SKAction.waitForDuration((1/2)*animationDuration),
-            SKAction.runBlock { self.playNote(.E) },
-            SKAction.waitForDuration((1/2)*animationDuration),
-            SKAction.runBlock { self.playNote(.F) },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock { self.playNote(.D) },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock { self.playNote(.C) },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock {
-                self.upAnOctave = false
-                self.wordmarkActiveNode.runAction(
-                    SKAction.fadeOutWithDuration(0.4*self.animationDuration),
-                    withKey: "Wordmark Active")
-            },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock { self.playNote(.C) },
-            SKAction.waitForDuration(2*animationDuration),
-
-            // Reset
-            SKAction.runBlock { self.demoFinished = true }
-        ]))
-
+        playJingle(.TV) { self.demoFinished = true }
         NSUserDefaults.standardUserDefaults().setBool(true, forKey: ranDemoKey)
     }
 

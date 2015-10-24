@@ -26,7 +26,7 @@ class TwystScene: SKScene {
 
     let noteLabelNode = SKLabelNode(fontNamed: "Avenir-Light")
     let wordmarkNode = SKSpriteNode(imageNamed: "Wordmark")
-    let synthNode = SynthNode.sharedSynthNode()
+    var synthNode = SynthNode.sharedSynthNode()
 
     override func didMoveToView(view: SKView) {
         screenWidth = view.frame.width
