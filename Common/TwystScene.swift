@@ -14,6 +14,8 @@ import AudioToolbox
 class TwystScene: SKScene {
 
     let vibratoMultiplier: CGFloat = 6
+    let octaveMultiplier = CGFloat(pow(pow(2.0, 1.0/12.0), 12.0))
+
     var eventDate = NSDate()
     var updateDelay = 0.0
 
