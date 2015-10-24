@@ -265,26 +265,13 @@ class TwystTVScene: TwystScene, Jinglable {
     }
 
     func animateNoteLabelNode(note: Note) {
-        switch note {
-        case .C: noteLabelNode.text = "C"
-        case .D: noteLabelNode.text = "D"
-        case .E: noteLabelNode.text = "E"
-        case .F: noteLabelNode.text = "F"
-        case .G: noteLabelNode.text = "G"
-        case .A: noteLabelNode.text = "A"
-        case .B: noteLabelNode.text = "B"
-        default:
-            return
-        }
-
+        noteLabelNode.text = note.description
         noteLabelNode.alpha = 1
         noteLabelNode.runAction(SKAction.sequence([
             SKAction.waitForDuration(quarterNoteDuration),
             SKAction.fadeOutWithDuration(quarterNoteDuration)
         ]), withKey: "Animate Note Label Node")
     }
-
-    // MARK: Ugly
 
     func runDemoIfNecessary() {
         if NSUserDefaults.standardUserDefaults().boolForKey(ranDemoKey) {

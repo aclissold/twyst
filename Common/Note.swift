@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Note: CGFloat, RawRepresentable {
+enum Note: CGFloat, RawRepresentable, CustomStringConvertible {
     /*case C0 = 16.35
     case Cs0 = 17.32
     case D0 = 18.35
@@ -59,15 +59,20 @@ enum Note: CGFloat, RawRepresentable {
     case B3 = 246.94
     case C = 261.63
     case Cs = 277.18
+    case Df = 277.180001
     case D = 293.66
     case Ds = 311.13
+    case Ef = 311.130001
     case E = 329.63
     case F = 349.23
     case Fs = 369.99
+    case Gf = 369.990001
     case G = 392.00
     case Gs = 415.30
+    case Af = 415.300001
     case A = 440.00
     case As = 466.16
+    case Bf = 466.160001
     case B = 493.88
     case C5 = 523.25
     /*case Cs5 = 554.37
@@ -117,5 +122,29 @@ enum Note: CGFloat, RawRepresentable {
     case A8 = 7040.00
     case As8 = 7458.62
     case B8 = 7902.13*/
+
+    var description: String {
+        switch self {
+        case B3: return "B"
+        case C: return "C"
+        case Cs: return "C♯"
+        case Df: return "D♭"
+        case D: return "D"
+        case Ds: return "D♯"
+        case Ef: return "E♭"
+        case E: return "E"
+        case F: return "F"
+        case Fs: return "F♯"
+        case Gf: return "G♭"
+        case G: return "G"
+        case Gs: return "G♯"
+        case Af: return "A♭"
+        case A: return "A"
+        case As: return "A♯"
+        case Bf: return "B♭"
+        case B: return "B"
+        case C5: return "C"
+        }
+    }
 
 }

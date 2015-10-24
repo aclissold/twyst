@@ -17,11 +17,13 @@ class TwystPhoneScene: TwystScene {
     let threeButton = ButtonNode(type: .Three)
     let flatButton = ButtonNode(type: .Flat)
     let sharpButton = ButtonNode(type: .Sharp)
+    let quarterNoteDuration = 0.4
 
     var vibrato: CGFloat = 0 {
         didSet {
-            if !pendingUpdate {
-                updateSynthNodeFrequency()
+            if let note = pendingNote where !pendingUpdate {
+                let frequency = note.rawValue + vibratoMultiplier*vibrato
+                synthNode.frequency = upAnOctave ? frequency*octaveMultiplier : frequency
             }
         }
     }
@@ -93,8 +95,16 @@ class TwystPhoneScene: TwystScene {
     }
 
     override func completePendingUpdate() {
-        updateSynthNodeFrequency()
+        playNoteOrStopPlaying()
         pendingUpdate = false
+    }
+
+    func playNoteOrStopPlaying() {
+        if let note = pendingNote {
+            playNote(note)
+        } else {
+            stopPlaying()
+        }
     }
 
     func triggerUpdate() {
@@ -103,18 +113,18 @@ class TwystPhoneScene: TwystScene {
         eventDate = NSDate()
     }
 
-    func updateSynthNodeFrequency() {
-        if let note = pendingNote {
-            let frequency = note.rawValue + vibratoMultiplier*vibrato
-            synthNode.frequency = upAnOctave ? frequency*octaveMultiplier : frequency
-            noteLabelNode.text = currentNoteName
-            if !synthNode.playing {
-                synthNode.startPlaying()
-            }
-        } else if synthNode.playing {
-            synthNode.stopPlaying()
-            noteLabelNode.text = ""
+    func playNote(note: Note) {
+        let frequency = note.rawValue + vibratoMultiplier*vibrato
+        synthNode.frequency = upAnOctave ? frequency*octaveMultiplier : frequency
+        noteLabelNode.text = note.description
+        if !synthNode.playing {
+            synthNode.startPlaying()
         }
+    }
+
+    func stopPlaying() {
+        synthNode.stopPlaying()
+        noteLabelNode.text = ""
     }
 
     func buttonTapped(node: ButtonNode) {
@@ -122,41 +132,6 @@ class TwystPhoneScene: TwystScene {
     }
 
     // MARK: Ugly
-
-    var currentNoteName: String {
-        switch (oneButton.active, twoButton.active, threeButton.active, sharpButton.active, flatButton.active) {
-
-        // Natural
-        case (false, false, false, false, false), (false, false, false, true, true): return ""
-        case (true, false, false, false, false), (true, false, false, true, true): return "C"
-        case (false, true, false, false, false), (false, true, false, true, true): return "D"
-        case (false, false, true, false, false), (false, false, true, true, true): return "E"
-        case (true, true, false, false, false), (true, true, false, true, true): return "F"
-        case (true, false, true, false, false), (true, false, true, true, true): return "G"
-        case (false, true, true, false, false), (false, true, true, true, true): return "A"
-        case (true, true, true, false, false), (true, true, true, true, true): return "B"
-
-        // Sharp
-        case (false, false, false, true, false): return ""
-        case (true, false, false, true, false): return "C♯"
-        case (false, true, false, true, false): return "D♯"
-        case (false, false, true, true, false): return "F"
-        case (true, true, false, true, false): return "F♯"
-        case (true, false, true, true, false): return "G♯"
-        case (false, true, true, true, false): return "A♯"
-        case (true, true, true, true, false): return "C"
-
-        // Flat
-        case (false, false, false, false, true): return ""
-        case (true, false, false, false, true): return "B"
-        case (false, true, false, false, true): return "D♭"
-        case (false, false, true, false, true): return "E♭"
-        case (true, true, false, false, true): return "E"
-        case (true, false, true, false, true): return "G♭"
-        case (false, true, true, false, true): return "A♭"
-        case (true, true, true, false, true): return "B♭"
-        }
-    }
 
     var currentNote: Note? {
         switch (oneButton.active, twoButton.active, threeButton.active, sharpButton.active, flatButton.active) {
@@ -184,12 +159,12 @@ class TwystPhoneScene: TwystScene {
         // Flat
         case (false, false, false, false, true): return nil
         case (true, false, false, false, true): return .B3
-        case (false, true, false, false, true): return .Cs
-        case (false, false, true, false, true): return .Ds
+        case (false, true, false, false, true): return .Df
+        case (false, false, true, false, true): return .Ef
         case (true, true, false, false, true): return .E
-        case (true, false, true, false, true): return .Fs
-        case (false, true, true, false, true): return .Gs
-        case (true, true, true, false, true): return .As
+        case (true, false, true, false, true): return .Gf
+        case (false, true, true, false, true): return .Af
+        case (true, true, true, false, true): return .Bf
         }
     }
 
