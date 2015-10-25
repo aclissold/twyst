@@ -8,26 +8,37 @@
 
 import GameController
 
-class TwystTVScene: TwystScene {
+class TwystTVScene: TwystScene, Jinglable {
 
-    let octaveMultiplier = CGFloat(pow(pow(2.0, 1.0/12.0), 12.0))
-    let animationDuration = 0.4
-    let ranDemoKey = "ranDemo"
+    var quarterNoteDuration: Double { return 0.4 }
 
     var controller: GCController?
     var dpadActive = false
     var buttonAPending = false
     var buttonXPending = false
-    var demoFinished = false
 
-    let frequencies: [UIPressType: CGFloat] = [
-        .UpArrow: Note.D4.rawValue,
-        .DownArrow: Note.F4.rawValue,
-        .LeftArrow: Note.C4.rawValue,
-        .RightArrow: Note.E4.rawValue,
-        .PlayPause: Note.G4.rawValue,
-        .Select: Note.A4.rawValue,
-        .Menu: Note.B4.rawValue // really .PlayPause + .Select
+    override var upAnOctave: Bool {
+        didSet {
+            if upAnOctave && !oldValue {
+                wordmarkActiveNode.runAction(
+                    SKAction.fadeInWithDuration(0.4*quarterNoteDuration),
+                    withKey: "Wordmark Active")
+            } else if !upAnOctave && oldValue {
+                wordmarkActiveNode.runAction(
+                    SKAction.fadeOutWithDuration(0.4*quarterNoteDuration),
+                    withKey: "Wordmark Active")
+            }
+        }
+    }
+
+    let notes: [UIPressType: Note] = [
+        .UpArrow: .D,
+        .DownArrow: .F,
+        .LeftArrow: .C,
+        .RightArrow: .E,
+        .PlayPause: .G,
+        .Select: .A,
+        .Menu: .B // really .PlayPause + .Select
     ]
 
     let wordmarkActiveNode = SKSpriteNode(imageNamed: "Wordmark Active")
@@ -111,16 +122,6 @@ class TwystTVScene: TwystScene {
         if let gravity = self.controller?.motion?.gravity
             where upAnOctave != (gravity.z > -2.0/3.0) && demoFinished {
                 upAnOctave = !upAnOctave
-
-                if upAnOctave {
-                    wordmarkActiveNode.runAction(
-                        SKAction.fadeInWithDuration(0.4*animationDuration),
-                        withKey: "Wordmark Active")
-                } else {
-                    wordmarkActiveNode.runAction(
-                        SKAction.fadeOutWithDuration(0.4*animationDuration),
-                        withKey: "Wordmark Active")
-                }
         }
 
         if (buttonAPending || buttonXPending) && abs(eventDate.timeIntervalSinceNow) > updateDelay {
@@ -130,14 +131,14 @@ class TwystTVScene: TwystScene {
 
     override func completePendingUpdate() {
         if buttonAPending && buttonXPending {
-            playNote(.Menu)
+            playNote(.B)
             buttonAPending = false
             buttonXPending = false
         } else if buttonAPending {
-            playNote(.Select)
+            playNote(.A)
             buttonAPending = false
         } else if buttonXPending {
-            playNote(.PlayPause)
+            playNote(.G)
             buttonXPending = false
         }
     }
@@ -175,39 +176,39 @@ class TwystTVScene: TwystScene {
 
         let threshold: Float = 0.4
         var max: Float = 0
-        var pressType = UIPressType.Select
+        var note = Note.C
 
         let up = dpad.up.value
         let down = dpad.down.value
         let left = dpad.left.value
         let right = dpad.right.value
 
-        if up > max {
-            max = up
-            pressType = .UpArrow
-        }
-        if down > max {
-            max = down
-            pressType = .DownArrow
-        }
         if left > max {
             max = left
-            pressType = .LeftArrow
+            note = .C
+        }
+        if up > max {
+            max = up
+            note = .D
         }
         if right > max {
             max = right
-            pressType = .RightArrow
+            note = .E
+        }
+        if down > max {
+            max = down
+            note = .F
         }
 
         if max > threshold {
-            self.playNote(pressType)
+            self.playNote(note)
         }
     }
 
     func handleButtonA(button: GCControllerButtonInput) {
         if button.pressed && buttonXPending {
             buttonXPending = false
-            playNote(.Menu)
+            playNote(.B)
         } else if button.pressed {
             buttonAPending = true
             eventDate = NSDate()
@@ -217,68 +218,63 @@ class TwystTVScene: TwystScene {
     func handleButtonX(button: GCControllerButtonInput) {
         if button.pressed && buttonAPending {
             buttonAPending = false
-            playNote(.Menu)
+            playNote(.B)
         } else if button.pressed {
             buttonXPending = true
             eventDate = NSDate()
         }
     }
 
-    func playNote(pressType: UIPressType) {
-        if let frequency = frequencies[pressType] {
-            synthNode.frequency = upAnOctave ? frequency * octaveMultiplier : frequency
-            synthNode.startPlaying()
-        }
+    func playNote(note: Note) {
+        let frequency = note.rawValue
+        synthNode.frequency = upAnOctave ? frequency*octaveMultiplier : frequency
+        synthNode.startPlaying()
 
-        animateButtonNode(pressType)
-        animateNoteLabelNode(pressType)
+        animateButtonNode(note)
+        animateNoteLabelNode(note)
     }
 
-    func animateButtonNode(pressType: UIPressType) {
+    func stopPlaying() {
+        synthNode.stopPlaying()
+        noteLabelNode.text = ""
+    }
+
+    func animateButtonNode(note: Note) {
         let buttonNode: SKSpriteNode
-        switch pressType {
-        case .UpArrow: buttonNode = leftButtonNode
-        case .DownArrow: buttonNode = rightButtonNode
-        case .LeftArrow: buttonNode = downButtonNode
-        case .RightArrow: buttonNode = upButtonNode
-        case .PlayPause: buttonNode = playPauseButtonNode
-        case .Select: buttonNode = centerButtonNode
-        case .Menu:
+        switch note {
+        case .C: buttonNode = downButtonNode
+        case .D: buttonNode = leftButtonNode
+        case .E: buttonNode = upButtonNode
+        case .F: buttonNode = rightButtonNode
+        case .G: buttonNode = playPauseButtonNode
+        case .A: buttonNode = centerButtonNode
+        case .B:
             bothLeftNode.alpha = 1
             bothLeftNode.runAction(
-                SKAction.fadeOutWithDuration(animationDuration),
+                SKAction.fadeOutWithDuration(quarterNoteDuration),
                 withKey: "\(UIPressType.Select.hashValue)")
             bothRightNode.alpha = 1
             bothRightNode.runAction(
-                SKAction.fadeOutWithDuration(animationDuration),
+                SKAction.fadeOutWithDuration(quarterNoteDuration),
                 withKey: "\(UIPressType.PlayPause.hashValue)")
+            return
+        default:
             return
         }
         buttonNode.alpha = 1
         buttonNode.runAction(
-            SKAction.fadeOutWithDuration(animationDuration),
-            withKey: "\(pressType.hashValue)")
+            SKAction.fadeOutWithDuration(quarterNoteDuration),
+            withKey: "\(note.rawValue)")
     }
 
-    func animateNoteLabelNode(pressType: UIPressType) {
-        switch pressType {
-        case .UpArrow: noteLabelNode.text = "D"
-        case .DownArrow: noteLabelNode.text = "F"
-        case .LeftArrow: noteLabelNode.text = "C"
-        case .RightArrow: noteLabelNode.text = "E"
-        case .PlayPause: noteLabelNode.text = "G"
-        case .Select: noteLabelNode.text = "A"
-        case .Menu: noteLabelNode.text = "B"
-        }
-
+    func animateNoteLabelNode(note: Note) {
+        noteLabelNode.text = note.description
         noteLabelNode.alpha = 1
         noteLabelNode.runAction(SKAction.sequence([
-            SKAction.waitForDuration(animationDuration),
-            SKAction.fadeOutWithDuration(animationDuration)
+            SKAction.waitForDuration(quarterNoteDuration),
+            SKAction.fadeOutWithDuration(quarterNoteDuration)
         ]), withKey: "Animate Note Label Node")
     }
-
-    // MARK: Ugly
 
     func runDemoIfNecessary() {
         if NSUserDefaults.standardUserDefaults().boolForKey(ranDemoKey) {
@@ -286,75 +282,10 @@ class TwystTVScene: TwystScene {
             return
         }
 
-        synthNode.runAction(SKAction.sequence([
-            // First octave
-            SKAction.waitForDuration(4*animationDuration),
-            SKAction.runBlock { self.playNote(.LeftArrow) },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock { self.playNote(.UpArrow) },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock { self.playNote(.RightArrow) },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock { self.playNote(.DownArrow) },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock { self.playNote(.PlayPause) },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock { self.playNote(.Select) },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock { self.playNote(.Menu) },
-            SKAction.waitForDuration(animationDuration),
-
-            // Second octave
-            SKAction.runBlock {
-                self.upAnOctave = true
-                self.wordmarkActiveNode.runAction(
-                    SKAction.fadeInWithDuration(0.4*self.animationDuration),
-                    withKey: "Wordmark Active")
-            },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock { self.playNote(.LeftArrow) },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock { self.playNote(.UpArrow) },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock { self.playNote(.RightArrow) },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock { self.playNote(.DownArrow) },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock { self.playNote(.PlayPause) },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock { self.playNote(.Select) },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock { self.playNote(.Menu) },
-            SKAction.waitForDuration(2*animationDuration),
-
-            // Jingle
-            SKAction.runBlock { self.playNote(.Menu) },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock { self.playNote(.PlayPause) },
-            SKAction.waitForDuration((1/2)*animationDuration),
-            SKAction.runBlock { self.playNote(.RightArrow) },
-            SKAction.waitForDuration((1/2)*animationDuration),
-            SKAction.runBlock { self.playNote(.DownArrow) },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock { self.playNote(.UpArrow) },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock { self.playNote(.LeftArrow) },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock {
-                self.upAnOctave = false
-                self.wordmarkActiveNode.runAction(
-                    SKAction.fadeOutWithDuration(0.4*self.animationDuration),
-                    withKey: "Wordmark Active")
-            },
-            SKAction.waitForDuration(animationDuration),
-            SKAction.runBlock { self.playNote(.LeftArrow) },
-            SKAction.waitForDuration(2*animationDuration),
-
-            // Reset
-            SKAction.runBlock { self.demoFinished = true }
-        ]))
-
-        NSUserDefaults.standardUserDefaults().setBool(true, forKey: ranDemoKey)
+        playJingle(.TV) {
+            self.demoFinished = true
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: self.ranDemoKey)
+        }
     }
 
 }

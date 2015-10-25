@@ -8,52 +8,25 @@
 
 import CoreMotion
 
-class TwystPhoneScene: TwystScene {
+class TwystPhoneScene: TwystScene, Jinglable {
 
     var pendingUpdate = false
-    var pendingNoteCode: Int?
+    var pendingNote: Note?
     let oneButton = ButtonNode(type: .One)
     let twoButton = ButtonNode(type: .Two)
     let threeButton = ButtonNode(type: .Three)
     let flatButton = ButtonNode(type: .Flat)
     let sharpButton = ButtonNode(type: .Sharp)
+    let quarterNoteDuration = (1.0/3.0)
 
     var vibrato: CGFloat = 0 {
         didSet {
-            if !pendingUpdate {
-                updateSynthNodeFrequency()
+            if let note = pendingNote where !pendingUpdate {
+                let frequency = note.rawValue + vibratoMultiplier*vibrato
+                synthNode.frequency = upAnOctave ? frequency*octaveMultiplier : frequency
             }
         }
     }
-
-    let noteCodeMappings = [
-        -1: Note.B3,
-        0: .C4,
-        1: .Cs4,
-        2: .D4,
-        3: .Ds4,
-        4: .E4,
-        5: .F4,
-        6: .Fs4,
-        7: .G4,
-        8: .Gs4,
-        9: .A4,
-        10: .As4,
-        11: .B4,
-        12: .C5,
-        13: .Cs5,
-        14: .D5,
-        15: .Ds5,
-        16: .E5,
-        17: .F5,
-        18: .Fs5,
-        19: .G5,
-        20: .Gs5,
-        21: .A5,
-        22: .As5,
-        23: .B5,
-        24: .C6,
-    ]
 
     let motionManager = CMMotionManager()
 
@@ -73,18 +46,32 @@ class TwystPhoneScene: TwystScene {
                 return
             }
 
-            if let g = deviceMotion?.gravity {
-                let wasUpAnOctave = self.upAnOctave
-                self.upAnOctave = g.x > 0.666
-                if (wasUpAnOctave && !self.upAnOctave)
-                    || (!wasUpAnOctave && self.upAnOctave) {
-                        self.triggerUpdate()
-                }
+            if let g = deviceMotion?.gravity
+                where self.upAnOctave != (g.x > 0.666) && self.demoFinished {
+                    self.upAnOctave = !self.upAnOctave
+                    self.triggerUpdate()
             }
 
             if let a = deviceMotion?.userAcceleration {
                 self.vibrato = CGFloat(a.x + a.y + a.z)
             }
+        }
+
+        runDemoIfNecessary()
+    }
+
+    func runDemoIfNecessary() {
+        if NSUserDefaults.standardUserDefaults().boolForKey(ranDemoKey) {
+            demoFinished = true
+            return
+        }
+
+        let buttons = [oneButton, twoButton, threeButton, sharpButton, flatButton]
+        buttons.forEach { $0.userInteractionEnabled = false }
+        playJingle(.Phone) {
+            buttons.forEach { $0.userInteractionEnabled = true }
+            self.demoFinished = true
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: self.ranDemoKey)
         }
     }
 
@@ -115,35 +102,6 @@ class TwystPhoneScene: TwystScene {
 
     }
 
-    func getCurrentNoteCode() -> Int? {
-        var noteCode: Int
-
-        switch (oneButton.active, twoButton.active, threeButton.active) {
-        case (false, false, false):
-            return nil
-        case (true, false, false):
-            noteCode = 0
-        case (false, true, false):
-            noteCode = 2
-        case (false, false, true):
-            noteCode = 4
-        case (true, true, false):
-            noteCode = 5
-        case (true, false, true):
-            noteCode = 7
-        case (false, true, true):
-            noteCode = 9
-        case (true, true, true):
-            noteCode = 11
-        }
-
-        if sharpButton.active { ++noteCode }
-        if flatButton.active { --noteCode }
-        if upAnOctave { noteCode += 12 }
-
-        return noteCode
-    }
-
     override func update(currentTime: NSTimeInterval) {
         if pendingUpdate && abs(eventDate.timeIntervalSinceNow) > updateDelay {
             completePendingUpdate()
@@ -151,30 +109,40 @@ class TwystPhoneScene: TwystScene {
     }
 
     override func completePendingUpdate() {
-        updateSynthNodeFrequency()
+        playNoteOrStopPlaying()
         pendingUpdate = false
     }
 
+    func playNoteOrStopPlaying() {
+        if let note = pendingNote {
+            playNote(note)
+        } else {
+            stopPlaying()
+        }
+    }
+
     func triggerUpdate() {
-        pendingNoteCode = getCurrentNoteCode()
+        pendingNote = currentNote
         pendingUpdate = true
         eventDate = NSDate()
     }
 
-    func updateSynthNodeFrequency() {
-        if let noteCode = pendingNoteCode {
-            guard let note = noteCodeMappings[noteCode] else {
-                fatalError("unexpected note code: \(noteCode)")
-            }
-            synthNode.frequency = note.rawValue + vibratoMultiplier*vibrato
-            noteLabelNode.text = currentNoteName
-            if !synthNode.playing {
-                synthNode.startPlaying()
-            }
-        } else if synthNode.playing {
-            synthNode.stopPlaying()
-            noteLabelNode.text = ""
+    func playNote(note: Note) {
+        pendingNote = note // for demo
+        let frequency = note.rawValue + vibratoMultiplier*vibrato
+        synthNode.frequency = upAnOctave ? frequency*octaveMultiplier : frequency
+        if !demoFinished {
+            updateButtonActiveStates(note)
         }
+        noteLabelNode.text = note.description
+        if !synthNode.playing {
+            synthNode.startPlaying()
+        }
+    }
+
+    func stopPlaying() {
+        synthNode.stopPlaying()
+        noteLabelNode.text = ""
     }
 
     func buttonTapped(node: ButtonNode) {
@@ -183,38 +151,81 @@ class TwystPhoneScene: TwystScene {
 
     // MARK: Ugly
 
-    var currentNoteName: String {
+    func updateButtonActiveStates(note: Note) {
+        oneButton.active = false
+        twoButton.active = false
+        threeButton.active = false
+        sharpButton.active = false
+        flatButton.active = false
+
+        switch note {
+        case .B3, .C, .Cs, .F, .Fs, .Gf, .G, .Gs, .Bf, .B, .C5:
+            oneButton.active = true
+        default:
+            break
+        }
+
+        switch note {
+        case .B3, .Df, .D, .Ds, .F, .Fs, .Af, .A, .As, .B:
+            twoButton.active = true
+        default:
+            break
+        }
+
+        switch note {
+        case .B3, .Ef, .E, .Gf, .G, .Gs, .Af, .A, .As, .Bf, .B:
+            threeButton.active = true
+        default:
+            break
+        }
+
+        switch note {
+        case .Cs, .Ds, .Fs, .Gs, .As:
+            sharpButton.active = true
+        default:
+            break
+        }
+
+        switch note {
+        case .Df, .Ef, .Gf, .Af, .Bf:
+            flatButton.active = true
+        default:
+            break
+        }
+    }
+
+    var currentNote: Note? {
         switch (oneButton.active, twoButton.active, threeButton.active, sharpButton.active, flatButton.active) {
 
         // Natural
-        case (false, false, false, false, false), (false, false, false, true, true): return ""
-        case (true, false, false, false, false), (true, false, false, true, true): return "C"
-        case (false, true, false, false, false), (false, true, false, true, true): return "D"
-        case (false, false, true, false, false), (false, false, true, true, true): return "E"
-        case (true, true, false, false, false), (true, true, false, true, true): return "F"
-        case (true, false, true, false, false), (true, false, true, true, true): return "G"
-        case (false, true, true, false, false), (false, true, true, true, true): return "A"
-        case (true, true, true, false, false), (true, true, true, true, true): return "B"
+        case (false, false, false, false, false), (false, false, false, true, true): return nil
+        case (true, false, false, false, false), (true, false, false, true, true): return .C
+        case (false, true, false, false, false), (false, true, false, true, true): return .D
+        case (false, false, true, false, false), (false, false, true, true, true): return .E
+        case (true, true, false, false, false), (true, true, false, true, true): return .F
+        case (true, false, true, false, false), (true, false, true, true, true): return .G
+        case (false, true, true, false, false), (false, true, true, true, true): return .A
+        case (true, true, true, false, false), (true, true, true, true, true): return .B
 
         // Sharp
-        case (false, false, false, true, false): return ""
-        case (true, false, false, true, false): return "C♯"
-        case (false, true, false, true, false): return "D♯"
-        case (false, false, true, true, false): return "F"
-        case (true, true, false, true, false): return "F♯"
-        case (true, false, true, true, false): return "G♯"
-        case (false, true, true, true, false): return "A♯"
-        case (true, true, true, true, false): return "C"
+        case (false, false, false, true, false): return nil
+        case (true, false, false, true, false): return .Cs
+        case (false, true, false, true, false): return .Ds
+        case (false, false, true, true, false): return .F
+        case (true, true, false, true, false): return .Fs
+        case (true, false, true, true, false): return .Gs
+        case (false, true, true, true, false): return .As
+        case (true, true, true, true, false): return .C5
 
         // Flat
-        case (false, false, false, false, true): return ""
-        case (true, false, false, false, true): return "B"
-        case (false, true, false, false, true): return "D♭"
-        case (false, false, true, false, true): return "E♭"
-        case (true, true, false, false, true): return "E"
-        case (true, false, true, false, true): return "G♭"
-        case (false, true, true, false, true): return "A♭"
-        case (true, true, true, false, true): return "B♭"
+        case (false, false, false, false, true): return nil
+        case (true, false, false, false, true): return .B3
+        case (false, true, false, false, true): return .Df
+        case (false, false, true, false, true): return .Ef
+        case (true, true, false, false, true): return .E
+        case (true, false, true, false, true): return .Gf
+        case (false, true, true, false, true): return .Af
+        case (true, true, true, false, true): return .Bf
         }
     }
 

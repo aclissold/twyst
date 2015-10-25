@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Note: CGFloat, RawRepresentable {
+enum Note: CGFloat, RawRepresentable, CustomStringConvertible {
     /*case C0 = 16.35
     case Cs0 = 17.32
     case D0 = 18.35
@@ -57,20 +57,25 @@ enum Note: CGFloat, RawRepresentable {
     case A3 = 220.00
     case As3 = 233.08*/
     case B3 = 246.94
-    case C4 = 261.63
-    case Cs4 = 277.18
-    case D4 = 293.66
-    case Ds4 = 311.13
-    case E4 = 329.63
-    case F4 = 349.23
-    case Fs4 = 369.99
-    case G4 = 392.00
-    case Gs4 = 415.30
-    case A4 = 440.00
-    case As4 = 466.16
-    case B4 = 493.88
+    case C = 261.63
+    case Cs = 277.18
+    case Df = 277.180001
+    case D = 293.66
+    case Ds = 311.13
+    case Ef = 311.130001
+    case E = 329.63
+    case F = 349.23
+    case Fs = 369.99
+    case Gf = 369.990001
+    case G = 392.00
+    case Gs = 415.30
+    case Af = 415.300001
+    case A = 440.00
+    case As = 466.16
+    case Bf = 466.160001
+    case B = 493.88
     case C5 = 523.25
-    case Cs5 = 554.37
+    /*case Cs5 = 554.37
     case D5 = 587.33
     case Ds5 = 622.25
     case E5 = 659.25
@@ -82,7 +87,7 @@ enum Note: CGFloat, RawRepresentable {
     case As5 = 932.33
     case B5 = 987.77
     case C6 = 1046.50
-    /*case Cs6 = 1108.73
+    case Cs6 = 1108.73
     case D6 = 1174.66
     case Ds6 = 1244.51
     case E6 = 1318.51
@@ -117,5 +122,29 @@ enum Note: CGFloat, RawRepresentable {
     case A8 = 7040.00
     case As8 = 7458.62
     case B8 = 7902.13*/
+
+    var description: String {
+        switch self {
+        case B3: return "B"
+        case C: return "C"
+        case Cs: return "C♯"
+        case Df: return "D♭"
+        case D: return "D"
+        case Ds: return "D♯"
+        case Ef: return "E♭"
+        case E: return "E"
+        case F: return "F"
+        case Fs: return "F♯"
+        case Gf: return "G♭"
+        case G: return "G"
+        case Gs: return "G♯"
+        case Af: return "A♭"
+        case A: return "A"
+        case As: return "A♯"
+        case Bf: return "B♭"
+        case B: return "B"
+        case C5: return "C"
+        }
+    }
 
 }

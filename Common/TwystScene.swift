@@ -14,6 +14,8 @@ import AudioToolbox
 class TwystScene: SKScene {
 
     let vibratoMultiplier: CGFloat = 6
+    let octaveMultiplier = CGFloat(pow(pow(2.0, 1.0/12.0), 12.0))
+
     var eventDate = NSDate()
     var updateDelay = 0.0
 
@@ -21,10 +23,12 @@ class TwystScene: SKScene {
         screenHeight: CGFloat = 0
 
     var upAnOctave = false
+    var demoFinished = false
+    let ranDemoKey = "ranDemo"
 
     let noteLabelNode = SKLabelNode(fontNamed: "Avenir-Light")
     let wordmarkNode = SKSpriteNode(imageNamed: "Wordmark")
-    let synthNode = SynthNode.sharedSynthNode()
+    var synthNode = SynthNode.sharedSynthNode()
 
     override func didMoveToView(view: SKView) {
         screenWidth = view.frame.width
