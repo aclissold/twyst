@@ -23,6 +23,7 @@ class TwystScene: SKScene {
         screenHeight: CGFloat = 0
 
     var upAnOctave = false
+    var demoFinished = false
 
     let noteLabelNode = SKLabelNode(fontNamed: "Avenir-Light")
     let wordmarkNode = SKSpriteNode(imageNamed: "Wordmark")

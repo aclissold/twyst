@@ -17,7 +17,6 @@ class TwystTVScene: TwystScene, Jinglable {
     var dpadActive = false
     var buttonAPending = false
     var buttonXPending = false
-    var demoFinished = false
 
     override var upAnOctave: Bool {
         didSet {
@@ -234,6 +233,11 @@ class TwystTVScene: TwystScene, Jinglable {
 
         animateButtonNode(note)
         animateNoteLabelNode(note)
+    }
+
+    func stopPlaying() {
+        synthNode.stopPlaying()
+        noteLabelNode.text = ""
     }
 
     func animateButtonNode(note: Note) {

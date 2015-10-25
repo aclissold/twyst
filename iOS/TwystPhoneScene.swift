@@ -8,7 +8,7 @@
 
 import CoreMotion
 
-class TwystPhoneScene: TwystScene {
+class TwystPhoneScene: TwystScene, Jinglable {
 
     var pendingUpdate = false
     var pendingNote: Note?
@@ -17,7 +17,7 @@ class TwystPhoneScene: TwystScene {
     let threeButton = ButtonNode(type: .Three)
     let flatButton = ButtonNode(type: .Flat)
     let sharpButton = ButtonNode(type: .Sharp)
-    let quarterNoteDuration = 0.4
+    let quarterNoteDuration = (1.0/3.0)
 
     var vibrato: CGFloat = 0 {
         didSet {
@@ -46,18 +46,25 @@ class TwystPhoneScene: TwystScene {
                 return
             }
 
-            if let g = deviceMotion?.gravity {
-                let wasUpAnOctave = self.upAnOctave
-                self.upAnOctave = g.x > 0.666
-                if (wasUpAnOctave && !self.upAnOctave)
-                    || (!wasUpAnOctave && self.upAnOctave) {
-                        self.triggerUpdate()
-                }
+            if let g = deviceMotion?.gravity
+                where self.upAnOctave != (g.x > 0.666) && self.demoFinished {
+                    self.upAnOctave = !self.upAnOctave
+                    self.triggerUpdate()
             }
 
             if let a = deviceMotion?.userAcceleration {
                 self.vibrato = CGFloat(a.x + a.y + a.z)
             }
+        }
+
+        for button in [self.oneButton, self.twoButton, self.threeButton, self.sharpButton, self.flatButton] {
+            button.userInteractionEnabled = false
+        }
+        playJingle(.Phone) {
+            for button in [self.oneButton, self.twoButton, self.threeButton, self.sharpButton, self.flatButton] {
+                button.userInteractionEnabled = true
+            }
+            self.demoFinished = true
         }
     }
 
@@ -114,8 +121,12 @@ class TwystPhoneScene: TwystScene {
     }
 
     func playNote(note: Note) {
+        pendingNote = note // for demo
         let frequency = note.rawValue + vibratoMultiplier*vibrato
         synthNode.frequency = upAnOctave ? frequency*octaveMultiplier : frequency
+        if !demoFinished {
+            updateButtonActiveStates(note)
+        }
         noteLabelNode.text = note.description
         if !synthNode.playing {
             synthNode.startPlaying()
@@ -124,6 +135,9 @@ class TwystPhoneScene: TwystScene {
 
     func stopPlaying() {
         synthNode.stopPlaying()
+        for button in [oneButton, twoButton, threeButton, sharpButton, flatButton] {
+            button.active = false
+        }
         noteLabelNode.text = ""
     }
 
@@ -132,6 +146,49 @@ class TwystPhoneScene: TwystScene {
     }
 
     // MARK: Ugly
+
+    func updateButtonActiveStates(note: Note) {
+        oneButton.active = false
+        twoButton.active = false
+        threeButton.active = false
+        sharpButton.active = false
+        flatButton.active = false
+
+        switch note {
+        case .B3, .C, .Cs, .F, .Fs, .Gf, .G, .Gs, .Bf, .B, .C5:
+            oneButton.active = true
+        default:
+            break
+        }
+
+        switch note {
+        case .B3, .Df, .D, .Ds, .F, .Fs, .Af, .A, .As, .B:
+            twoButton.active = true
+        default:
+            break
+        }
+
+        switch note {
+        case .B3, .Ef, .E, .Gf, .G, .Gs, .Af, .A, .As, .Bf, .B:
+            threeButton.active = true
+        default:
+            break
+        }
+
+        switch note {
+        case .Cs, .Ds, .Fs, .Gs, .As:
+            sharpButton.active = true
+        default:
+            break
+        }
+
+        switch note {
+        case .Df, .Ef, .Gf, .Af, .Bf:
+            flatButton.active = true
+        default:
+            break
+        }
+    }
 
     var currentNote: Note? {
         switch (oneButton.active, twoButton.active, threeButton.active, sharpButton.active, flatButton.active) {
