@@ -57,14 +57,21 @@ class TwystPhoneScene: TwystScene, Jinglable {
             }
         }
 
-        for button in [self.oneButton, self.twoButton, self.threeButton, self.sharpButton, self.flatButton] {
-            button.userInteractionEnabled = false
+        runDemoIfNecessary()
+    }
+
+    func runDemoIfNecessary() {
+        if NSUserDefaults.standardUserDefaults().boolForKey(ranDemoKey) {
+            demoFinished = true
+            return
         }
+
+        let buttons = [oneButton, twoButton, threeButton, sharpButton, flatButton]
+        buttons.forEach { $0.userInteractionEnabled = false }
         playJingle(.Phone) {
-            for button in [self.oneButton, self.twoButton, self.threeButton, self.sharpButton, self.flatButton] {
-                button.userInteractionEnabled = true
-            }
+            buttons.forEach { $0.userInteractionEnabled = true }
             self.demoFinished = true
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: self.ranDemoKey)
         }
     }
 
@@ -135,9 +142,6 @@ class TwystPhoneScene: TwystScene, Jinglable {
 
     func stopPlaying() {
         synthNode.stopPlaying()
-        for button in [oneButton, twoButton, threeButton, sharpButton, flatButton] {
-            button.active = false
-        }
         noteLabelNode.text = ""
     }
 

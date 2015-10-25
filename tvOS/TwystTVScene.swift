@@ -11,7 +11,6 @@ import GameController
 class TwystTVScene: TwystScene, Jinglable {
 
     var quarterNoteDuration: Double { return 0.4 }
-    let ranDemoKey = "ranDemo"
 
     var controller: GCController?
     var dpadActive = false
@@ -283,8 +282,10 @@ class TwystTVScene: TwystScene, Jinglable {
             return
         }
 
-        playJingle(.TV) { self.demoFinished = true }
-        NSUserDefaults.standardUserDefaults().setBool(true, forKey: ranDemoKey)
+        playJingle(.TV) {
+            self.demoFinished = true
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: self.ranDemoKey)
+        }
     }
 
 }

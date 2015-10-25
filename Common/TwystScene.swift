@@ -24,6 +24,7 @@ class TwystScene: SKScene {
 
     var upAnOctave = false
     var demoFinished = false
+    let ranDemoKey = "ranDemo"
 
     let noteLabelNode = SKLabelNode(fontNamed: "Avenir-Light")
     let wordmarkNode = SKSpriteNode(imageNamed: "Wordmark")
