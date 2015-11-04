@@ -38,7 +38,9 @@ class TwystPhoneScene: TwystScene, Jinglable {
         addButtons()
 
         noteLabelNode.fontSize = 52
-        noteLabelNode.position = CGPoint(x: (1/2)*screenWidth, y: oneButton.frame.midY)
+        let oneButtonPosition = convertPoint(self.position, fromNode: oneButton.spriteNode)
+        noteLabelNode.position = CGPoint(x: (1/2)*screenWidth, y: oneButtonPosition.y)
+        noteLabelNode.verticalAlignmentMode = .Center
 
         motionManager.startDeviceMotionUpdatesToQueue(NSOperationQueue()) { (deviceMotion, error) in
             if let error = error {
