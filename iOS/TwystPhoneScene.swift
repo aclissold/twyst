@@ -38,7 +38,9 @@ class TwystPhoneScene: TwystScene, Jinglable {
         addButtons()
 
         noteLabelNode.fontSize = 52
-        noteLabelNode.position = CGPoint(x: (1/2)*screenWidth, y: oneButton.frame.midY)
+        let oneButtonPosition = convertPoint(self.position, fromNode: oneButton.spriteNode)
+        noteLabelNode.position = CGPoint(x: (1/2)*screenWidth, y: oneButtonPosition.y)
+        noteLabelNode.verticalAlignmentMode = .Center
 
         motionManager.startDeviceMotionUpdatesToQueue(NSOperationQueue()) { (deviceMotion, error) in
             if let error = error {
@@ -76,30 +78,44 @@ class TwystPhoneScene: TwystScene, Jinglable {
     }
 
     func addButtons() {
-        let buttonSize = CGSize(width: (2/5)*screenWidth, height: (1/3)*screenHeight)
+        let largeScreenOffset = (1/4)*(screenHeight - 320)
+        let accidentalOffset: CGFloat = 8
+        let padding: CGFloat = 24
+        let width: CGFloat = 75
+        let paddedWidth = padding + width + padding
+        let overlap: CGFloat = 2.5
+
+        oneButton.size = CGSize(width: 2*paddedWidth, height: screenHeight/2)
+        twoButton.size = CGSize(width: 2*paddedWidth, height: width+padding)
+        threeButton.size = oneButton.size
+        sharpButton.size = CGSize(width: 2*paddedWidth, height: screenHeight/2)
+        flatButton.size = sharpButton.size
 
         oneButton.position = CGPoint(
-            x: screenWidth - buttonSize.width,
-            y: (1/3)*screenHeight)
+            x: screenWidth - (1/2)*(padding+width+padding),
+            y: (1/4)*screenHeight - padding)
         twoButton.position = CGPoint(
-            x: screenWidth - buttonSize.width,
-            y: (2/3)*screenHeight)
+            x: screenWidth - (1/2)*paddedWidth,
+            y: screenHeight/2)
         threeButton.position = CGPoint(
-            x: screenWidth - buttonSize.width,
-            y: (3/3)*screenHeight)
+            x: screenWidth - (1/2)*paddedWidth,
+            y: (3/4)*screenHeight + padding)
         sharpButton.position = CGPoint(
-            x: 0,
-            y: (1/3)*screenHeight)
+            x: (1/2)*paddedWidth,
+            y: (3/4)*screenHeight)
         flatButton.position = CGPoint(
-            x: 0,
-            y: (3/3)*screenHeight)
+            x: (1/2)*paddedWidth,
+            y: (1/4)*screenHeight)
+
+        oneButton.spriteNode.position.y += largeScreenOffset + overlap
+        threeButton.spriteNode.position.y -= largeScreenOffset + overlap
+        sharpButton.spriteNode.position.y -= largeScreenOffset + accidentalOffset + overlap
+        flatButton.spriteNode.position.y += largeScreenOffset + accidentalOffset + overlap
 
         for buttonNode in [oneButton, twoButton, threeButton, sharpButton, flatButton] {
-            buttonNode.size = buttonSize
-            buttonNode.anchorPoint = CGPoint(x: 0, y: 1)
             addChild(buttonNode)
         }
-
+        twoButton.zPosition = 1
     }
 
     override func update(currentTime: NSTimeInterval) {

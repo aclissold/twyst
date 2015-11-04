@@ -11,28 +11,29 @@ import SpriteKit
 class ButtonNode: SKSpriteNode {
 
     let type: ButtonNodeType
+    var spriteNode: SKSpriteNode!
 
     var active = false {
         didSet {
             guard active else {
-                texture = restingTexture
+                spriteNode.texture = restingTexture
                 return
             }
 
             let imageName: String
             switch type {
             case .Flat:
-                imageName = "flatImage_active"
+                imageName = "Flat Active"
             case .Sharp:
-                imageName = "sharpImage_active"
+                imageName = "Sharp Active"
             case .One:
-                imageName = "buttonOneImage_active"
+                imageName = "One Active"
             case .Two:
-                imageName = "buttonTwoImage_active"
+                imageName = "Two Active"
             case .Three:
-                imageName = "buttonThreeImage_active"
+                imageName = "Three Active"
             }
-            texture = SKTexture(imageNamed: imageName)
+            spriteNode.texture = SKTexture(imageNamed: imageName)
         }
     }
 
@@ -40,19 +41,22 @@ class ButtonNode: SKSpriteNode {
         let imageName: String
         switch type {
         case .Flat:
-            imageName = "flatImage"
+            imageName = "Flat"
         case .Sharp:
-            imageName = "sharpImage"
+            imageName = "Sharp"
         case .One, .Two, .Three:
-            imageName = "buttonOneImage"
+            imageName = "Note"
         }
         return SKTexture(imageNamed: imageName)
     }
 
     init(type: ButtonNodeType) {
         self.type = type
-        super.init(texture: nil, color: SKColor.clearColor(), size: CGSizeZero)
-        texture = restingTexture
+
+        super.init(texture: nil, color: UIColor.clearColor(), size: CGSizeZero)
+
+        self.spriteNode = SKSpriteNode(texture: restingTexture)
+        addChild(spriteNode)
         userInteractionEnabled = true
     }
 
