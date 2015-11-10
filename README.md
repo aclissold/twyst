@@ -1,6 +1,6 @@
 ![Wordmark](https://cloud.githubusercontent.com/assets/4397642/10442627/53020134-7122-11e5-9331-722c43958da5.png)
 
-![Screenshot](https://cloud.githubusercontent.com/assets/4397642/10442516/f873b998-7120-11e5-9361-865ffec78c38.png)
+![Screenshot](https://cloud.githubusercontent.com/assets/4397642/11070569/4c54abf4-87aa-11e5-9a6d-66a070c93cf9.png)
 
 <br/>
 
